@@ -1,4 +1,4 @@
-# Illandril's Character Sheet Lockdown (DnD5e)
+# Illandril's Character Sheet Lockdown (5e)
 This is a module for Foundry Virtual Tabletop that prevents players from making changes to aspects of their character sheets that should change infrequently.
 
 It also completely hides the Background and Alignment inputs, the Currency Conversion button, and the Biography tab.
