@@ -23,14 +23,14 @@ const elementsToDisable = [
   'input[name="data.resources.primary.lr"]',
   'input[name="data.resources.secondary.lr"]',
   'input[name="data.resources.tertiary.lr"]',
-  "input.ability-score",
-  "select.actor-size",
+  'input.ability-score',
+  'select.actor-size',
   'input[name="data.traits.senses"]',
   'input[name^="data.currency."]',
-  'select[name="data.attributes.spellcasting"]'
-].join(",");
+  'select[name="data.attributes.spellcasting"]',
+].join(',');
 
-Hooks.on("renderActorSheet5eCharacter", (actorSheet5eCharacter, html, data) => {
+Hooks.on('renderActorSheet5eCharacter', (actorSheet5eCharacter, html, data) => {
   const sheetElem = getSheetElem(html);
   if (!sheetElem) {
     return;
@@ -41,8 +41,8 @@ Hooks.on("renderActorSheet5eCharacter", (actorSheet5eCharacter, html, data) => {
   forAll(
     sheetElem,
     'input[name="data.details.background"],input[name="data.details.alignment"]',
-    input => {
-      input.parentNode.style.display = "none";
+    (input) => {
+      input.parentNode.style.display = 'none';
     }
   );
   if (sheetElem && !sheetElem.classList.contains(CSS_SHEET)) {
@@ -58,20 +58,15 @@ function stopPropagation(event) {
 function initialize(sheetElem) {
   sheetElem.classList.add(CSS_SHEET);
   if (game.user.isGM) {
-    const sheetHeader = sheetElem.querySelector(".window-header");
-    const sheetTitle = sheetHeader.querySelector(".window-title");
+    const sheetHeader = sheetElem.querySelector('.window-header');
+    const sheetTitle = sheetHeader.querySelector('.window-title');
 
-    const editLink = document.createElement("a");
-    editLink.appendChild(faIcon("edit"));
-    editLink.appendChild(
-      document.createTextNode(
-        game.i18n.localize("illandril-sheet5e-lockdown.toggleEditable")
-      )
-    );
-    editLink.addEventListener("click", function() {
-      toggleEditable(sheetElem);
-    }, false);
-    editLink.addEventListener("dblclick", stopPropagation, false);
+    const editLink = document.createElement('a');
+    editLink.appendChild(faIcon('edit'));
+    const toggleString = game.i18n.localize('illandril-sheet5e-lockdown.toggleEditable');
+    editLink.appendChild(document.createTextNode(toggleString));
+    editLink.addEventListener('click', () => toggleEditable(sheetElem), false);
+    editLink.addEventListener('dblclick', stopPropagation, false);
     sheetHeader.insertBefore(editLink, sheetTitle.nextSibling);
   }
 }
@@ -82,7 +77,7 @@ function isEditable(sheetElem) {
 
 function toggleEditable(sheetElem) {
   makeEditable(sheetElem, !isEditable(sheetElem));
-};
+}
 
 function makeEditable(sheetElem, editable) {
   if (editable) {
@@ -92,14 +87,14 @@ function makeEditable(sheetElem, editable) {
     sheetElem.classList.add(CSS_LOCK);
     sheetElem.classList.remove(CSS_EDIT);
   }
-  forAll(sheetElem, elementsToDisable, input => {
+  forAll(sheetElem, elementsToDisable, (input) => {
     input.disabled = !editable;
   });
-};
+}
 
 function getSheetElem(html) {
   let sheetElem = html[0];
-  while (sheetElem && !sheetElem.classList.contains("sheet")) {
+  while (sheetElem && !sheetElem.classList.contains('sheet')) {
     sheetElem = sheetElem.parentNode;
   }
   return sheetElem;
@@ -110,8 +105,8 @@ function forAll(parent, selector, action) {
 }
 
 function faIcon(name) {
-  const icon = document.createElement("i");
-  icon.classList.add("fas");
-  icon.classList.add("fa-" + name);
+  const icon = document.createElement('i');
+  icon.classList.add('fas');
+  icon.classList.add('fa-' + name);
   return icon;
 }
