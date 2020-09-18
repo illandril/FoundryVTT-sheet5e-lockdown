@@ -1,23 +1,19 @@
-.illandril-sheet5e-lockdown--lock .proficiency-toggle,
-.illandril-sheet5e-lockdown--sheet .attribute.health .attribute-name.rollable {
-  pointer-events: none;
-}
-
-.illandril-sheet5e-lockdown--sheet .sheet-navigation .item[data-tab='biography'],
-.illandril-sheet5e-lockdown--sheet .currency-convert,
-.illandril-sheet5e-lockdown--sheet input[disabled][name='data.attributes.speed.special'][value=''],
-.illandril-sheet5e-lockdown--lock #ddbImportButton,
-.dnd5e.sheet.actor.illandril-sheet5e-lockdown--lock .inventory-list .item-controls,
-.illandril-sheet5e-lockdown--lock .trait-selector,
-.illandril-sheet5e-lockdown--lock .form-group.inactive,
-.illandril-sheet5e-lockdown--lock .slot-max-override {
-  display: none;
+.illandril-sheet5e-lockdown--noPointerEvents {
+  pointer-events: none !important;
 }
 
 .illandril-sheet5e-lockdown--hide {
   display: none !important;
 }
 
-.illandril-sheet5e-lockdown--flexfix {
-  flex: 0 0 1px;
+.illandril-sheet5e-lockdown--hideReserveSpace {
+  visibility: hidden !important;
+}
+
+.dnd5e.sheet.actor.illandril-sheet5e-lockdown--sheet .inventory-list .item-controls {
+  justify-content: center;
+}
+
+.illandril-sheet5e-lockdown--hideImportButtons #ddbImportButton {
+  display: none;
 }
