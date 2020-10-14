@@ -1,43 +1,43 @@
 {
-  "illandril-sheet5e-lockdown.setting.showToggleEditRole": "Show Toggle Edit To",
-  "illandril-sheet5e-lockdown.setting.showToggleEditRole-hint": "A Toggle Edit button will be shown to all users with at least the selected role, allowing them to modify all locked settings. Note: Changing this option will not impact already opened character sheets. Players will need to close and re-open their character sheet to see this change.",
+  "illandril-sheet5e-lockdown.setting.showToggleEditRole.label": "Show Toggle Edit To",
+  "illandril-sheet5e-lockdown.setting.showToggleEditRole.hint": "A Toggle Edit button will be shown to all users with at least the selected role, allowing them to modify all locked settings. Note: Changing this option will not impact already opened character sheets. Players will need to close and re-open their character sheet to see this change.",
 
-  "illandril-sheet5e-lockdown.setting.lockBasicDetails": "Lock Basic Details",
-  "illandril-sheet5e-lockdown.setting.lockBasicDetails-hint": "Basic Details include Name, Race, Background, Alignment, and Size",
-  "illandril-sheet5e-lockdown.setting.hideBackground": "Hide Background (always)",
-  "illandril-sheet5e-lockdown.setting.hideAlignment": "Hide Alignment (always)",
-  "illandril-sheet5e-lockdown.setting.lockXP": "Lock Experience",
+  "illandril-sheet5e-lockdown.setting.lockBasicDetails.label": "Lock Basic Details",
+  "illandril-sheet5e-lockdown.setting.lockBasicDetails.hint": "Basic Details include Name, Race, Background, Alignment, and Size",
+  "illandril-sheet5e-lockdown.setting.hideBackground.label": "Hide Background (always)",
+  "illandril-sheet5e-lockdown.setting.hideAlignment.label": "Hide Alignment (always)",
+  "illandril-sheet5e-lockdown.setting.lockXP.label": "Lock Experience",
 
-  "illandril-sheet5e-lockdown.setting.lockAbilityScores": "Lock Ability Scores",
-  "illandril-sheet5e-lockdown.setting.lockProficiencies": "Lock Proficiencies",
-  "illandril-sheet5e-lockdown.setting.lockResources": "Lock Resources",
-  "illandril-sheet5e-lockdown.setting.lockResources-hint": "Locks the name, maximum value, and reset on short/long rest toggles for Resource 1, 2, and 3. This does not lock the current value for resources. If a resource is locked, has no name, and has a maximum of 0, it will be hidden.",
-  "illandril-sheet5e-lockdown.setting.lockTraits": "Lock Traits",
-  "illandril-sheet5e-lockdown.setting.lockTraits-hint": "Traits include Senses, Languages, Immunities/Resistances/Vulnerabilities, Weapon/Armor/Tool Proficiencies, and Special Traits. If a trait is locked and has no value, it will be hidden.",
-  "illandril-sheet5e-lockdown.setting.lockLegendaryAndLair": "Lock Legendary and Lair Actions",
-  "illandril-sheet5e-lockdown.setting.lockLegendaryAndLair-hint": "Locks the maximum value for legendary actions and resistances, and the flag and initiative value for Uses Lair Action. The available value for Legendary Actions and Resistance is not locked. The Legendary and Lair rows are hidden when locked if the creature has no Legendary or Lair Actions.",
+  "illandril-sheet5e-lockdown.setting.lockAbilityScores.label": "Lock Ability Scores",
+  "illandril-sheet5e-lockdown.setting.lockProficiencies.label": "Lock Proficiencies",
+  "illandril-sheet5e-lockdown.setting.lockResources.label": "Lock Resources",
+  "illandril-sheet5e-lockdown.setting.lockResources.hint": "Locks the name, maximum value, and reset on short/long rest toggles for Resource 1, 2, and 3. This does not lock the current value for resources. If a resource is locked, has no name, and has a maximum of 0, it will be hidden.",
+  "illandril-sheet5e-lockdown.setting.lockTraits.label": "Lock Traits",
+  "illandril-sheet5e-lockdown.setting.lockTraits.hint": "Traits include Senses, Languages, Immunities/Resistances/Vulnerabilities, Weapon/Armor/Tool Proficiencies, and Special Traits. If a trait is locked and has no value, it will be hidden.",
+  "illandril-sheet5e-lockdown.setting.lockLegendaryAndLair.label": "Lock Legendary and Lair Actions",
+  "illandril-sheet5e-lockdown.setting.lockLegendaryAndLair.hint": "Locks the maximum value for legendary actions and resistances, and the flag and initiative value for Uses Lair Action. The available value for Legendary Actions and Resistance is not locked. The Legendary and Lair rows are hidden when locked if the creature has no Legendary or Lair Actions.",
 
-  "illandril-sheet5e-lockdown.setting.hideAddRemoveItemButtons": "Hide Add and Delete Item Buttons",
-  "illandril-sheet5e-lockdown.setting.hideAddRemoveItemButtons-hint": "This setting impacts Inventory, Features, and Spellbook",
-  "illandril-sheet5e-lockdown.setting.hideEditItemButtons": "Hide Edit Item Buttons",
-  "illandril-sheet5e-lockdown.setting.hideEditItemButtons-hint": "This setting impacts Inventory, Features, and Spellbook",
+  "illandril-sheet5e-lockdown.setting.hideAddRemoveItemButtons.label": "Hide Add and Delete Item Buttons",
+  "illandril-sheet5e-lockdown.setting.hideAddRemoveItemButtons.hint": "This setting impacts Inventory, Features, and Spellbook",
+  "illandril-sheet5e-lockdown.setting.hideEditItemButtons.label": "Hide Edit Item Buttons",
+  "illandril-sheet5e-lockdown.setting.hideEditItemButtons.hint": "This setting impacts Inventory, Features, and Spellbook",
 
-  "illandril-sheet5e-lockdown.setting.lockCurrency": "Lock Currency",
-  "illandril-sheet5e-lockdown.setting.lockEquipItemButtons": "Lock Equip Item Toggles",
+  "illandril-sheet5e-lockdown.setting.lockCurrency.label": "Lock Currency",
+  "illandril-sheet5e-lockdown.setting.lockEquipItemButtons.label": "Lock Equip Item Toggles",
 
-  "illandril-sheet5e-lockdown.setting.lockPrepareSpellButtons": "Lock Prepare Spell Toggles",
-  "illandril-sheet5e-lockdown.setting.lockMaxSpellSlotOverride": "Lock Max Spell Slots Overrides",
+  "illandril-sheet5e-lockdown.setting.lockPrepareSpellButtons.label": "Lock Prepare Spell Toggles",
+  "illandril-sheet5e-lockdown.setting.lockMaxSpellSlotOverride.label": "Lock Max Spell Slots Overrides",
 
-  "illandril-sheet5e-lockdown.setting.hideBiography": "Hide Biography (always)",
+  "illandril-sheet5e-lockdown.setting.hideBiography.label": "Hide Biography (always)",
 
-  "illandril-sheet5e-lockdown.setting.lockUnsorteds": "Lock Other Inputs",
-  "illandril-sheet5e-lockdown.setting.lockUnsorteds-hint": "Locks Max Hit Points, Armor Class, Speed, Initiative Modifier, and Spellcasting Attribute. If you want to control any of these individually (or have any other issues with this module), please open an issue on this module's GitHub project page: https://github.com/illandril/FoundryVTT-sheet5e-lockdown",
+  "illandril-sheet5e-lockdown.setting.lockUnsorteds.label": "Lock Other Inputs",
+  "illandril-sheet5e-lockdown.setting.lockUnsorteds.hint": "Locks Max Hit Points, Armor Class, Speed, Initiative Modifier, and Spellcasting Attribute. If you want to control any of these individually (or have any other issues with this module), please open an issue on this module's GitHub project page: https://github.com/illandril/FoundryVTT-sheet5e-lockdown",
 
-  "illandril-sheet5e-lockdown.setting.disableTidy5eSheet": "Disable Tidy5e Sheet Support",
-  "illandril-sheet5e-lockdown.setting.disableTidy5eSheet-hint": "Tidy5e Sheet Support is in Beta. If you encounter issues with this module and Tidy5e Sheet, but don't want to fully disable this module because you use a mix of both standard and Tidy5e sheets, you can disable only the Tidy5e Sheet support. If you do encounter problems with this module (in Tidy5e sheets or elsewhere), please open an issue on this module's GitHub project page: https://github.com/illandril/FoundryVTT-sheet5e-lockdown",
+  "illandril-sheet5e-lockdown.setting.disableTidy5eSheet.label": "Disable Tidy5e Sheet Support",
+  "illandril-sheet5e-lockdown.setting.disableTidy5eSheet.hint": "Tidy5e Sheet Support is in Beta. If you encounter issues with this module and Tidy5e Sheet, but don't want to fully disable this module because you use a mix of both standard and Tidy5e sheets, you can disable only the Tidy5e Sheet support. If you do encounter problems with this module (in Tidy5e sheets or elsewhere), please open an issue on this module's GitHub project page: https://github.com/illandril/FoundryVTT-sheet5e-lockdown",
 
-  "illandril-sheet5e-lockdown.setting.disableOtherSheets": "Disable Other Sheet Support",
-  "illandril-sheet5e-lockdown.setting.disableOtherSheets-hint": "This module can attempt to lock down all other custom Character and NPC sheets, but they are not guaranteed to work (and may even make some sheets completely unusable). If you are using a sheet other than the base DnD5e sheets or Tidy5e, please open an issue on this module's GitHub project page to request official support: https://github.com/illandril/FoundryVTT-sheet5e-lockdown",
+  "illandril-sheet5e-lockdown.setting.disableOtherSheets.label": "Disable Other Sheet Support",
+  "illandril-sheet5e-lockdown.setting.disableOtherSheets.hint": "This module can attempt to lock down all other custom Character and NPC sheets, but they are not guaranteed to work (and may even make some sheets completely unusable). If you are using a sheet other than the base DnD5e sheets or Tidy5e, please open an issue on this module's GitHub project page to request official support: https://github.com/illandril/FoundryVTT-sheet5e-lockdown",
 
   "illandril-sheet5e-lockdown.toggleEditable": "Toggle Edit"
 }

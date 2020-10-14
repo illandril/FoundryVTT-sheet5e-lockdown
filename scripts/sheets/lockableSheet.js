@@ -1,9 +1,8 @@
 import Settings, { SETTINGS_UPDATED } from '../settings.js';
-import log from '../log.js';
+import { log, KEY as MODULE_KEY, CSS_PREFIX } from '../module.js';
 
-export const REGISTERED = 'illandril-sheet5e-lockdown.SheetsRegistered';
+export const REGISTERED = `${MODULE_KEY}.SheetsRegistered`;
 
-const CSS_PREFIX = 'illandril-sheet5e-lockdown--';
 const CSS_SHEET = CSS_PREFIX + 'sheet';
 const CSS_EDIT = CSS_PREFIX + 'edit';
 const CSS_LOCK = CSS_PREFIX + 'lock';
@@ -48,9 +47,8 @@ export const isLockableSheet = (sheetName) => LOCKABLE_SHEET_NAMES.has(sheetName
 
 export default class LockableSheet {
   constructor(sheetName, sheetDisabledSetting) {
-    LOCKABLE_SHEET_NAMES.add(sheetName);
-    log.info(`Sheet Registered: ${sheetName}`);
-    Hooks.on('render' + sheetName, (actorSheet) => {
+    this.sheetName = sheetName;
+    this.onRenderHook = (actorSheet) => {
       if (!actorSheet.isEditable || (sheetDisabledSetting && sheetDisabledSetting.get())) {
         return;
       }
@@ -61,7 +59,10 @@ export default class LockableSheet {
         return;
       }
       this.onRender(sheetElem, actor);
-    });
+    };
+    LOCKABLE_SHEET_NAMES.add(sheetName);
+    log.info(`Sheet Registered: ${sheetName}`);
+    Hooks.on('render' + sheetName, this.onRenderHook);
   }
 
   onRender(sheetElem, actor) {
@@ -96,12 +97,12 @@ export default class LockableSheet {
   }
 
   toggleEditable(sheetElem, actor) {
-    log.debug('Toggling Editable');
+    log.debug(`Toggling Editable: ${this.sheetName}`);
     this.makeLocked(sheetElem, actor, !this.isLocked(sheetElem));
   }
 
   makeLocked(sheetElem, actor, locked) {
-    log.debug('Make Locked? ' + locked);
+    log.debug(`Make Locked? ${locked} (${this.sheetName})`);
     addRemoveClass(sheetElem, CSS_LOCK, locked);
     addRemoveClass(sheetElem, CSS_EDIT, !locked);
 

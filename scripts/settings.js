@@ -1,12 +1,7 @@
-const MODULE_NAME = 'illandril-sheet5e-lockdown';
-export const SETTINGS_UPDATED = MODULE_NAME + '.SettingsUpdated';
-const HINT_SUFFIX = '-hint';
+import { KEY as MODULE_KEY } from './module.js';
+export const SETTINGS_UPDATED = MODULE_KEY + '.SettingsUpdated';
 
 const settingsList = [];
-
-const localize = (key) => {
-  return game.i18n.localize(MODULE_NAME + '.setting.' + key);
-};
 
 const refresh = () => {
   Hooks.callAll(SETTINGS_UPDATED);
@@ -19,14 +14,17 @@ class Setting {
     this.hasHint = !!options.hasHint;
     this.defaultValue = defaultValue;
     this.choices = options.choices || null;
+    this.scope = options.scope || 'world';
     settingsList.push(this);
   }
 
   register() {
-    game.settings.register(MODULE_NAME, this.key, {
-      name: localize(this.key),
-      hint: this.hasHint ? localize(this.key + '-hint') : null,
-      scope: 'world',
+    const name = game.i18n.localize(`${MODULE_KEY}.setting.${this.key}.label`);
+    const hint = this.hasHint ? game.i18n.localize(`${MODULE_KEY}.setting.${this.key}.hint`) : null;
+    game.settings.register(MODULE_KEY, this.key, {
+      name,
+      hint,
+      scope: this.scope,
       config: true,
       default: this.defaultValue,
       type: this.type,
@@ -36,7 +34,7 @@ class Setting {
   }
 
   get() {
-    return game.settings.get(MODULE_NAME, this.key);
+    return game.settings.get(MODULE_KEY, this.key);
   }
 }
 

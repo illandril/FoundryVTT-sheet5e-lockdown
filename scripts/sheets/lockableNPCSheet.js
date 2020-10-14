@@ -1,5 +1,5 @@
 import Settings from '../settings.js';
-import log from '../log.js';
+import { log } from '../module.js';
 
 import LockableSheet, { LockMode, lockUnlock } from './lockableSheet.js';
 

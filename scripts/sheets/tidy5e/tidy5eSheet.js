@@ -6,6 +6,9 @@ import * as Common from './tidy5eCommon.js';
 class LockableTidy5eSheet extends LockableCharacterSheet {
   constructor() {
     super('Tidy5eSheet', Settings.DisableTidy5eSheet);
+    Hooks.on('renderedTidy5eSheet', (actorSheet) => {
+      this.onRenderHook(actorSheet);
+    });
   }
 
   getBasicDetailInputs(sheetElem) {
