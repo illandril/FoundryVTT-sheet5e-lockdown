@@ -1,3 +1,7 @@
+## [v2.0.2](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.0.2) (2020-10-17)
+**Fixed Bugs:**
+* Increases support version to 0.7.4
+
 ## [v2.0.1](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.0.1) (2020-10-14)
 **Fixed Bugs:**
 * [\#7](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/7) Fixes locking of Tidy5e Sheet "Favorites"
