@@ -49,6 +49,11 @@ export default class LockableSheet {
   constructor(sheetName, sheetDisabledSetting) {
     this.sheetName = sheetName;
     this.onRenderHook = (actorSheet) => {
+      if(actorSheet.constructor.name !== sheetName) {
+        // It's a custom sheet that extends some other sheet, and we're in the parent
+        // class's hook - skip it to avoid inappropriate locking.
+        return;
+      }
       if (!actorSheet.isEditable || (sheetDisabledSetting && sheetDisabledSetting.get())) {
         return;
       }

@@ -1,3 +1,7 @@
+## [v2.0.3](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.0.3) (2020-10-25)
+**Fixed Bugs:**
+* [\#8](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/8) Fixed issues with custom sheets Foundry 0.7.x
+
 ## [v2.0.2](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.0.2) (2020-10-17)
 **Fixed Bugs:**
 * Increases support version to 0.7.4
