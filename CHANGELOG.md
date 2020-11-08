@@ -1,3 +1,7 @@
+## [v2.1.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.1.0) (2020-11-08)
+**Fixed Bugs:**
+* Adds support for new Effects tab (Foundry 0.7.6 / DnD5e 0.99)
+
 ## [v2.0.3](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.0.3) (2020-10-25)
 **Fixed Bugs:**
 * [\#8](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/8) Fixed issues with custom sheets Foundry 0.7.x

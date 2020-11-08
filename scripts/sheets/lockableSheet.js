@@ -137,6 +137,10 @@ export default class LockableSheet {
     const isSpellbookEmpty = !actor.data.items.some((item) => item.type === 'spell');
     lockUnlock(this.getSpellbookTab(sheetElem), hideEmptySpellbook, isSpellbookEmpty);
 
+    // Effects
+    lockUnlock(this.getEffectControls(sheetElem), locked, Settings.LockEffects);
+    lockUnlock(this.getEffectsTab(sheetElem), locked, Settings.HideEffects);
+
     // Biography
     lockUnlock(this.getBiographyForHide(sheetElem), locked, Settings.HideBiography);
 
@@ -235,6 +239,21 @@ export default class LockableSheet {
     return {
       elements: sheetElem.querySelectorAll('.slot-max-override'),
       lockMode: LockMode.HIDE,
+    };
+  }
+
+  getEffectControls(sheetElem) {
+    return {
+      elements: sheetElem.querySelectorAll('.effect-control'),
+      lockMode: LockMode.HIDE,
+    };
+  }
+
+  getEffectsTab(sheetElem) {
+    return {
+      elements: sheetElem.querySelectorAll('.tabs .item[data-tab="effects"]'),
+      lockMode: LockMode.HIDE,
+      always: true,
     };
   }
 

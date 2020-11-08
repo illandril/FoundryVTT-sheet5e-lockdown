@@ -28,6 +28,10 @@
   "illandril-sheet5e-lockdown.setting.lockPrepareSpellButtons.label": "Lock Prepare Spell Toggles",
   "illandril-sheet5e-lockdown.setting.lockMaxSpellSlotOverride.label": "Lock Max Spell Slots Overrides",
 
+  "illandril-sheet5e-lockdown.setting.lockEffects.label": "Lock Effects",
+  "illandril-sheet5e-lockdown.setting.lockEffects.hint": "Note: This only impacts the Effects tab in the character sheet, and does not prevent players from adding/removing active effecits from the Token HUD.",
+  "illandril-sheet5e-lockdown.setting.hideEffects.label": "Hide Effects Tab (always)",
+
   "illandril-sheet5e-lockdown.setting.hideBiography.label": "Hide Biography (always)",
 
   "illandril-sheet5e-lockdown.setting.lockUnsorteds.label": "Lock Other Inputs",

@@ -103,6 +103,10 @@ const Settings = {
   LockPrepareSpellButtons: new BooleanSetting('lockPrepareSpellButtons', false),
   LockMaxSpellSlotOverride: new BooleanSetting('lockMaxSpellSlotOverride', false),
 
+  // Effects
+  LockEffects: new BooleanSetting('lockEffects', false, { hasHint: true }),
+  HideEffects: new BooleanSetting('hideEffects', false),
+
   // Biography
   HideBiography: new BooleanSetting('hideBiography', false),
 
