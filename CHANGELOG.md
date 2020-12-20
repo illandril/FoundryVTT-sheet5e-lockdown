@@ -1,3 +1,7 @@
+## [v2.1.1](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.1.1) (2020-12-20)
+**Fixed Bugs:**
+* Increases support version to 0.7.9
+
 ## [v2.1.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.1.0) (2020-11-08)
 **New Features:**
 * Adds support for new Effects tab (Foundry 0.7.6 / DnD5e 0.99)
