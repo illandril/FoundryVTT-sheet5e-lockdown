@@ -1,3 +1,7 @@
+## [v2.2.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.2.0) (2021-01-01)
+**Fixed Bugs:**
+* [\#10](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/10) No longer hides the Spellbook tab if the only spell a character has is from the magicitems module
+
 ## [v2.1.1](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.1.1) (2020-12-20)
 **Fixed Bugs:**
 * Increases support version to 0.7.9

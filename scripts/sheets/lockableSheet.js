@@ -1,5 +1,6 @@
 import Settings, { SETTINGS_UPDATED } from '../settings.js';
 import { log, KEY as MODULE_KEY, CSS_PREFIX } from '../module.js';
+import MagicItemsSupport from '../module-support/magicitems.js';
 
 export const REGISTERED = `${MODULE_KEY}.SheetsRegistered`;
 
@@ -49,7 +50,7 @@ export default class LockableSheet {
   constructor(sheetName, sheetDisabledSetting) {
     this.sheetName = sheetName;
     this.onRenderHook = (actorSheet) => {
-      if(actorSheet.constructor.name !== sheetName) {
+      if (actorSheet.constructor.name !== sheetName) {
         // It's a custom sheet that extends some other sheet, and we're in the parent
         // class's hook - skip it to avoid inappropriate locking.
         return;
@@ -134,7 +135,7 @@ export default class LockableSheet {
     // Spellbook
     lockUnlock(this.getMaxSpellSlotOverride(sheetElem), locked, Settings.LockMaxSpellSlotOverride);
     const hideEmptySpellbook = locked && Settings.HideAddRemoveItemButtons.get();
-    const isSpellbookEmpty = !actor.data.items.some((item) => item.type === 'spell');
+    const isSpellbookEmpty = this.isSpellbookEmpty(actor);
     lockUnlock(this.getSpellbookTab(sheetElem), hideEmptySpellbook, isSpellbookEmpty);
 
     // Effects
@@ -147,6 +148,16 @@ export default class LockableSheet {
     // Unsorted stuff
     lockUnlock(this.getUnsorteds(sheetElem), locked, Settings.LockUnsorteds);
     log.debug('Make Locked Complete');
+  }
+
+  isSpellbookEmpty(actor) {
+    if (actor.data.items.some((item) => item.type === 'spell')) {
+      return false;
+    }
+    if (MagicItemsSupport.doesActorHaveSpells(actor)) {
+      return false;
+    }
+    return true;
   }
 
   getBasicDetailInputs(sheetElem) {
