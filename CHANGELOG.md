@@ -1,3 +1,7 @@
+## [v2.3.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.3.0) (2021-01-02)
+**New Features:**
+* [\#9](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/9) Show configured Special Traits directly on the character sheet
+
 ## [v2.2.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.2.0) (2021-01-01)
 **Fixed Bugs:**
 * [\#10](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/10) No longer hides the Spellbook tab if the only spell a character has is from the magicitems module

@@ -62,5 +62,17 @@ class LockableTidy5eNPC extends LockableNPCSheet {
       lockMode: LockMode.HIDE,
     };
   }
+
+  getUnsorteds(sheetElem) {
+    return super.getUnsorteds(sheetElem).concat([Common.getSpeedConfigureIcon(sheetElem)]);
+  }
+
+  showSpecialTraitsAsUL() {
+    return false;
+  }
+
+  getSpecialTraitsRow(sheetElem) {
+    return Common.getSpecialTraitsRow(sheetElem);
+  }
 }
 new LockableTidy5eNPC();

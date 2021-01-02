@@ -16,6 +16,8 @@
   "illandril-sheet5e-lockdown.setting.lockTraits.hint": "Traits include Senses, Languages, Immunities/Resistances/Vulnerabilities, Weapon/Armor/Tool Proficiencies, and Special Traits. If a trait is locked and has no value, it will be hidden.",
   "illandril-sheet5e-lockdown.setting.lockLegendaryAndLair.label": "Lock Legendary and Lair Actions",
   "illandril-sheet5e-lockdown.setting.lockLegendaryAndLair.hint": "Locks the maximum value for legendary actions and resistances, and the flag and initiative value for Uses Lair Action. The available value for Legendary Actions and Resistance is not locked. The Legendary and Lair rows are hidden when locked if the creature has no Legendary or Lair Actions.",
+  "illandril-sheet5e-lockdown.setting.showSpecialTraits.label": "Show Special Traits",
+  "illandril-sheet5e-lockdown.setting.showSpecialTraits.hint": "Show the list of Special Traits (Diamond Soul, Elven Accuracy, Attack Bonuses, etc) on the character sheet.",
 
   "illandril-sheet5e-lockdown.setting.hideAddRemoveItemButtons.label": "Hide Add and Delete Item Buttons",
   "illandril-sheet5e-lockdown.setting.hideAddRemoveItemButtons.hint": "This setting impacts Inventory, Features, and Spellbook",

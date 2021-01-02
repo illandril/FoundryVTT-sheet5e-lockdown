@@ -24,6 +24,21 @@ export const LockMode = {
   CONTENT_EDITABLE: 5,
 };
 
+const BONUSES = [
+  { name: 'data.bonuses.mwak.attack', label: 'DND5E.BonusMWAttack' },
+  { name: 'data.bonuses.mwak.damage', label: 'DND5E.BonusMWDamage' },
+  { name: 'data.bonuses.rwak.attack', label: 'DND5E.BonusRWAttack' },
+  { name: 'data.bonuses.rwak.damage', label: 'DND5E.BonusRWDamage' },
+  { name: 'data.bonuses.msak.attack', label: 'DND5E.BonusMSAttack' },
+  { name: 'data.bonuses.msak.damage', label: 'DND5E.BonusMSDamage' },
+  { name: 'data.bonuses.rsak.attack', label: 'DND5E.BonusRSAttack' },
+  { name: 'data.bonuses.rsak.damage', label: 'DND5E.BonusRSDamage' },
+  { name: 'data.bonuses.abilities.check', label: 'DND5E.BonusAbilityCheck' },
+  { name: 'data.bonuses.abilities.save', label: 'DND5E.BonusAbilitySave' },
+  { name: 'data.bonuses.abilities.skill', label: 'DND5E.BonusAbilitySkill' },
+  { name: 'data.bonuses.spell.dc', label: 'DND5E.BonusSpellDC' },
+];
+
 const SHOWN_SHEETS = new Set();
 
 Hooks.on(SETTINGS_UPDATED, () => {
@@ -79,6 +94,7 @@ export default class LockableSheet {
   }
 
   initialize(sheetElem, actor) {
+    this.showSpecialTraits(sheetElem, actor);
     if (sheetElem.classList.contains(CSS_SHEET)) {
       return;
     }
@@ -205,13 +221,15 @@ export default class LockableSheet {
           [
             // Trait edit icons
             '.trait-selector',
+            // Trait config icons
+            '.traits .config-button',
             // Empty trait rows
             '.traits .form-group.inactive',
           ].join(',')
         ),
         lockMode: LockMode.HIDE,
       },
-      this.getConfigureSpecialTraitsRow(sheetElem),
+      Settings.ShowSpecialTraits.get() ? null : this.getConfigureSpecialTraitsRow(sheetElem),
     ];
   }
 
@@ -298,7 +316,79 @@ export default class LockableSheet {
         ),
         lockMode: LockMode.FORM_DISABLED,
       },
+      {
+        elements: sheetElem.querySelectorAll('.attribute .config-button'),
+        lockMode: LockMode.HIDE,
+      },
     ];
+  }
+
+  showSpecialTraits(sheetElem, actor) {
+    if (!Settings.ShowSpecialTraits.get()) {
+      return;
+    }
+    const specialTraitsRow = this.getSpecialTraitsRow(sheetElem);
+    if (!specialTraitsRow) {
+      return;
+    }
+    let traitsList;
+    if (this.showSpecialTraitsAsUL()) {
+      traitsList = document.createElement('ul');
+      traitsList.classList.add('traits-list');
+    } else {
+      traitsList = document.createDocumentFragment();
+    }
+
+    const actorFlags = actor.data.flags;
+    for (let [key, flag] of Object.entries(CONFIG.DND5E.characterFlags)) {
+      const value = getProperty(actorFlags, `dnd5e.${key}`);
+      if (value) {
+        this.addTag(traitsList, flag.name, value);
+      }
+    }
+
+    BONUSES.forEach((bonus) => {
+      const value = getProperty(actor.data, bonus.name);
+      if (value) {
+        this.addTag(traitsList, bonus.label, value);
+      }
+    });
+    if (traitsList.childElementCount > 0) {
+      specialTraitsRow.traitListContainer.appendChild(traitsList);
+    } else {
+      specialTraitsRow.row.classList.add('inactive');
+    }
+  }
+
+  addTag(traitsList, labelLocaleKey, value) {
+    if (!this.showSpecialTraitsAsUL()) {
+      traitsList.appendChild(document.createTextNode(' '));
+    }
+    const tagElem = this.showSpecialTraitsAsUL()
+      ? document.createElement('li')
+      : document.createElement('span');
+    tagElem.classList.add('tag');
+    tagElem.appendChild(document.createTextNode(game.i18n.localize(labelLocaleKey)));
+    if (typeof value !== 'boolean') {
+      tagElem.appendChild(document.createTextNode(` ${value}`));
+    }
+    traitsList.appendChild(tagElem);
+  }
+
+  showSpecialTraitsAsUL() {
+    return true;
+  }
+
+  getSpecialTraitsRow(sheetElem) {
+    const flagsToggle = sheetElem.querySelector('.traits [data-action="flags"]');
+    if(!flagsToggle) {
+      return null;
+    }
+    const row = flagsToggle.parentElement;
+    return {
+      row: row,
+      traitListContainer: row,
+    };
   }
 }
 
@@ -309,6 +399,9 @@ const addRemoveClass = (element, cssClass, isAdd) => {
 export const lockUnlock = (elementGroups, sheetLocked, lockSetting) => {
   if (typeof lockSetting !== 'boolean') {
     lockSetting = lockSetting.get();
+  }
+  if (!elementGroups) {
+    return;
   }
   if (Array.isArray(elementGroups)) {
     elementGroups.forEach((elementGroup) => {

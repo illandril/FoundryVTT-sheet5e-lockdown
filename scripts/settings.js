@@ -88,6 +88,7 @@ const Settings = {
   LockResources: new BooleanSetting('lockResources', true, { hasHint: true }),
   LockTraits: new BooleanSetting('lockTraits', true, { hasHint: true }),
   LockLegendaryAndLair: new BooleanSetting('lockLegendaryAndLair', true, { hasHint: true }),
+  ShowSpecialTraits: new BooleanSetting('showSpecialTraits', true, { hasHint: true }),
 
   // Inventory + Features + Spellbook
   HideAddRemoveItemButtons: new BooleanSetting('hideAddRemoveItemButtons', true, { hasHint: true }),
