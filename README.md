@@ -17,6 +17,8 @@ The following are still editable to players...
 
 The GM can turn on editing for themselves through a Toggle Edit button in the character sheet title bar.
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/O5O73HF15)
+
 # Installation
 1. Open the Configuration and Setup for your FoundryVTT server
 1. Open the Add-on Modules Tab
