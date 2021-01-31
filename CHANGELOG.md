@@ -1,46 +1,84 @@
-## [v2.3.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.3.0) (2021-01-02)
-**New Features:**
-* [\#9](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/9) Show configured Special Traits directly on the character sheet
+# Changelog
 
-**Fixed Bugs:**
-* Fixed hiding of the configure buttons for Movement, Senses, and Special Traits
+## [v2.3.1](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.1) (2021-01-31)
 
-## [v2.2.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.2.0) (2021-01-01)
-**Fixed Bugs:**
-* [\#10](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/10) No longer hides the Spellbook tab if the only spell a character has is from the magicitems module
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.0...v2.3.1)
 
-## [v2.1.1](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.1.1) (2020-12-20)
-**Fixed Bugs:**
-* Increases support version to 0.7.9
+**Fixed&nbsp;Bugs**
 
-## [v2.1.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.1.0) (2020-11-08)
-**New Features:**
-* Adds support for new Effects tab (Foundry 0.7.6 / DnD5e 0.99)
+- Currency Conversion button vanishes when this module is enabled [\#11](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/11)
 
-## [v2.0.3](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.0.3) (2020-10-25)
-**Fixed Bugs:**
-* [\#8](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/8) Fixed issues with custom sheets Foundry 0.7.x
+## [v2.3.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.0) (2021-01-02)
 
-## [v2.0.2](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.0.2) (2020-10-17)
-**Fixed Bugs:**
-* Increases support version to 0.7.4
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.2.0...v2.3.0)
 
-## [v2.0.1](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.0.1) (2020-10-14)
-**Fixed Bugs:**
-* [\#7](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/7) Fixes locking of Tidy5e Sheet "Favorites"
-* [\#6](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/6) Stops uBlock Origin from incorrectly blocking a script
+**Enhancements**
 
-## [v2.0.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v2.0.0) (2020-09-18)
-**New Features:**
-* [\#5](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/5) (BETA) Adds support for the Tidy5e Sheets. This has not been fully tested, and may have issues - if you use Tidy5e and encounter issues, please let me know by opening an issue - I am unlikely to notice on my own, as I do not use Tidy5e sheets myself.
-* [\#4](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/4) Adds configuration options to control how much or how little players can edit
+- Show Special Traits \(uneditable\) when locked [\#9](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/9)
 
-## [v1.1.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v1.1.0) (2020-08-24)
-**New Features:**
-* [\#3](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/3) Expands the lockdown to include NPC sheets
+## [v2.2.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.2.0) (2021-01-01)
 
-**Fixed Bugs:**
-* [\#2](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/2) Increased compatible core version to 0.6.6
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.1.1...v2.2.0)
 
-## [v1.0.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/tag/v1.0.0) (2020-08-23)
-The initial release.
+**Other&nbsp;Changes**
+
+- Hiding Spellbook tab with active spells \[FoundryVTT Magic Items\] [\#10](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/10)
+
+## [v2.1.1](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.1.1) (2020-12-20)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.1.0...v2.1.1)
+
+## [v2.1.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.1.0) (2020-11-08)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.0.3...v2.1.0)
+
+## [v2.0.3](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.0.3) (2020-10-25)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.0.2...v2.0.3)
+
+**Other&nbsp;Changes**
+
+- Lock Traits is over-zealous for TidySheet5e [\#8](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/8)
+
+## [v2.0.2](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.0.2) (2020-10-18)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.0.1...v2.0.2)
+
+## [v2.0.1](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.0.1) (2020-10-14)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.0.0...v2.0.1)
+
+**Other&nbsp;Changes**
+
+- Tidy5e Sheet "Favorites" are not getting locked down [\#7](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/7)
+- uBlock Origin seems to break the module [\#6](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/6)
+
+## [v2.0.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.0.0) (2020-09-19)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v1.1.0...v2.0.0)
+
+**Enhancements**
+
+- Add support for the Tidy5e Sheet [\#5](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/5)
+- Add setting to configure how much players can edit [\#4](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/4)
+
+## [v1.1.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v1.1.0) (2020-09-07)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v1.0.0...v1.1.0)
+
+**Enhancements**
+
+- Lockdown NPC sheets [\#3](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/3)
+- Add prettier.config.js [\#1](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/1)
+
+**Other&nbsp;Changes**
+
+- Update compatibility for 0.6.6 [\#2](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/2)
+
+## [v1.0.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v1.0.0) (2020-08-23)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/dbd54403f3b9c43280f4f6059dd46aa10ab73b14...v1.0.0)
+
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

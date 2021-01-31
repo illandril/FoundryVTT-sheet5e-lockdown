@@ -1,44 +1,48 @@
 {
-  "name": "illandril-sheet5e-lockdown",
-  "title": "Illandril's Character Sheet Lockdown (5e)",
-  "description": "Locks down character sheets (DnD5e only) to prevent players from making changes, and minimize the risk of accidental GM edits. Note: This is not a secure lockdown, and player could get around it if they really wanted.",
-  "version": "2.3.0",
-  "library": "false",
-  "manifestPlusVersion": "1.0.0",
-  "minimumCoreVersion": "0.6.5",
-  "compatibleCoreVersion": "0.7.9",
-  "type": "module",
-  "authors": [
-    {
-      "name": "Joe Spandrusyszyn (illandril)",
-      "url": "https://github.com/illandril",
-      "email": "foundry-modules@illandril.net",
-      "discord": "joespan#3152",
-      "patreon": "illandril",
-      "reddit": "u/illandril"
-    }
-  ],
-  "dependencies": [],
-  "conflicts": [],
-  "esmodules": ["./scripts/index.js"],
-  "styles": ["./styles.css"],
-  "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "lang/en.json"
-    }
-  ],
-  "license": "./LICENSE",
-  "url": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown",
-  "bugs": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues",
-  "changelog": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/blob/master/CHANGELOG.md",
-  "manifest": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/latest/download/module.json",
-  "download": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/download/v2.3.0/illandril-sheet5e-lockdown.zip",
-  "media": [
-    {
-      "type": "cover",
-      "url": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/raw/master/screenshots/examples-preview.png"
-    }
-  ]
+    "name": "illandril-sheet5e-lockdown",
+    "title": "Illandril's Character Sheet Lockdown (5e)",
+    "description": "Locks down character sheets (DnD5e only) to prevent players from making changes, and minimize the risk of accidental GM edits. Note: This is not a secure lockdown, and player could get around it if they really wanted.",
+    "version": "2.3.1",
+    "library": "false",
+    "manifestPlusVersion": "1.0.0",
+    "minimumCoreVersion": "0.6.5",
+    "compatibleCoreVersion": "0.7.9",
+    "type": "module",
+    "authors": [
+        {
+            "name": "Joe Spandrusyszyn (illandril)",
+            "url": "https://github.com/illandril",
+            "email": "foundry-modules@illandril.net",
+            "discord": "joespan#3152",
+            "patreon": "illandril",
+            "reddit": "u/illandril"
+        }
+    ],
+    "dependencies": [],
+    "conflicts": [],
+    "esmodules": [
+        "./scripts/index.js"
+    ],
+    "styles": [
+        "./styles.css"
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        }
+    ],
+    "license": "./LICENSE",
+    "url": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown",
+    "bugs": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues",
+    "changelog": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/blob/master/CHANGELOG.md",
+    "manifest": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/latest/download/module.json",
+    "download": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/download/v2.3.1/module.zip",
+    "media": [
+        {
+            "type": "cover",
+            "url": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/raw/master/screenshots/examples-preview.png"
+        }
+    ]
 }
