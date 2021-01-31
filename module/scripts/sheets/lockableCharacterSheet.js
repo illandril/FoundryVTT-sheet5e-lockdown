@@ -118,7 +118,6 @@ export default class LockableCharacterSheet extends LockableSheet {
       {
         elements: sheetElem.querySelectorAll('.currency-convert'),
         lockMode: LockMode.HIDE,
-        always: true,
       },
     ];
   }
