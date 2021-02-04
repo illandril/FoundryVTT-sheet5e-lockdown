@@ -1,3 +1,5 @@
+import { log } from '../module.js';
+
 const MagicItemsSupport = {
   doesActorHaveSpells: (actor) => {
     if (window.MagicItems && window.MagicItems.actor) {
@@ -5,7 +7,7 @@ const MagicItemsSupport = {
         const magicitemsActor = window.MagicItems.actor(actor.id);
         return magicitemsActor && magicitemsActor.hasItemsSpells();
       } catch (e) {
-        console.error('Error checking for magicitems mod spells', e);
+        log.error('Error checking for magicitems mod spells', e);
       }
     }
     return false;
