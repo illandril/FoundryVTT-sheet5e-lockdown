@@ -4,16 +4,18 @@ import MagicItemsSupport from '../module-support/magicitems.js';
 
 export const REGISTERED = `${MODULE_KEY}.SheetsRegistered`;
 
-const CSS_SHEET = CSS_PREFIX + 'sheet';
-const CSS_EDIT = CSS_PREFIX + 'edit';
-const CSS_LOCK = CSS_PREFIX + 'lock';
-const CSS_HIDE_IMPORT_BUTTONS = CSS_PREFIX + 'hideImportButtons';
+const CSS_SHEET = `${CSS_PREFIX}sheet`;
+const CSS_EDIT = `${CSS_PREFIX}edit`;
+const CSS_TOGGLE_EDIT_ON = `${CSS_PREFIX}toggleEditOn`;
+const CSS_TOGGLE_EDIT_OFF = `${CSS_PREFIX}toggleEditOff`;
+const CSS_LOCK = `${CSS_PREFIX}lock`;
+const CSS_HIDE_IMPORT_BUTTONS = `${CSS_PREFIX}hideImportButtons`;
 
-const CSS_HIDE = CSS_PREFIX + 'hide';
-const CSS_HIDE_RESERVE_SPACE = CSS_PREFIX + 'hideReserveSpace';
-const CSS_FLEXFIX = CSS_PREFIX + 'flexfix';
+const CSS_HIDE = `${CSS_PREFIX}hide`;
+const CSS_HIDE_RESERVE_SPACE = `${CSS_PREFIX}hideReserveSpace`;
+const CSS_FLEXFIX = `${CSS_PREFIX}flexfix`;
 
-const CSS_NO_POINTER_EVENTS = CSS_PREFIX + 'noPointerEvents';
+const CSS_NO_POINTER_EVENTS = `${CSS_PREFIX}noPointerEvents`;
 
 export const LockMode = {
   CSS_POINTER_EVENTS: 0,
@@ -104,13 +106,23 @@ export default class LockableSheet {
       const sheetHeader = sheetElem.querySelector('.window-header');
       const sheetTitle = sheetHeader.querySelector('.window-title');
 
-      const editLink = document.createElement('a');
-      editLink.appendChild(faIcon('edit'));
-      const toggleString = game.i18n.localize('illandril-sheet5e-lockdown.toggleEditable');
-      editLink.appendChild(document.createTextNode(toggleString));
-      editLink.addEventListener('click', () => this.toggleEditable(sheetElem, actor), false);
-      editLink.addEventListener('dblclick', stopPropagation, false);
-      sheetHeader.insertBefore(editLink, sheetTitle.nextSibling);
+      const editOnLink = document.createElement('a');
+      editOnLink.appendChild(faIcon('lock'));
+      editOnLink.classList.add(CSS_TOGGLE_EDIT_ON);
+      const toggleOnString = game.i18n.localize('illandril-sheet5e-lockdown.toggleEditOn');
+      editOnLink.appendChild(document.createTextNode(toggleOnString));
+      editOnLink.addEventListener('click', () => this.makeLocked(sheetElem, actor, false), false);
+      editOnLink.addEventListener('dblclick', stopPropagation, false);
+      sheetHeader.insertBefore(editOnLink, sheetTitle.nextSibling);
+
+      const editOffLink = document.createElement('a');
+      editOffLink.appendChild(faIcon('unlock'));
+      editOffLink.classList.add(CSS_TOGGLE_EDIT_OFF);
+      const toggleOffString = game.i18n.localize('illandril-sheet5e-lockdown.toggleEditOff');
+      editOffLink.appendChild(document.createTextNode(toggleOffString));
+      editOffLink.addEventListener('click', () => this.makeLocked(sheetElem, actor, true), false);
+      editOffLink.addEventListener('dblclick', stopPropagation, false);
+      sheetHeader.insertBefore(editOffLink, sheetTitle.nextSibling);
     }
   }
 

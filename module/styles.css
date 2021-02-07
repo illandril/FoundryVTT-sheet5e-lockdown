@@ -1,3 +1,15 @@
+.illandril-sheet5e-lockdown--sheet.illandril-sheet5e-lockdown--lock .illandril-sheet5e-lockdown--toggleEditOff,
+.illandril-sheet5e-lockdown--sheet:not(.illandril-sheet5e-lockdown--lock) .illandril-sheet5e-lockdown--toggleEditOn {
+  display: none;
+}
+
+.illandril-sheet5e-lockdown--toggleEditOff {
+  color: #beb;
+}
+.illandril-sheet5e-lockdown--toggleEditOn {
+  color: #faa;
+}
+
 .illandril-sheet5e-lockdown--noPointerEvents {
   pointer-events: none !important;
 }

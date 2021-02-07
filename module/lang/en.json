@@ -45,5 +45,6 @@
   "illandril-sheet5e-lockdown.setting.disableOtherSheets.label": "Disable Other Sheet Support",
   "illandril-sheet5e-lockdown.setting.disableOtherSheets.hint": "This module can attempt to lock down all other custom Character and NPC sheets, but they are not guaranteed to work (and may even make some sheets completely unusable). If you are using a sheet other than the base DnD5e sheets or Tidy5e, please open an issue on this module's GitHub project page to request official support: https://github.com/illandril/FoundryVTT-sheet5e-lockdown",
 
-  "illandril-sheet5e-lockdown.toggleEditable": "Toggle Edit"
+  "illandril-sheet5e-lockdown.toggleEditOn": "Locked (Click to Unlock)",
+  "illandril-sheet5e-lockdown.toggleEditOff": "Unlocked (Click to Lock)"
 }
