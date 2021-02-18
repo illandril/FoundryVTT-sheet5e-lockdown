@@ -36,6 +36,7 @@
     "license": "./LICENSE",
     "url": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown",
     "bugs": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues",
+    "allowBugReporter": true,
     "changelog": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/blob/master/CHANGELOG.md",
     "manifest": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/latest/download/module.json",
     "download": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/download/v2.3.2/module.zip",
