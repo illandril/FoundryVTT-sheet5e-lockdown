@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.3.3](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.3) (2021-02-18)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.2...v2.3.3)
+
+**Enhancements**
+
+- Add support for Bug Reporter [\#13](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/13)
+
 ## [v2.3.2](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.2) (2021-02-07)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.1...v2.3.2)
@@ -68,6 +76,7 @@
 **Enhancements**
 
 - Add support for the Tidy5e Sheet [\#5](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/5)
+- Add setting to configure how much players can edit [\#4](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/4)
 
 ## [v1.1.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v1.1.0) (2020-09-07)
 
@@ -75,7 +84,6 @@
 
 **Enhancements**
 
-- Add setting to configure how much players can edit [\#4](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/4)
 - Lockdown NPC sheets [\#3](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/3)
 - Add prettier.config.js [\#1](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/1)
 
