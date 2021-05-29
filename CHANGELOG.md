@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.3.4](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.4) (2021-05-29)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.3...v2.3.4)
+
+**Other&nbsp;Changes**
+
+- Support Foundry 0.8.x [\#15](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/15)
+
 ## [v2.3.3](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.3) (2021-02-18)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.2...v2.3.3)
