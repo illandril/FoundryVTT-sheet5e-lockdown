@@ -4,16 +4,18 @@
     "description": "Locks down character sheets (DnD5e only) to prevent players from making changes, and minimize the risk of accidental GM edits. Note: This is not a secure lockdown, and player could get around it if they really wanted.",
     "version": "2.3.3",
     "library": "false",
-    "manifestPlusVersion": "1.0.0",
+    "manifestPlusVersion": "1.2.0",
     "minimumCoreVersion": "0.6.5",
-    "compatibleCoreVersion": "0.7.9",
+    "compatibleCoreVersion": "0.8.5",
     "type": "module",
+    "author": "Joe Spandrusyszyn (illandril)",
     "authors": [
         {
             "name": "Joe Spandrusyszyn (illandril)",
             "url": "https://github.com/illandril",
             "email": "foundry-modules@illandril.net",
             "discord": "joespan#3152",
+            "ko-fi": "illandril",
             "patreon": "illandril",
             "reddit": "u/illandril"
         }
