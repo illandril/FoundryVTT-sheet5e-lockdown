@@ -1,5 +1,18 @@
 # Changelog
 
+## [v2.3.5](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.5) (2021-06-18)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.4...v2.3.5)
+
+**Enhancements**
+
+- Delete button [\#17](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/17)
+- Not working with Simple World Building Sheets [\#14](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/14)
+
+**Other&nbsp;Changes**
+
+- Feature Request: Hide Tidy5eSheet's "Journal" tab [\#16](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/16)
+
 ## [v2.3.4](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.4) (2021-05-29)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.3...v2.3.4)
