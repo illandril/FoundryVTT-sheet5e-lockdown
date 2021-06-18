@@ -20,7 +20,9 @@
   "illandril-sheet5e-lockdown.setting.showSpecialTraits.hint": "Show the list of Special Traits (Diamond Soul, Elven Accuracy, Attack Bonuses, etc) on the character sheet.",
 
   "illandril-sheet5e-lockdown.setting.hideAddRemoveItemButtons.label": "Hide Add and Delete Item Buttons",
-  "illandril-sheet5e-lockdown.setting.hideAddRemoveItemButtons.hint": "This setting impacts Inventory, Features, and Spellbook",
+  "illandril-sheet5e-lockdown.setting.hideAddRemoveItemButtons.hint": "If checked, the Add and Delete buttons are hidden on the Inventory, Features, and Spellbook tabs.",
+  "illandril-sheet5e-lockdown.setting.hideEmptySpellbook.label": "Hide Empty Spellbooks",
+  "illandril-sheet5e-lockdown.setting.hideEmptySpellbook.hint": "If checked, the Spellbook tab will be hidden when the character sheet is locked and the character has no spells, regardless of the Hide Add and Delete Item Buttons setting. If unchecked, the Spellbook tab for characters with no spells will be hidden or shown based on the Hide Add and Delete Item Buttons setting when the character sheet is locked.",
   "illandril-sheet5e-lockdown.setting.hideEditItemButtons.label": "Hide Edit Item Buttons",
   "illandril-sheet5e-lockdown.setting.hideEditItemButtons.hint": "This setting impacts Inventory, Features, and Spellbook",
 

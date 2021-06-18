@@ -92,6 +92,7 @@ const Settings = {
 
   // Inventory + Features + Spellbook
   HideAddRemoveItemButtons: new BooleanSetting('hideAddRemoveItemButtons', true, { hasHint: true }),
+  HideEmptySpellbook: new BooleanSetting('hideEmptySpellbook', false, { hasHint: true }),
   HideEditItemButtons: new BooleanSetting('hideEditItemButtons', true, { hasHint: true }),
 
   // Inventory

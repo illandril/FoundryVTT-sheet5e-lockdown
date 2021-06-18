@@ -162,7 +162,7 @@ export default class LockableSheet {
 
     // Spellbook
     lockUnlock(this.getMaxSpellSlotOverride(sheetElem), locked, Settings.LockMaxSpellSlotOverride);
-    const hideEmptySpellbook = locked && Settings.HideAddRemoveItemButtons.get();
+    const hideEmptySpellbook = locked && (Settings.HideAddRemoveItemButtons.get() || Settings.HideEmptySpellbook.get());
     const isSpellbookEmpty = this.isSpellbookEmpty(actor);
     lockUnlock(this.getSpellbookTab(sheetElem), hideEmptySpellbook, isSpellbookEmpty);
 

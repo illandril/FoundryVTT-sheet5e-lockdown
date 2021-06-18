@@ -6,7 +6,7 @@
     "library": "false",
     "manifestPlusVersion": "1.2.0",
     "minimumCoreVersion": "0.6.5",
-    "compatibleCoreVersion": "0.8.5",
+    "compatibleCoreVersion": "0.8.7",
     "type": "module",
     "author": "Joe Spandrusyszyn (illandril)",
     "authors": [
@@ -21,6 +21,9 @@
         }
     ],
     "dependencies": [],
+    "systems": [
+        "dnd5e"
+    ],
     "conflicts": [],
     "esmodules": [
         "./scripts/index.js"
@@ -39,6 +42,9 @@
     "url": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown",
     "bugs": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues",
     "allowBugReporter": true,
+    "flags": {
+      "allowBugReporter": true
+    },
     "changelog": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/blob/master/CHANGELOG.md",
     "manifest": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/latest/download/module.json",
     "download": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/download/v2.3.4/module.zip",
