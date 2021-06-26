@@ -1,11 +1,16 @@
 {
+  "illandril-sheet5e-lockdown.setting.hideFromEveryone": "Hide from Everyone",
+
   "illandril-sheet5e-lockdown.setting.showToggleEditRole.label": "Show Toggle Edit To",
   "illandril-sheet5e-lockdown.setting.showToggleEditRole.hint": "A Toggle Edit button will be shown to all users with at least the selected role, allowing them to modify all locked settings. Note: Changing this option will not impact already opened character sheets. Players will need to close and re-open their character sheet to see this change.",
 
   "illandril-sheet5e-lockdown.setting.lockBasicDetails.label": "Lock Basic Details",
   "illandril-sheet5e-lockdown.setting.lockBasicDetails.hint": "Basic Details include Name, Race, Background, Alignment, and Size",
-  "illandril-sheet5e-lockdown.setting.hideBackground.label": "Hide Background (always)",
-  "illandril-sheet5e-lockdown.setting.hideAlignment.label": "Hide Alignment (always)",
+
+  "illandril-sheet5e-lockdown.setting.showBackgroundRole.label": "Show Background To",
+  "illandril-sheet5e-lockdown.setting.showBackgroundRole.hint": "A character's background will be hidden (even when the character sheet is unlocked) from players who do not have at least the selected role.",
+  "illandril-sheet5e-lockdown.setting.showAlignmentRole.label": "Show Alignment To",
+  "illandril-sheet5e-lockdown.setting.showAlignmentRole.hint": "A character's alignment will be hidden (even when the character sheet is unlocked) from players who do not have at least the selected role.",
   "illandril-sheet5e-lockdown.setting.lockXP.label": "Lock Experience",
 
   "illandril-sheet5e-lockdown.setting.lockAbilityScores.label": "Lock Ability Scores",
@@ -34,9 +39,12 @@
 
   "illandril-sheet5e-lockdown.setting.lockEffects.label": "Lock Effects",
   "illandril-sheet5e-lockdown.setting.lockEffects.hint": "Note: This only impacts the Effects tab in the character sheet, and does not prevent players from adding/removing active effecits from the Token HUD.",
-  "illandril-sheet5e-lockdown.setting.hideEffects.label": "Hide Effects Tab (always)",
 
-  "illandril-sheet5e-lockdown.setting.hideBiography.label": "Hide Biography (always)",
+  "illandril-sheet5e-lockdown.setting.showEffectsRole.label": "Show Effects Tab To",
+  "illandril-sheet5e-lockdown.setting.showEffectsRole.hint": "The Effects tab will be hidden (even when the character sheet is unlocked) from players who do not have at least the selected role. If Effects are locked, and a character has no effects (including inactive effects), the Effects tab will be hidden when the character sheet is locked regardless of this setting.",
+
+  "illandril-sheet5e-lockdown.setting.showBiographyRole.label": "Show Biography To",
+  "illandril-sheet5e-lockdown.setting.showBiographyRole.hint": "The Biography tab will be hidden (even when the character sheet is unlocked) from players who do not have at least the selected role.",
 
   "illandril-sheet5e-lockdown.setting.lockUnsorteds.label": "Lock Other Inputs",
   "illandril-sheet5e-lockdown.setting.lockUnsorteds.hint": "Locks Max Hit Points, Armor Class, Speed, Initiative Modifier, and Spellcasting Attribute. If you want to control any of these individually (or have any other issues with this module), please open an issue on this module's GitHub project page: https://github.com/illandril/FoundryVTT-sheet5e-lockdown",

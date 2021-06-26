@@ -11,7 +11,7 @@ export default class LockableCharacterSheet extends LockableSheet {
 
     // Basic Details section
     lockUnlock(this.getXPInputs(sheetElem), locked, Settings.LockXP);
-    lockUnlock(this.getBackgroundForHide(sheetElem), locked, Settings.HideBackground);
+    lockUnlock(this.getBackgroundForHide(sheetElem), locked, Settings.ShowBackgroundRole);
 
     // Attributes
     lockUnlock(this.getResourceNameAndMaxInputs(sheetElem, actor), locked, Settings.LockResources);

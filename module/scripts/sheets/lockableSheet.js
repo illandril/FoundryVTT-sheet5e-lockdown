@@ -147,7 +147,7 @@ export default class LockableSheet {
 
     // Basic Details section
     lockUnlock(this.getBasicDetailInputs(sheetElem), locked, Settings.LockBasicDetails);
-    lockUnlock(this.getAlignmentForHide(sheetElem), locked, Settings.HideAlignment);
+    lockUnlock(this.getAlignmentForHide(sheetElem), locked, Settings.ShowAlignmentRole);
 
     // Attributes
     lockUnlock(this.getAbilityScoreInputs(sheetElem), locked, Settings.LockAbilityScores);
@@ -163,15 +163,17 @@ export default class LockableSheet {
     // Spellbook
     lockUnlock(this.getMaxSpellSlotOverride(sheetElem), locked, Settings.LockMaxSpellSlotOverride);
     const hideEmptySpellbook = locked && (Settings.HideAddRemoveItemButtons.get() || Settings.HideEmptySpellbook.get());
-    const isSpellbookEmpty = this.isSpellbookEmpty(actor);
-    lockUnlock(this.getSpellbookTab(sheetElem), hideEmptySpellbook, isSpellbookEmpty);
+    const isSpellbookEmptyAndHidden = hideEmptySpellbook && this.isSpellbookEmpty(actor);
+    lockUnlock(this.getSpellbookTab(sheetElem), hideEmptySpellbook, isSpellbookEmptyAndHidden);
 
     // Effects
     lockUnlock(this.getEffectControls(sheetElem), locked, Settings.LockEffects);
-    lockUnlock(this.getEffectsTab(sheetElem), locked, Settings.HideEffects);
+    const hideEmptyEffects = locked && Settings.LockEffects.get();
+    const isEffectsEmptyAndHidden = hideEmptyEffects && this.isEffectsEmpty(actor);
+    lockUnlock(this.getEffectsTab(sheetElem), locked, isEffectsEmptyAndHidden || Settings.ShowEffectsRole);
 
     // Biography
-    lockUnlock(this.getBiographyForHide(sheetElem), locked, Settings.HideBiography);
+    lockUnlock(this.getBiographyForHide(sheetElem), locked, Settings.ShowBiographyRole);
 
     // Unsorted stuff
     lockUnlock(this.getUnsorteds(sheetElem), locked, Settings.LockUnsorteds);
@@ -179,13 +181,17 @@ export default class LockableSheet {
   }
 
   isSpellbookEmpty(actor) {
-    if (actor.data.items.some((item) => item.type === 'spell')) {
+    if (actor.data.effects.some((item) => item.type === 'spell')) {
       return false;
     }
     if (MagicItemsSupport.doesActorHaveSpells(actor)) {
       return false;
     }
     return true;
+  }
+
+  isEffectsEmpty(actor) {
+    return actor.data.effects.size == 0;
   }
 
   getBasicDetailInputs(sheetElem) {
@@ -411,6 +417,9 @@ const addRemoveClass = (element, cssClass, isAdd) => {
 export const lockUnlock = (elementGroups, sheetLocked, lockSetting) => {
   if (typeof lockSetting !== 'boolean') {
     lockSetting = lockSetting.get();
+    if(typeof lockSetting === 'string') {
+      lockSetting = !game.user.hasRole(lockSetting);
+    }
   }
   if (!elementGroups) {
     return;
