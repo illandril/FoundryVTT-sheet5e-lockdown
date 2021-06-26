@@ -1,5 +1,17 @@
 # Changelog
 
+## [v2.3.6](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.6) (2021-06-26)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.5...v2.3.6)
+
+**Enhancements**
+
+- Effects being always hidden hinders GMs [\#18](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/18)
+
+**Other&nbsp;Changes**
+
+- Item edit button hidden [\#19](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/19)
+
 ## [v2.3.5](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.5) (2021-06-18)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.4...v2.3.5)
