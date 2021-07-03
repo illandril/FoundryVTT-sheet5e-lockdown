@@ -181,7 +181,7 @@ export default class LockableSheet {
   }
 
   isSpellbookEmpty(actor) {
-    if (actor.data.effects.some((item) => item.type === 'spell')) {
+    if (actor.data.items.some((item) => item.type === 'spell')) {
       return false;
     }
     if (MagicItemsSupport.doesActorHaveSpells(actor)) {
