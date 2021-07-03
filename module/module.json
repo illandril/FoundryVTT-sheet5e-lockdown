@@ -2,7 +2,7 @@
     "name": "illandril-sheet5e-lockdown",
     "title": "Illandril's Character Sheet Lockdown (5e)",
     "description": "Locks down character sheets (DnD5e only) to prevent players from making changes, and minimize the risk of accidental GM edits. Note: This is not a secure lockdown, and player could get around it if they really wanted.",
-    "version": "2.3.6",
+    "version": "2.3.7",
     "library": "false",
     "manifestPlusVersion": "1.2.0",
     "minimumCoreVersion": "0.6.5",
@@ -45,7 +45,7 @@
     },
     "changelog": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/blob/master/CHANGELOG.md",
     "manifest": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/latest/download/module.json",
-    "download": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/download/v2.3.6/module.zip",
+    "download": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/releases/download/v2.3.7/module.zip",
     "media": [
         {
             "type": "cover",
