@@ -124,6 +124,11 @@ export default class LockableSheet {
       editOffLink.addEventListener('dblclick', stopPropagation, false);
       sheetHeader.insertBefore(editOffLink, sheetTitle.nextSibling);
     }
+    this.customSheetInitialize(sheetElem, actor);
+  }
+
+  customSheetInitialize(sheetElem, actor) {
+    // Nothing here, but some sheets do special stuff
   }
 
   isLocked(sheetElem) {

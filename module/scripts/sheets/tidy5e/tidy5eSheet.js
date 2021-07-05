@@ -11,6 +11,19 @@ class LockableTidy5eSheet extends LockableCharacterSheet {
     });
   }
 
+  customSheetInitialize(sheetElem, actor) {
+    super.customSheetInitialize(sheetElem, actor);
+    const favoritesTarget = sheetElem.querySelector('.favorites-target');
+    if(favoritesTarget) {
+      const observer = new MutationObserver(() => {
+        this.onRender(sheetElem, actor);
+        observer.disconnect();
+      });
+      observer.observe(favoritesTarget, {childList: true});
+    }
+
+  }
+
   getBasicDetailInputs(sheetElem) {
     return [
       {
@@ -68,6 +81,26 @@ class LockableTidy5eSheet extends LockableCharacterSheet {
 
   getSpecialTraitsRow(sheetElem) {
     return Common.getSpecialTraitsRow(sheetElem);
+  }
+
+  getEquipItemButtons(sheetElem) {
+    return [
+      super.getEquipItemButtons(sheetElem),
+      {
+        elements: sheetElem.querySelectorAll('.favorites .inventory-list > .items-header:first-child:not(.spellbook-header) + .item-list .item-toggle'),
+        lockMode: LockMode.CSS_POINTER_EVENTS,
+      }
+    ];
+  }
+
+  getPrepareSpellButtons(sheetElem) {
+    return [
+      super.getPrepareSpellButtons(sheetElem),
+      {
+        elements: sheetElem.querySelectorAll('.favorites .inventory-list > .items-header.spellbook-header + .item-list .item-toggle'),
+        lockMode: LockMode.CSS_POINTER_EVENTS,
+      }
+    ];
   }
 }
 new LockableTidy5eSheet();
