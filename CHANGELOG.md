@@ -1,16 +1,28 @@
 # Changelog
 
+## [v2.3.8](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.8) (2021-07-05)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.7...v2.3.8)
+
+**Other&nbsp;Changes**
+
+- Lock Equip Item Toggles [\#21](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/21)
+
 ## [v2.3.7](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.7) (2021-07-03)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.6...v2.3.7)
 
-## [v2.3.6](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.6) (2021-06-26)
-
-[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.5...v2.3.6)
-
 **Enhancements**
 
 - Effects being always hidden hinders GMs [\#18](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/18)
+
+**Fixed&nbsp;Bugs**
+
+- Spell book hiding bug [\#20](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/20)
+
+## [v2.3.6](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.6) (2021-06-26)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.5...v2.3.6)
 
 **Other&nbsp;Changes**
 
@@ -44,10 +56,6 @@
 **Enhancements**
 
 - Add support for Bug Reporter [\#13](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/13)
-
-**Fixed&nbsp;Bugs**
-
-- Spell book hiding bug [\#20](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/20)
 
 ## [v2.3.2](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.2) (2021-02-07)
 
