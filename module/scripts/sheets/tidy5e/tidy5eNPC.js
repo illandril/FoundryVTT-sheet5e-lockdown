@@ -48,8 +48,8 @@ class LockableTidy5eNPC extends LockableNPCSheet {
     };
   }
 
-  getAddRemoveItemButtons(sheetElem) {
-    return Common.getAddRemoveItemButtons(super.getAddRemoveItemButtons(sheetElem), sheetElem);
+  getRemoveItemButtons(sheetElem) {
+    return Common.getRemoveItemButtons(super.getRemoveItemButtons(sheetElem), sheetElem);
   }
 
   getSpellbookTab(sheetElem) {

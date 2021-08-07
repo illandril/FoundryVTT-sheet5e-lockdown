@@ -25,7 +25,7 @@ export const getSensesInput = (sheetElem) => {
   };
 };
 
-export const getAddRemoveItemButtons = (superButtons, sheetElem) => {
+export const getRemoveItemButtons = (superButtons, sheetElem) => {
   return [
     superButtons,
     {

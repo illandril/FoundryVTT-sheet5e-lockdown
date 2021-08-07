@@ -1,7 +1,7 @@
 import { log, KEY as MODULE_KEY } from './module.js';
 export const SETTINGS_UPDATED = MODULE_KEY + '.SettingsUpdated';
 
-const SETTINGS_VERSION = 1;
+const SETTINGS_VERSION = 2;
 const SETTINGS_VERSION_KEY = 'settingsVersion';
 
 const settingsList = [];
@@ -106,7 +106,8 @@ const Settings = {
   ShowSpecialTraits: new BooleanSetting('showSpecialTraits', true, { hasHint: true }),
 
   // Inventory + Features + Spellbook
-  HideAddRemoveItemButtons: new BooleanSetting('hideAddRemoveItemButtons', true, { hasHint: true }),
+  HideAddItemButtons: new BooleanSetting('hideAddItemButtons', true, { hasHint: true }),
+  HideRemoveItemButtons: new BooleanSetting('hideRemoveItemButtons', true, { hasHint: true }),
   HideEmptySpellbook: new BooleanSetting('hideEmptySpellbook', false, { hasHint: true }),
   HideEditItemButtons: new BooleanSetting('hideEditItemButtons', true, { hasHint: true }),
 
@@ -190,6 +191,20 @@ Hooks.once('ready', () => {
           game.settings.set(MODULE_KEY, newShowSetting, HIDE_FROM_EVERYONE_OPTION);
         }
       }
+    }
+    if (previousVersion < 2) {
+      game.settings.register(MODULE_KEY, 'hideAddRemoveItemButtons', {
+        scope: 'world',
+        config: false,
+        type: Boolean,
+        default: true,
+      });
+      const previousHideAddRemoveValue = game.settings.get(MODULE_KEY, 'hideAddRemoveItemButtons');
+      log.info(
+        `Migrating hideAddRemoveItemButtons setting to hideAddItemButtons and hideRemoveItemButtons - setting to ${previousHideAddRemoveValue}`
+      );
+      game.settings.set(MODULE_KEY, 'hideAddItemButtons', previousHideAddRemoveValue);
+      game.settings.set(MODULE_KEY, 'hideRemoveItemButtons', previousHideAddRemoveValue);
     }
     game.settings.set(MODULE_KEY, SETTINGS_VERSION_KEY, SETTINGS_VERSION);
     log.info(`Settings Initialized - upgraded from v${previousVersion} to v${SETTINGS_VERSION}`);

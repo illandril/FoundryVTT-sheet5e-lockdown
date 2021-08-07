@@ -76,8 +76,8 @@ class LockableTidy5eSheet extends LockableCharacterSheet {
     };
   }
 
-  getAddRemoveItemButtons(sheetElem) {
-    return Common.getAddRemoveItemButtons(super.getAddRemoveItemButtons(sheetElem), sheetElem);
+  getRemoveItemButtons(sheetElem) {
+    return Common.getRemoveItemButtons(super.getRemoveItemButtons(sheetElem), sheetElem);
   }
 
   getUnsorteds(sheetElem) {

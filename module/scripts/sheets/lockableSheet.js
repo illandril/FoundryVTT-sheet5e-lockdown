@@ -160,14 +160,15 @@ export default class LockableSheet {
     lockUnlock(this.getTraits(sheetElem), locked, Settings.LockTraits);
 
     // Inventory + Features + Spellbook
-    lockUnlock(this.getAddRemoveItemButtons(sheetElem), locked, Settings.HideAddRemoveItemButtons);
+    lockUnlock(this.getAddItemButtons(sheetElem), locked, Settings.HideAddItemButtons);
+    lockUnlock(this.getRemoveItemButtons(sheetElem), locked, Settings.HideRemoveItemButtons);
     lockUnlock(this.getEditItemButtons(sheetElem), locked, Settings.HideEditItemButtons);
 
     // Features -- nothing special here
 
     // Spellbook
     lockUnlock(this.getMaxSpellSlotOverride(sheetElem), locked, Settings.LockMaxSpellSlotOverride);
-    const hideEmptySpellbook = locked && (Settings.HideAddRemoveItemButtons.get() || Settings.HideEmptySpellbook.get());
+    const hideEmptySpellbook = locked && (Settings.HideAddItemButtons.get() || Settings.HideEmptySpellbook.get());
     const isSpellbookEmptyAndHidden = hideEmptySpellbook && this.isSpellbookEmpty(actor);
     lockUnlock(this.getSpellbookTab(sheetElem), hideEmptySpellbook, isSpellbookEmptyAndHidden);
 
@@ -271,11 +272,16 @@ export default class LockableSheet {
     };
   }
 
-  getAddRemoveItemButtons(sheetElem) {
+  getAddItemButtons(sheetElem) {
     return {
-      elements: sheetElem.querySelectorAll(
-        ['.inventory-list .item-create', '.inventory-list .item-delete'].join(',')
-      ),
+      elements: sheetElem.querySelectorAll('.inventory-list .item-create'),
+      lockMode: LockMode.HIDE,
+    };
+  }
+
+  getRemoveItemButtons(sheetElem) {
+    return {
+      elements: sheetElem.querySelectorAll('.inventory-list .item-delete'),
       lockMode: LockMode.HIDE,
     };
   }
