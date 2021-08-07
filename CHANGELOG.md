@@ -1,5 +1,18 @@
 # Changelog
 
+## [v2.4.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.4.0) (2021-08-07)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.8...v2.4.0)
+
+**Enhancements**
+
+- Seperate Delete & Add button hide [\#24](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/24)
+- Feature Request: Add Support for Nap Time module [\#22](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/22)
+
+**Other&nbsp;Changes**
+
+- Getting a console error when opening TidyNPC sheets [\#23](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/23)
+
 ## [v2.3.8](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.8) (2021-07-05)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.7...v2.3.8)
@@ -12,10 +25,6 @@
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.6...v2.3.7)
 
-**Enhancements**
-
-- Effects being always hidden hinders GMs [\#18](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/18)
-
 **Fixed&nbsp;Bugs**
 
 - Spell book hiding bug [\#20](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/20)
@@ -23,6 +32,10 @@
 ## [v2.3.6](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.6) (2021-06-26)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.5...v2.3.6)
+
+**Enhancements**
+
+- Effects being always hidden hinders GMs [\#18](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/18)
 
 **Other&nbsp;Changes**
 
