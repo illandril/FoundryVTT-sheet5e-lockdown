@@ -14,14 +14,13 @@ class LockableTidy5eSheet extends LockableCharacterSheet {
   customSheetInitialize(sheetElem, actor) {
     super.customSheetInitialize(sheetElem, actor);
     const favoritesTarget = sheetElem.querySelector('.favorites-target');
-    if(favoritesTarget) {
+    if (favoritesTarget) {
       const observer = new MutationObserver(() => {
         this.onRender(sheetElem, actor);
         observer.disconnect();
       });
-      observer.observe(favoritesTarget, {childList: true});
+      observer.observe(favoritesTarget, { childList: true });
     }
-
   }
 
   getBasicDetailInputs(sheetElem) {
@@ -56,6 +55,16 @@ class LockableTidy5eSheet extends LockableCharacterSheet {
     };
   }
 
+  getRestButtons(sheetElem) {
+    return [
+      super.getRestButtons(sheetElem),
+      {
+        elements: sheetElem.querySelectorAll('.resting'),
+        lockMode: LockMode.HIDE,
+      },
+    ];
+  }
+
   getSensesInput(sheetElem) {
     return Common.getSensesInput(sheetElem);
   }
@@ -87,9 +96,11 @@ class LockableTidy5eSheet extends LockableCharacterSheet {
     return [
       super.getEquipItemButtons(sheetElem),
       {
-        elements: sheetElem.querySelectorAll('.favorites .inventory-list > .items-header:first-child:not(.spellbook-header) + .item-list .item-toggle'),
+        elements: sheetElem.querySelectorAll(
+          '.favorites .inventory-list > .items-header:first-child:not(.spellbook-header) + .item-list .item-toggle'
+        ),
         lockMode: LockMode.CSS_POINTER_EVENTS,
-      }
+      },
     ];
   }
 
@@ -97,9 +108,11 @@ class LockableTidy5eSheet extends LockableCharacterSheet {
     return [
       super.getPrepareSpellButtons(sheetElem),
       {
-        elements: sheetElem.querySelectorAll('.favorites .inventory-list > .items-header.spellbook-header + .item-list .item-toggle'),
+        elements: sheetElem.querySelectorAll(
+          '.favorites .inventory-list > .items-header.spellbook-header + .item-list .item-toggle'
+        ),
         lockMode: LockMode.CSS_POINTER_EVENTS,
-      }
+      },
     ];
   }
 }

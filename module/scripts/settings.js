@@ -95,6 +95,7 @@ const Settings = {
     hasHint: true,
   }),
   LockXP: new BooleanSetting('lockXP', true),
+  LockRests: new BooleanSetting('lockRests', true),
 
   // Attributes
   LockAbilityScores: new BooleanSetting('lockAbilityScores', true),

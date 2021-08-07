@@ -12,6 +12,7 @@ export default class LockableCharacterSheet extends LockableSheet {
     // Basic Details section
     lockUnlock(this.getXPInputs(sheetElem), locked, Settings.LockXP);
     lockUnlock(this.getBackgroundForHide(sheetElem), locked, Settings.ShowBackgroundRole);
+    lockUnlock(this.getRestButtons(sheetElem), locked, Settings.LockRests);
 
     // Attributes
     lockUnlock(this.getResourceNameAndMaxInputs(sheetElem, actor), locked, Settings.LockResources);
@@ -33,6 +34,13 @@ export default class LockableCharacterSheet extends LockableSheet {
     return {
       elements: sheetElem.querySelectorAll('input[name="data.details.xp.value"]'),
       lockMode: LockMode.FORM_DISABLED,
+    };
+  }
+
+  getRestButtons(sheetElem) {
+    return {
+      elements: sheetElem.querySelectorAll('a.rest'),
+      lockMode: LockMode.HIDE,
     };
   }
 

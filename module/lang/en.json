@@ -12,6 +12,7 @@
   "illandril-sheet5e-lockdown.setting.showAlignmentRole.label": "Show Alignment To",
   "illandril-sheet5e-lockdown.setting.showAlignmentRole.hint": "A character's alignment will be hidden (even when the character sheet is unlocked) from players who do not have at least the selected role.",
   "illandril-sheet5e-lockdown.setting.lockXP.label": "Lock Experience",
+  "illandril-sheet5e-lockdown.setting.lockRests.label": "Lock Short and Long Rests",
 
   "illandril-sheet5e-lockdown.setting.lockAbilityScores.label": "Lock Ability Scores",
   "illandril-sheet5e-lockdown.setting.lockProficiencies.label": "Lock Proficiencies",
