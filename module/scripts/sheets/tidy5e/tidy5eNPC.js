@@ -63,6 +63,42 @@ class LockableTidy5eNPC extends LockableNPCSheet {
     };
   }
 
+  getLegendaryActionsRow(sheetElem) {
+    const input = sheetElem.querySelector('input[name="data.resources.legact.max"]');
+    let row = input;
+    while (row && !row.classList.contains('counter')) {
+      row = row.parentNode;
+    }
+    return {
+      elements: [row],
+      lockMode: LockMode.HIDE,
+    };
+  }
+
+  getLegendaryResistanceRow(sheetElem) {
+    const input = sheetElem.querySelector('input[name="data.resources.legres.max"]');
+    let row = input;
+    while (row && !row.classList.contains('counter')) {
+      row = row.parentNode;
+    }
+    return {
+      elements: [row],
+      lockMode: LockMode.HIDE,
+    };
+  }
+
+  getLairActionsRow(sheetElem) {
+    const input = sheetElem.querySelector('input[name="data.resources.lair.value"]');
+    let row = input;
+    while (row && !row.classList.contains('counter')) {
+      row = row.parentNode;
+    }
+    return {
+      elements: [row],
+      lockMode: LockMode.HIDE,
+    };
+  }
+
   getUnsorteds(sheetElem) {
     return super.getUnsorteds(sheetElem).concat([Common.getSpeedConfigureIcon(sheetElem)]);
   }

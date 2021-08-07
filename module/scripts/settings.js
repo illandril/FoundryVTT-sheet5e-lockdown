@@ -3,6 +3,7 @@ export const SETTINGS_UPDATED = MODULE_KEY + '.SettingsUpdated';
 
 const SETTINGS_VERSION = 2;
 const SETTINGS_VERSION_KEY = 'settingsVersion';
+const TIDY5E_WARNING_KEY = 'tidy5eWarning';
 
 const settingsList = [];
 
@@ -153,6 +154,13 @@ Hooks.once('init', () => {
     type: Number,
     default: 0,
   });
+  game.settings.register(MODULE_KEY, TIDY5E_WARNING_KEY, {
+    scope: 'world',
+    config: false,
+    type: Boolean,
+    default: false,
+  });
+
 });
 
 Hooks.once('ready', () => {
@@ -210,5 +218,11 @@ Hooks.once('ready', () => {
     log.info(`Settings Initialized - upgraded from v${previousVersion} to v${SETTINGS_VERSION}`);
   } else {
     log.info(`Settings Initialized - already on ${SETTINGS_VERSION}`);
+  }
+
+  const tidy5eWarningShown = game.settings.get(MODULE_KEY, TIDY5E_WARNING_KEY);
+  if(!tidy5eWarningShown && game.modules.has('tidy5e-sheet') && game.user.isGM) {
+    ui.notifications.warn(game.i18n.localize(`${MODULE_KEY}.warning.tidy5eSheetSupport`))
+    game.settings.set(MODULE_KEY, TIDY5E_WARNING_KEY, true);
   }
 });
