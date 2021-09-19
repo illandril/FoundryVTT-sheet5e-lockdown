@@ -164,9 +164,11 @@ export default class LockableSheet {
     lockUnlock(this.getRemoveItemButtons(sheetElem), locked, Settings.HideRemoveItemButtons);
     lockUnlock(this.getEditItemButtons(sheetElem), locked, Settings.HideEditItemButtons);
 
-    // Features -- nothing special here
+    // Features
+    lockUnlock(this.getAvailableItemFeatureUses(sheetElem), locked, Settings.LockAvailableItemFeatureUses)
 
     // Spellbook
+    lockUnlock(this.getAvailableSpellSlots(sheetElem), locked, Settings.LockAvailableSpellSlots)
     lockUnlock(this.getMaxSpellSlotOverride(sheetElem), locked, Settings.LockMaxSpellSlotOverride);
     const hideEmptySpellbook = locked && (Settings.HideAddItemButtons.get() || Settings.HideEmptySpellbook.get());
     const isSpellbookEmptyAndHidden = hideEmptySpellbook && this.isSpellbookEmpty(actor);
@@ -290,6 +292,20 @@ export default class LockableSheet {
     return {
       elements: sheetElem.querySelectorAll('.inventory-list .item-edit'),
       lockMode: LockMode.HIDE,
+    };
+  }
+
+  getAvailableItemFeatureUses(sheetElem) {
+    return {
+      elements: sheetElem.querySelectorAll('.item-detail.item-uses > input'),
+      lockMode: LockMode.FORM_DISABLED,
+    };
+  }
+
+  getAvailableSpellSlots(sheetElem) {
+    return {
+      elements: sheetElem.querySelectorAll('input[name^="data.spells."][name$=".value"]'),
+      lockMode: LockMode.FORM_DISABLED,
     };
   }
 

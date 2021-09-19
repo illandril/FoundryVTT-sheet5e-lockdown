@@ -80,6 +80,10 @@ class LockableTidy5eSheet extends LockableCharacterSheet {
     return Common.getRemoveItemButtons(super.getRemoveItemButtons(sheetElem), sheetElem);
   }
 
+  getAvailableItemFeatureUses(sheetElem) {
+    return Common.getAvailableItemFeatureUses(sheetElem);
+  }
+
   getUnsorteds(sheetElem) {
     return super.getUnsorteds(sheetElem).concat([Common.getSpeedConfigureIcon(sheetElem)]);
   }

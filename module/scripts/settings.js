@@ -116,10 +116,12 @@ const Settings = {
   LockCurrency: new BooleanSetting('lockCurrency', true),
   LockEquipItemButtons: new BooleanSetting('lockEquipItemButtons', false),
 
-  // Features -- nothing special here
+  // Features
+  LockAvailableItemFeatureUses: new BooleanSetting('lockAvailableItemFeatureUses', false),
 
   // Spellbook
   LockPrepareSpellButtons: new BooleanSetting('lockPrepareSpellButtons', false),
+  LockAvailableSpellSlots: new BooleanSetting('lockAvailableSpellSlots', false),
   LockMaxSpellSlotOverride: new BooleanSetting('lockMaxSpellSlotOverride', false),
 
   // Effects

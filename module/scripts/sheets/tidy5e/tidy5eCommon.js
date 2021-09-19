@@ -35,6 +35,13 @@ export const getRemoveItemButtons = (superButtons, sheetElem) => {
   ];
 };
 
+export const getAvailableItemFeatureUses = (sheetElem) => {
+  return {
+    elements: sheetElem.querySelectorAll('.item-detail input[data-path="data.uses.value"],.item-detail input[data-path="data.uses.max"]'),
+    lockMode: LockMode.FORM_DISABLED,
+  };
+};
+
 export const getSpecialTraitsRow = (sheetElem) => {
   const hasRow = sheetElem.querySelector(`.traits .${CSS_SPECIAL_TRAITS}`) !== null;
   if (hasRow) {

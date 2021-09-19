@@ -37,7 +37,10 @@
   "illandril-sheet5e-lockdown.setting.lockCurrency.label": "Lock Currency",
   "illandril-sheet5e-lockdown.setting.lockEquipItemButtons.label": "Lock Equip Item Toggles",
 
+  "illandril-sheet5e-lockdown.setting.lockAvailableItemFeatureUses.label": "Lock Available Item and Feature Uses",
+
   "illandril-sheet5e-lockdown.setting.lockPrepareSpellButtons.label": "Lock Prepare Spell Toggles",
+  "illandril-sheet5e-lockdown.setting.lockAvailableSpellSlots.label": "Lock Available Spell Slots",
   "illandril-sheet5e-lockdown.setting.lockMaxSpellSlotOverride.label": "Lock Max Spell Slots Overrides",
 
   "illandril-sheet5e-lockdown.setting.lockEffects.label": "Lock Effects",
