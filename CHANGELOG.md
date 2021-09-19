@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.4.2](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.4.2) (2021-09-19)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.4.1...v2.4.2)
+
+**Enhancements**
+
+- \[FEATURE\] Locking the ability to change the available spell slots [\#28](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/28)
+
 ## [v2.4.1](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.4.1) (2021-08-07)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.4.0...v2.4.1)
@@ -28,7 +36,6 @@
 **Other&nbsp;Changes**
 
 - Lock Equip Item Toggles [\#21](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/21)
-- Item edit button hidden [\#19](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/19)
 
 ## [v2.3.7](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.7) (2021-07-03)
 
@@ -45,6 +52,10 @@
 **Enhancements**
 
 - Effects being always hidden hinders GMs [\#18](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/18)
+
+**Other&nbsp;Changes**
+
+- Item edit button hidden [\#19](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/19)
 
 ## [v2.3.5](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.5) (2021-06-18)
 
