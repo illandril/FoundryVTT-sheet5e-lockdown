@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.4.3](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.4.3) (2021-09-20)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.4.2...v2.4.3)
+
+**Enhancements**
+
+- \[FEATURE\] Toggle name editability [\#29](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/29)
+
 ## [v2.4.2](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.4.2) (2021-09-19)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.4.1...v2.4.2)
