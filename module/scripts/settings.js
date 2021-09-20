@@ -1,7 +1,7 @@
 import { log, KEY as MODULE_KEY } from './module.js';
 export const SETTINGS_UPDATED = MODULE_KEY + '.SettingsUpdated';
 
-const SETTINGS_VERSION = 2;
+const SETTINGS_VERSION = 3;
 const SETTINGS_VERSION_KEY = 'settingsVersion';
 const TIDY5E_WARNING_KEY = 'tidy5eWarning';
 
@@ -35,6 +35,10 @@ class Setting {
       choices: this.choices,
       onChange: refresh,
     });
+  }
+
+  set(value) {
+    return game.settings.set(MODULE_KEY, this.key, value);
   }
 
   get() {
@@ -88,6 +92,7 @@ const Settings = {
   }),
 
   // Basic Details
+  LockName: new BooleanSetting('lockName', false),
   LockBasicDetails: new BooleanSetting('lockBasicDetails', true, { hasHint: true }),
   ShowBackgroundRole: new ChoiceSetting('showBackgroundRole', 'PLAYER', showRoleChoices, {
     hasHint: true,
@@ -162,7 +167,6 @@ Hooks.once('init', () => {
     type: Boolean,
     default: false,
   });
-
 });
 
 Hooks.once('ready', () => {
@@ -216,6 +220,11 @@ Hooks.once('ready', () => {
       game.settings.set(MODULE_KEY, 'hideAddItemButtons', previousHideAddRemoveValue);
       game.settings.set(MODULE_KEY, 'hideRemoveItemButtons', previousHideAddRemoveValue);
     }
+    if (previousVersion < 3) {
+      const lockBasicDetails = Settings.LockBasicDetails.get();
+      log.info(`Migrating lockBasicDetails setting to lockName - setting to ${lockBasicDetails}`);
+      Settings.LockName.set(lockBasicDetails);
+    }
     game.settings.set(MODULE_KEY, SETTINGS_VERSION_KEY, SETTINGS_VERSION);
     log.info(`Settings Initialized - upgraded from v${previousVersion} to v${SETTINGS_VERSION}`);
   } else {
@@ -223,8 +232,8 @@ Hooks.once('ready', () => {
   }
 
   const tidy5eWarningShown = game.settings.get(MODULE_KEY, TIDY5E_WARNING_KEY);
-  if(!tidy5eWarningShown && game.modules.has('tidy5e-sheet') && game.user.isGM) {
-    ui.notifications.warn(game.i18n.localize(`${MODULE_KEY}.warning.tidy5eSheetSupport`))
+  if (!tidy5eWarningShown && game.modules.has('tidy5e-sheet') && game.user.isGM) {
+    ui.notifications.warn(game.i18n.localize(`${MODULE_KEY}.warning.tidy5eSheetSupport`));
     game.settings.set(MODULE_KEY, TIDY5E_WARNING_KEY, true);
   }
 });

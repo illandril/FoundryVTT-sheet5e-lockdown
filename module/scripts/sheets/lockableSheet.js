@@ -151,6 +151,7 @@ export default class LockableSheet {
     addRemoveClass(sheetElem, CSS_HIDE_IMPORT_BUTTONS, locked);
 
     // Basic Details section
+    lockUnlock(this.getNameInput(sheetElem), locked, Settings.LockName);
     lockUnlock(this.getBasicDetailInputs(sheetElem), locked, Settings.LockBasicDetails);
     lockUnlock(this.getAlignmentForHide(sheetElem), locked, Settings.ShowAlignmentRole);
 
@@ -202,11 +203,17 @@ export default class LockableSheet {
     return actor.data.effects.size == 0;
   }
 
+  getNameInput(sheetElem) {
+    return {
+      elements: sheetElem.querySelectorAll('input[name="name"]'),
+      lockMode: LockMode.FORM_DISABLED,
+    };
+  }
+
   getBasicDetailInputs(sheetElem) {
     return {
       elements: sheetElem.querySelectorAll(
         [
-          'input[name="name"]',
           'input[name="data.details.race"]',
           'input[name="data.details.background"]',
           'input[name="data.details.alignment"]',

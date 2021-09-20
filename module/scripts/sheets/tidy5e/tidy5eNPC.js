@@ -8,12 +8,20 @@ class LockableTidy5eNPC extends LockableNPCSheet {
     super('Tidy5eNPC', Settings.DisableTidy5eSheet);
   }
 
+  getNameInput(sheetElem) {
+    return [
+      {
+        elements: sheetElem.querySelectorAll('.character-details .char-name'),
+        lockMode: LockMode.CONTENT_EDITABLE,
+      },
+    ];
+  }
+
   getBasicDetailInputs(sheetElem) {
     return [
       {
         elements: sheetElem.querySelectorAll(
           [
-            '.character-details .char-name',
             '.origin-summary [data-target$="-race"]',
             '.origin-summary [data-target$="-alignment"]',
             '.origin-summary [data-target$="-type"]',

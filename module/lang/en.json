@@ -4,8 +4,9 @@
   "illandril-sheet5e-lockdown.setting.showToggleEditRole.label": "Show Toggle Edit To",
   "illandril-sheet5e-lockdown.setting.showToggleEditRole.hint": "A Toggle Edit button will be shown to all users with at least the selected role, allowing them to modify all locked settings. Note: Changing this option will not impact already opened character sheets. Players will need to close and re-open their character sheet to see this change.",
 
+  "illandril-sheet5e-lockdown.setting.lockName.label": "Lock Name",
   "illandril-sheet5e-lockdown.setting.lockBasicDetails.label": "Lock Basic Details",
-  "illandril-sheet5e-lockdown.setting.lockBasicDetails.hint": "Basic Details include Name, Race, Background, Alignment, and Size",
+  "illandril-sheet5e-lockdown.setting.lockBasicDetails.hint": "Basic Details include Race, Background, Alignment, and Size",
 
   "illandril-sheet5e-lockdown.setting.showBackgroundRole.label": "Show Background To",
   "illandril-sheet5e-lockdown.setting.showBackgroundRole.hint": "A character's background will be hidden (even when the character sheet is unlocked) from players who do not have at least the selected role.",

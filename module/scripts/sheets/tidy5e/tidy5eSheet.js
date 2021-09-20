@@ -23,12 +23,20 @@ class LockableTidy5eSheet extends LockableCharacterSheet {
     }
   }
 
+  getNameInput(sheetElem) {
+    return [
+      {
+        elements: sheetElem.querySelectorAll('.character-details .char-name'),
+        lockMode: LockMode.CONTENT_EDITABLE,
+      },
+    ];
+  }
+
   getBasicDetailInputs(sheetElem) {
     return [
       {
         elements: sheetElem.querySelectorAll(
           [
-            '.character-details .char-name',
             '.origin-summary [data-target$="-race"]',
             '.origin-summary [data-target$="-background"]',
             '.origin-summary [data-target$="-alignment"]',
