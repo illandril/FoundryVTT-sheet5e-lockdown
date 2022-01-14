@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.4.4](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.4.4) (2022-01-14)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.4.3...v2.4.4)
+
+**Enhancements**
+
+- \[FEATURE\] Support for Pathfinder 2e [\#30](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/30)
+
 ## [v2.4.3](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.4.3) (2021-09-20)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.4.2...v2.4.3)
