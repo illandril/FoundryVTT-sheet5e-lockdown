@@ -4,6 +4,12 @@
   "illandril-sheet5e-lockdown.setting.showToggleEditRole.label": "Show Toggle Edit To",
   "illandril-sheet5e-lockdown.setting.showToggleEditRole.hint": "A Toggle Edit button will be shown to all users with at least the selected role, allowing them to modify all locked settings. Note: Changing this option will not impact already opened character sheets. Players will need to close and re-open their character sheet to see this change.",
 
+  "illandril-sheet5e-lockdown.setting.lockToggleStyle.label": "Lock Toggle Style",
+  "illandril-sheet5e-lockdown.setting.lockToggleStyle.choice_full": "Icon, Label, and Help",
+  "illandril-sheet5e-lockdown.setting.lockToggleStyle.choice_iconPlusLabel": "Icon and Label",
+  "illandril-sheet5e-lockdown.setting.lockToggleStyle.choice_labelOnly": "Label Only",
+  "illandril-sheet5e-lockdown.setting.lockToggleStyle.choice_iconOnly": "Icon Only",
+
   "illandril-sheet5e-lockdown.setting.lockName.label": "Lock Name",
   "illandril-sheet5e-lockdown.setting.lockBasicDetails.label": "Lock Basic Details",
   "illandril-sheet5e-lockdown.setting.lockBasicDetails.hint": "Basic Details include Race, Background, Alignment, and Size",
@@ -65,5 +71,7 @@
   "illandril-sheet5e-lockdown.warning.tidy5eSheetSupport": "Illandril's Character Sheet Lockdown may not work with Tidy5e Sheet in future releases. See the notes under the Disable Tidy5e Sheet Support setting for Illandril's Character Sheet Lockdown settings for more details.",
 
   "illandril-sheet5e-lockdown.toggleEditOn": "Locked (Click to Unlock)",
-  "illandril-sheet5e-lockdown.toggleEditOff": "Unlocked (Click to Lock)"
+  "illandril-sheet5e-lockdown.toggleEditOnShort": "Locked",
+  "illandril-sheet5e-lockdown.toggleEditOff": "Unlocked (Click to Lock)",
+  "illandril-sheet5e-lockdown.toggleEditOffShort": "Unlocked"
 }

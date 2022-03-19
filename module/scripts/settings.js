@@ -78,6 +78,13 @@ const minimumRoleChoices = Object.keys(CONST.USER_ROLES).reduce((choices, roleKe
   return choices;
 }, {});
 
+const LockToggleStyles = Object.freeze({
+  'full': `${MODULE_KEY}.setting.lockToggleStyle.choice_full`,
+  'iconPlusLabel': `${MODULE_KEY}.setting.lockToggleStyle.choice_iconPlusLabel`,
+  'labelOnly': `${MODULE_KEY}.setting.lockToggleStyle.choice_labelOnly`,
+  'iconOnly': `${MODULE_KEY}.setting.lockToggleStyle.choice_iconOnly`
+});
+
 export const HIDE_FROM_EVERYONE_OPTION = 'HIDE_FROM_EVERYONE';
 
 const showRoleChoices = {
@@ -90,6 +97,8 @@ const Settings = {
   ShowToggleEditRole: new ChoiceSetting('showToggleEditRole', 'GAMEMASTER', minimumRoleChoices, {
     hasHint: true,
   }),
+
+  LockToggleStyle: new ChoiceSetting('lockToggleStyle', 'full', LockToggleStyles, { scope: 'client' }),
 
   // Basic Details
   LockName: new BooleanSetting('lockName', false),

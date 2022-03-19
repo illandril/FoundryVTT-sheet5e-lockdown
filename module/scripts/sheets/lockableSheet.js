@@ -107,22 +107,40 @@ export default class LockableSheet {
       const sheetTitle = sheetHeader.querySelector('.window-title');
 
       const editOnLink = document.createElement('a');
-      editOnLink.appendChild(faIcon('lock'));
       editOnLink.classList.add(CSS_TOGGLE_EDIT_ON);
-      const toggleOnString = game.i18n.localize('illandril-sheet5e-lockdown.toggleEditOn');
-      editOnLink.appendChild(document.createTextNode(toggleOnString));
       editOnLink.addEventListener('click', () => this.makeLocked(sheetElem, actor, false), false);
       editOnLink.addEventListener('dblclick', stopPropagation, false);
       sheetHeader.insertBefore(editOnLink, sheetTitle.nextSibling);
 
       const editOffLink = document.createElement('a');
-      editOffLink.appendChild(faIcon('unlock'));
       editOffLink.classList.add(CSS_TOGGLE_EDIT_OFF);
-      const toggleOffString = game.i18n.localize('illandril-sheet5e-lockdown.toggleEditOff');
-      editOffLink.appendChild(document.createTextNode(toggleOffString));
       editOffLink.addEventListener('click', () => this.makeLocked(sheetElem, actor, true), false);
       editOffLink.addEventListener('dblclick', stopPropagation, false);
       sheetHeader.insertBefore(editOffLink, sheetTitle.nextSibling);
+
+      const toggleStyle = Settings.LockToggleStyle.get();
+      if(toggleStyle !== 'labelOnly') {
+        editOnLink.appendChild(faIcon('lock'));
+        editOffLink.appendChild(faIcon('unlock'));
+      }
+
+      let labelKeyType;
+      if (toggleStyle === 'full') {
+        labelKeyType = '';
+      } else if (toggleStyle === 'iconOnly') {
+        labelKeyType = null;
+      } else {
+        labelKeyType = 'Short';
+      }
+      console.log(labelKeyType);
+      if (labelKeyType !== null) {
+        const toggleOnString = game.i18n.localize(`${MODULE_KEY}.toggleEditOn${labelKeyType}`);
+        console.log(`${MODULE_KEY}.toggleEditOn${labelKeyType}`);
+        console.log(toggleOnString);
+        const toggleOffString = game.i18n.localize(`${MODULE_KEY}.toggleEditOff${labelKeyType}`);
+        editOnLink.appendChild(document.createTextNode(toggleOnString));
+        editOffLink.appendChild(document.createTextNode(toggleOffString));
+      }
     }
     this.customSheetInitialize(sheetElem, actor);
   }
