@@ -1,5 +1,14 @@
 # Changelog
 
+## [v2.4.5](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.4.5) (2022-03-19)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.4.4...v2.4.5)
+
+**Enhancements**
+
+- \[FEATURE\] Reduced Title bar text & Chatlog of sheet changes [\#33](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/33)
+- V9 Update Request [\#32](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/32)
+
 ## [v2.4.4](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.4.4) (2022-01-14)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.4.3...v2.4.4)
@@ -79,7 +88,6 @@
 
 **Enhancements**
 
-- Delete button [\#17](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/17)
 - Not working with Simple World Building Sheets [\#14](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/14)
 
 **Other&nbsp;Changes**
@@ -100,6 +108,7 @@
 
 **Enhancements**
 
+- Delete button [\#17](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/17)
 - Add support for Bug Reporter [\#13](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/13)
 
 ## [v2.3.2](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.2) (2021-02-07)
