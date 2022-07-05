@@ -11,12 +11,12 @@ class LockableTidy5eSheet extends LockableCharacterSheet {
     });
   }
 
-  customSheetInitialize(sheetElem, actor) {
-    super.customSheetInitialize(sheetElem, actor);
+  customSheetInitialize(sheetElem, actor, isSheetEditable) {
+    super.customSheetInitialize(sheetElem, actor, isSheetEditable);
     const favoritesTarget = sheetElem.querySelector('.favorites-target');
     if (favoritesTarget) {
       const observer = new MutationObserver(() => {
-        this.onRender(sheetElem, actor);
+        this.onRender(sheetElem, actor, isSheetEditable);
         observer.disconnect();
       });
       observer.observe(favoritesTarget, { childList: true });

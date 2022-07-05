@@ -6,27 +6,48 @@ export default class LockableCharacterSheet extends LockableSheet {
     super(sheetName, sheetDisabledSetting);
   }
 
-  makeLocked(sheetElem, actor, locked) {
-    super.makeLocked(sheetElem, actor, locked);
+  makeLocked(sheetElem, actor, locked, isSheetEditable) {
+    super.makeLocked(sheetElem, actor, locked, isSheetEditable);
 
     // Basic Details section
-    lockUnlock(this.getXPInputs(sheetElem), locked, Settings.LockXP);
-    lockUnlock(this.getBackgroundForHide(sheetElem), locked, Settings.ShowBackgroundRole);
-    lockUnlock(this.getRestButtons(sheetElem), locked, Settings.LockRests);
+    lockUnlock(this.getXPInputs(sheetElem), locked, Settings.LockXP, isSheetEditable);
+    lockUnlock(
+      this.getBackgroundForHide(sheetElem),
+      locked,
+      Settings.ShowBackgroundRole,
+      isSheetEditable
+    );
+    lockUnlock(this.getRestButtons(sheetElem), locked, Settings.LockRests, isSheetEditable);
 
     // Attributes
-    lockUnlock(this.getResourceNameAndMaxInputs(sheetElem, actor), locked, Settings.LockResources);
-    this.hideUnusedResources(sheetElem, actor, locked && Settings.LockResources.get());
+    lockUnlock(
+      this.getResourceNameAndMaxInputs(sheetElem, actor),
+      locked,
+      Settings.LockResources,
+      isSheetEditable
+    );
+    this.hideUnusedResources(
+      sheetElem,
+      actor,
+      locked && Settings.LockResources.get(),
+      isSheetEditable
+    );
 
     // Inventory
-    lockUnlock(this.getCurrencyInputs(sheetElem), locked, Settings.LockCurrency);
-    lockUnlock(this.getEquipItemButtons(sheetElem), locked, Settings.LockEquipItemButtons);
+    lockUnlock(this.getCurrencyInputs(sheetElem), locked, Settings.LockCurrency, isSheetEditable);
+    lockUnlock(
+      this.getEquipItemButtons(sheetElem),
+      locked,
+      Settings.LockEquipItemButtons,
+      isSheetEditable
+    );
 
     // Spellbook
     lockUnlock(
       this.getPrepareSpellButtons(sheetElem),
       locked,
-      Settings.LockPrepareSpellButtons.get()
+      Settings.LockPrepareSpellButtons.get(),
+      isSheetEditable
     );
   }
 
@@ -74,7 +95,7 @@ export default class LockableCharacterSheet extends LockableSheet {
     return 'input[name="data.resources.' + resource + '.label"]';
   }
 
-  hideUnusedResources(sheetElem, actor, hideIfUnused) {
+  hideUnusedResources(sheetElem, actor, hideIfUnused, isSheetEditable) {
     let resourcesContainer = null;
     this.getResources(actor).forEach((resource) => {
       const resourceContainer = this.getResourceContainer(sheetElem, resource);
@@ -87,7 +108,7 @@ export default class LockableCharacterSheet extends LockableSheet {
       const name = getProperty(actor, 'data.data.resources.' + resource + '.label');
       const max = getProperty(actor, 'data.data.resources.' + resource + '.max');
       const noResource = !name && max < 1;
-      lockUnlock(resourceContainer, hideIfUnused, noResource);
+      lockUnlock(resourceContainer, hideIfUnused, noResource, isSheetEditable);
     });
     let allHidden = true;
     if (resourcesContainer && resourcesContainer.classList.contains('attributes')) {
@@ -97,7 +118,7 @@ export default class LockableCharacterSheet extends LockableSheet {
         elements: [resourcesContainer],
         lockMode: LockMode.HIDE,
       };
-      lockUnlock(resourcesContainerAndLockMode, hideIfUnused, allHidden);
+      lockUnlock(resourcesContainerAndLockMode, hideIfUnused, allHidden, isSheetEditable);
     }
   }
 

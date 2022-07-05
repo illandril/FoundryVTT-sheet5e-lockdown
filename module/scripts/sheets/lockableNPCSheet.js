@@ -8,16 +8,26 @@ export default class LockableNPCSheet extends LockableSheet {
     super(sheetName, sheetDisabledSetting);
   }
 
-  makeLocked(sheetElem, actor, locked) {
-    super.makeLocked(sheetElem, actor, locked);
+  makeLocked(sheetElem, actor, locked, isSheetEditable) {
+    super.makeLocked(sheetElem, actor, locked, isSheetEditable);
 
     // Basic Details section
     // CR/Type/Source included in BasicDetails
     // TODO: Optionally hide Source
 
     // Attributes
-    lockUnlock(this.getLegendaryAndLairActions(sheetElem), locked, Settings.LockLegendaryAndLair);
-    this.hideLegendaryAndLairRows(sheetElem, actor, locked && Settings.LockLegendaryAndLair.get());
+    lockUnlock(
+      this.getLegendaryAndLairActions(sheetElem),
+      locked,
+      Settings.LockLegendaryAndLair,
+      isSheetEditable
+    );
+    this.hideLegendaryAndLairRows(
+      sheetElem,
+      actor,
+      locked && Settings.LockLegendaryAndLair.get(),
+      isSheetEditable
+    );
   }
 
   getBasicDetailInputs(sheetElem) {
@@ -53,18 +63,28 @@ export default class LockableNPCSheet extends LockableSheet {
     ];
   }
 
-  hideLegendaryAndLairRows(sheetElem, actor, hideIfUnused) {
+  hideLegendaryAndLairRows(sheetElem, actor, hideIfUnused, isSheetEditable) {
     const maxLegendaryActions = getProperty(actor, 'data.data.resources.legact.max');
     const noLegendaryActions = maxLegendaryActions < 1;
-    lockUnlock(this.getLegendaryActionsRow(sheetElem), hideIfUnused, noLegendaryActions);
+    lockUnlock(
+      this.getLegendaryActionsRow(sheetElem),
+      hideIfUnused,
+      noLegendaryActions,
+      isSheetEditable
+    );
 
     const maxLegendaryResistances = getProperty(actor, 'data.data.resources.legres.max');
     const noLegendaryResistance = maxLegendaryResistances < 1;
-    lockUnlock(this.getLegendaryResistanceRow(sheetElem), hideIfUnused, noLegendaryResistance);
+    lockUnlock(
+      this.getLegendaryResistanceRow(sheetElem),
+      hideIfUnused,
+      noLegendaryResistance,
+      isSheetEditable
+    );
 
     const usesLairActions = getProperty(actor, 'data.data.resources.lair.value');
     const noLairActions = !usesLairActions;
-    lockUnlock(this.getLairActionsRow(sheetElem), hideIfUnused, noLairActions);
+    lockUnlock(this.getLairActionsRow(sheetElem), hideIfUnused, noLairActions, isSheetEditable);
   }
 
   getLegendaryActionsRow(sheetElem) {

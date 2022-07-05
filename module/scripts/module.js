@@ -2,8 +2,13 @@ export const KEY = 'illandril-sheet5e-lockdown';
 export const NAME = "Illandril's Character Sheet Lockdown";
 export const CSS_PREFIX = `${KEY}--`;
 
+const getVersion = () => {
+  const version = game?.modules?.get(KEY)?.data?.version
+  return version && ` (${version})` || '';
+};
+
 const _log = (logFN, ...args) => {
-  logFN.apply(console, [`%c${NAME}`, 'background-color: #4f0104; color: #fff; padding: 0.1em 0.5em;', ...args]);
+  logFN.apply(console, [`%c${NAME}${getVersion()}`, 'background-color: #4f0104; color: #fff; padding: 0.1em 0.5em;', ...args]);
 };
 
 export const log = {

@@ -72,7 +72,7 @@ export default class LockableSheet {
         // class's hook - skip it to avoid inappropriate locking.
         return;
       }
-      if (!actorSheet.isEditable || (sheetDisabledSetting && sheetDisabledSetting.get())) {
+      if (sheetDisabledSetting && sheetDisabledSetting.get()) {
         return;
       }
       SHOWN_SHEETS.add(actorSheet);
@@ -81,45 +81,46 @@ export default class LockableSheet {
       if (!sheetElem) {
         return;
       }
-      this.onRender(sheetElem, actor);
+      this.onRender(sheetElem, actor, actorSheet.isEditable);
     };
     LOCKABLE_SHEET_NAMES.add(sheetName);
     log.info(`Sheet Registered: ${sheetName}`);
     Hooks.on('render' + sheetName, this.onRenderHook);
   }
 
-  onRender(sheetElem, actor) {
-    this.initialize(sheetElem, actor);
+  onRender(sheetElem, actor, isSheetEditable) {
+    console.log('render', actor.name);
+    this.initialize(sheetElem, actor, isSheetEditable);
 
-    const isLocked = this.isLocked(sheetElem);
-    this.makeLocked(sheetElem, actor, isLocked);
+    const isLocked = !isSheetEditable || this.isLocked(sheetElem);
+    this.makeLocked(sheetElem, actor, isLocked, isSheetEditable);
   }
 
-  initialize(sheetElem, actor) {
+  initialize(sheetElem, actor, isSheetEditable) {
     this.showSpecialTraits(sheetElem, actor);
     if (sheetElem.classList.contains(CSS_SHEET)) {
       return;
     }
     sheetElem.classList.add(CSS_SHEET);
     sheetElem.classList.add(CSS_LOCK);
-    if (game.user.hasRole(Settings.ShowToggleEditRole.get())) {
+    if (isSheetEditable && game.user.hasRole(Settings.ShowToggleEditRole.get())) {
       const sheetHeader = sheetElem.querySelector('.window-header');
       const sheetTitle = sheetHeader.querySelector('.window-title');
 
       const editOnLink = document.createElement('a');
       editOnLink.classList.add(CSS_TOGGLE_EDIT_ON);
-      editOnLink.addEventListener('click', () => this.makeLocked(sheetElem, actor, false), false);
+      editOnLink.addEventListener('click', () => this.makeLocked(sheetElem, actor, false, isSheetEditable), false);
       editOnLink.addEventListener('dblclick', stopPropagation, false);
       sheetHeader.insertBefore(editOnLink, sheetTitle.nextSibling);
 
       const editOffLink = document.createElement('a');
       editOffLink.classList.add(CSS_TOGGLE_EDIT_OFF);
-      editOffLink.addEventListener('click', () => this.makeLocked(sheetElem, actor, true), false);
+      editOffLink.addEventListener('click', () => this.makeLocked(sheetElem, actor, true, isSheetEditable), false);
       editOffLink.addEventListener('dblclick', stopPropagation, false);
       sheetHeader.insertBefore(editOffLink, sheetTitle.nextSibling);
 
       const toggleStyle = Settings.LockToggleStyle.get();
-      if(toggleStyle !== 'labelOnly') {
+      if (toggleStyle !== 'labelOnly') {
         editOnLink.appendChild(faIcon('lock'));
         editOffLink.appendChild(faIcon('unlock'));
       }
@@ -132,20 +133,17 @@ export default class LockableSheet {
       } else {
         labelKeyType = 'Short';
       }
-      console.log(labelKeyType);
       if (labelKeyType !== null) {
         const toggleOnString = game.i18n.localize(`${MODULE_KEY}.toggleEditOn${labelKeyType}`);
-        console.log(`${MODULE_KEY}.toggleEditOn${labelKeyType}`);
-        console.log(toggleOnString);
         const toggleOffString = game.i18n.localize(`${MODULE_KEY}.toggleEditOff${labelKeyType}`);
         editOnLink.appendChild(document.createTextNode(toggleOnString));
         editOffLink.appendChild(document.createTextNode(toggleOffString));
       }
     }
-    this.customSheetInitialize(sheetElem, actor);
+    this.customSheetInitialize(sheetElem, actor, isSheetEditable);
   }
 
-  customSheetInitialize(sheetElem, actor) {
+  customSheetInitialize(sheetElem, actor, isSheetEditable) {
     // Nothing here, but some sheets do special stuff
   }
 
@@ -153,12 +151,7 @@ export default class LockableSheet {
     return sheetElem.classList.contains(CSS_LOCK);
   }
 
-  toggleEditable(sheetElem, actor) {
-    log.debug(`Toggling Editable: ${this.sheetName}`);
-    this.makeLocked(sheetElem, actor, !this.isLocked(sheetElem));
-  }
-
-  makeLocked(sheetElem, actor, locked) {
+  makeLocked(sheetElem, actor, locked, isSheetEditable) {
     log.debug(`Make Locked? ${locked} (${this.sheetName})`);
     addRemoveClass(sheetElem, CSS_LOCK, locked);
     addRemoveClass(sheetElem, CSS_EDIT, !locked);
@@ -169,41 +162,107 @@ export default class LockableSheet {
     addRemoveClass(sheetElem, CSS_HIDE_IMPORT_BUTTONS, locked);
 
     // Basic Details section
-    lockUnlock(this.getNameInput(sheetElem), locked, Settings.LockName);
-    lockUnlock(this.getBasicDetailInputs(sheetElem), locked, Settings.LockBasicDetails);
-    lockUnlock(this.getAlignmentForHide(sheetElem), locked, Settings.ShowAlignmentRole);
+    lockUnlock(this.getNameInput(sheetElem), locked, Settings.LockName, isSheetEditable);
+    lockUnlock(
+      this.getBasicDetailInputs(sheetElem),
+      locked,
+      Settings.LockBasicDetails,
+      isSheetEditable
+    );
+    lockUnlock(
+      this.getAlignmentForHide(sheetElem),
+      locked,
+      Settings.ShowAlignmentRole,
+      isSheetEditable
+    );
 
     // Attributes
-    lockUnlock(this.getAbilityScoreInputs(sheetElem), locked, Settings.LockAbilityScores);
-    lockUnlock(this.getProficiencyToggles(sheetElem), locked, Settings.LockProficiencies);
-    lockUnlock(this.getTraits(sheetElem), locked, Settings.LockTraits);
+    lockUnlock(
+      this.getAbilityScoreInputs(sheetElem),
+      locked,
+      Settings.LockAbilityScores,
+      isSheetEditable
+    );
+    lockUnlock(
+      this.getProficiencyToggles(sheetElem),
+      locked,
+      Settings.LockProficiencies,
+      isSheetEditable
+    );
+    lockUnlock(this.getTraits(sheetElem), locked, Settings.LockTraits, isSheetEditable);
 
     // Inventory + Features + Spellbook
-    lockUnlock(this.getAddItemButtons(sheetElem), locked, Settings.HideAddItemButtons);
-    lockUnlock(this.getRemoveItemButtons(sheetElem), locked, Settings.HideRemoveItemButtons);
-    lockUnlock(this.getEditItemButtons(sheetElem), locked, Settings.HideEditItemButtons);
+    lockUnlock(
+      this.getAddItemButtons(sheetElem),
+      locked,
+      Settings.HideAddItemButtons,
+      isSheetEditable
+    );
+    lockUnlock(
+      this.getRemoveItemButtons(sheetElem),
+      locked,
+      Settings.HideRemoveItemButtons,
+      isSheetEditable
+    );
+    lockUnlock(
+      this.getEditItemButtons(sheetElem),
+      locked,
+      Settings.HideEditItemButtons,
+      isSheetEditable
+    );
 
     // Features
-    lockUnlock(this.getAvailableItemFeatureUses(sheetElem), locked, Settings.LockAvailableItemFeatureUses)
+    lockUnlock(
+      this.getAvailableItemFeatureUses(sheetElem),
+      locked,
+      Settings.LockAvailableItemFeatureUses,
+      isSheetEditable
+    );
 
     // Spellbook
-    lockUnlock(this.getAvailableSpellSlots(sheetElem), locked, Settings.LockAvailableSpellSlots)
-    lockUnlock(this.getMaxSpellSlotOverride(sheetElem), locked, Settings.LockMaxSpellSlotOverride);
-    const hideEmptySpellbook = locked && (Settings.HideAddItemButtons.get() || Settings.HideEmptySpellbook.get());
+    lockUnlock(
+      this.getAvailableSpellSlots(sheetElem),
+      locked,
+      Settings.LockAvailableSpellSlots,
+      isSheetEditable
+    );
+    lockUnlock(
+      this.getMaxSpellSlotOverride(sheetElem),
+      locked,
+      Settings.LockMaxSpellSlotOverride,
+      isSheetEditable
+    );
+    const hideEmptySpellbook =
+      locked && (Settings.HideAddItemButtons.get() || Settings.HideEmptySpellbook.get());
     const isSpellbookEmptyAndHidden = hideEmptySpellbook && this.isSpellbookEmpty(actor);
-    lockUnlock(this.getSpellbookTab(sheetElem), hideEmptySpellbook, isSpellbookEmptyAndHidden);
+    lockUnlock(
+      this.getSpellbookTab(sheetElem),
+      hideEmptySpellbook,
+      isSpellbookEmptyAndHidden,
+      isSheetEditable
+    );
 
     // Effects
-    lockUnlock(this.getEffectControls(sheetElem), locked, Settings.LockEffects);
+    lockUnlock(this.getEffectControls(sheetElem), locked, Settings.LockEffects, isSheetEditable);
     const hideEmptyEffects = locked && Settings.LockEffects.get();
     const isEffectsEmptyAndHidden = hideEmptyEffects && this.isEffectsEmpty(actor);
-    lockUnlock(this.getEffectsTab(sheetElem), locked, isEffectsEmptyAndHidden || Settings.ShowEffectsRole);
+    lockUnlock(
+      this.getEffectsTab(sheetElem),
+      locked,
+      isEffectsEmptyAndHidden || Settings.ShowEffectsRole,
+      isSheetEditable
+    );
 
     // Biography
-    lockUnlock(this.getBiographyForHide(sheetElem), locked, Settings.ShowBiographyRole);
+    lockUnlock(
+      this.getBiographyForHide(sheetElem),
+      locked,
+      Settings.ShowBiographyRole,
+      isSheetEditable
+    );
 
     // Unsorted stuff
-    lockUnlock(this.getUnsorteds(sheetElem), locked, Settings.LockUnsorteds);
+    lockUnlock(this.getUnsorteds(sheetElem), locked, Settings.LockUnsorteds, isSheetEditable);
     log.debug('Make Locked Complete');
   }
 
@@ -451,7 +510,7 @@ export default class LockableSheet {
 
   getSpecialTraitsRow(sheetElem) {
     const flagsToggle = sheetElem.querySelector('.traits [data-action="flags"]');
-    if(!flagsToggle) {
+    if (!flagsToggle) {
       return null;
     }
     const row = flagsToggle.parentElement;
@@ -463,16 +522,20 @@ export default class LockableSheet {
 }
 
 const addRemoveClass = (element, cssClass, isAdd) => {
-  if(!element) {
+  if (!element) {
     return;
   }
   isAdd ? element.classList.add(cssClass) : element.classList.remove(cssClass);
 };
 
-export const lockUnlock = (elementGroups, sheetLocked, lockSetting) => {
+export const lockUnlock = (elementGroups, sheetLocked, lockSetting, isSheetEditable) => {
+  if (typeof isSheetEditable !== 'boolean') {
+    log.error(`isSheetEditable was not a boolean - please submit a bug report in GitHub with a screenshot of the stack trace for this error`);
+    isSheetEditable = true;
+  }
   if (typeof lockSetting !== 'boolean') {
     lockSetting = lockSetting.get();
-    if(typeof lockSetting === 'string') {
+    if (typeof lockSetting === 'string') {
       lockSetting = !game.user.hasRole(lockSetting);
     }
   }
@@ -481,44 +544,47 @@ export const lockUnlock = (elementGroups, sheetLocked, lockSetting) => {
   }
   if (Array.isArray(elementGroups)) {
     elementGroups.forEach((elementGroup) => {
-      lockUnlock(elementGroup, sheetLocked, lockSetting);
+      lockUnlock(elementGroup, sheetLocked, lockSetting, isSheetEditable);
     });
   } else {
     const { elements, lockMode, always } = elementGroups;
     const lock = (sheetLocked || always) && lockSetting;
-    switch (lockMode) {
-      case LockMode.CSS_POINTER_EVENTS:
-        elements.forEach((element) => {
-          addRemoveClass(element, CSS_NO_POINTER_EVENTS, lock);
-        });
-        break;
-      case LockMode.FORM_DISABLED:
-        elements.forEach((element) => {
-          element.disabled = lock;
-        });
-        break;
-      case LockMode.HIDE:
-        elements.forEach((element) => {
-          addRemoveClass(element, CSS_HIDE, lock);
-        });
-        break;
-      case LockMode.HIDE_RESERVE_SPACE:
-        elements.forEach((element) => {
-          addRemoveClass(element, CSS_HIDE_RESERVE_SPACE, lock);
-        });
-        break;
-      case LockMode.HIDE_PARENTS:
-        elements.forEach((element) => {
-          addRemoveClass(element.parentNode, CSS_HIDE, lock);
-        });
-        break;
-      case LockMode.CONTENT_EDITABLE:
-        elements.forEach((element) => {
-          element.setAttribute('contenteditable', !lock);
-        });
-        break;
-      default:
-        log.error('Unexpected lockMode: ' + lockMode);
+
+    if (isSheetEditable || lock) {
+      switch (lockMode) {
+        case LockMode.CSS_POINTER_EVENTS:
+          elements.forEach((element) => {
+            addRemoveClass(element, CSS_NO_POINTER_EVENTS, lock);
+          });
+          break;
+        case LockMode.FORM_DISABLED:
+          elements.forEach((element) => {
+            element.disabled = lock;
+          });
+          break;
+        case LockMode.HIDE:
+          elements.forEach((element) => {
+            addRemoveClass(element, CSS_HIDE, lock);
+          });
+          break;
+        case LockMode.HIDE_RESERVE_SPACE:
+          elements.forEach((element) => {
+            addRemoveClass(element, CSS_HIDE_RESERVE_SPACE, lock);
+          });
+          break;
+        case LockMode.HIDE_PARENTS:
+          elements.forEach((element) => {
+            addRemoveClass(element.parentNode, CSS_HIDE, lock);
+          });
+          break;
+        case LockMode.CONTENT_EDITABLE:
+          elements.forEach((element) => {
+            element.setAttribute('contenteditable', !lock);
+          });
+          break;
+        default:
+          log.error('Unexpected lockMode: ' + lockMode);
+      }
     }
   }
 };
