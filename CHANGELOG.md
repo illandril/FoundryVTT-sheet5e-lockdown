@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.4.6](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.4.6) (2022-07-05)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.4.5...v2.4.6)
+
+**Enhancements**
+
+- Hidden tabs remain visible to observer [\#35](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/35)
+
 ## [v2.4.5](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.4.5) (2022-03-19)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.4.4...v2.4.5)
@@ -88,6 +96,7 @@
 
 **Enhancements**
 
+- Delete button [\#17](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/17)
 - Not working with Simple World Building Sheets [\#14](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/14)
 
 **Other&nbsp;Changes**
@@ -108,7 +117,6 @@
 
 **Enhancements**
 
-- Delete button [\#17](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/17)
 - Add support for Bug Reporter [\#13](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/13)
 
 ## [v2.3.2](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.2) (2021-02-07)
@@ -122,10 +130,6 @@
 ## [v2.3.1](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.1) (2021-01-31)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.0...v2.3.1)
-
-**Fixed&nbsp;Bugs**
-
-- Currency Conversion button vanishes when this module is enabled [\#11](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/11)
 
 ## [v2.3.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.0) (2021-01-02)
 
@@ -189,6 +193,10 @@
 
 - Lockdown NPC sheets [\#3](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/3)
 - Add prettier.config.js [\#1](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/1)
+
+**Fixed&nbsp;Bugs**
+
+- Currency Conversion button vanishes when this module is enabled [\#11](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/11)
 
 **Other&nbsp;Changes**
 
