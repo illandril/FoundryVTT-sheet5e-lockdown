@@ -1,5 +1,9 @@
 # Changelog
 
+## [v3.0.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v3.0.0) (2022-08-07)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.4.6...v3.0.0)
+
 ## [v2.4.6](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.4.6) (2022-07-05)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.4.5...v2.4.6)
@@ -131,13 +135,17 @@
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.3.0...v2.3.1)
 
-## [v2.3.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.0) (2021-01-02)
-
-[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.2.0...v2.3.0)
-
 **Enhancements**
 
 - Show Special Traits \(uneditable\) when locked [\#9](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/9)
+
+**Fixed&nbsp;Bugs**
+
+- Currency Conversion button vanishes when this module is enabled [\#11](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/11)
+
+## [v2.3.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.3.0) (2021-01-02)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/compare/v2.2.0...v2.3.0)
 
 ## [v2.2.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.2.0) (2021-01-01)
 
@@ -146,6 +154,7 @@
 **Other&nbsp;Changes**
 
 - Hiding Spellbook tab with active spells \[FoundryVTT Magic Items\] [\#10](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/10)
+- Update compatibility for 0.6.6 [\#2](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/2)
 
 ## [v2.1.1](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v2.1.1) (2020-12-20)
 
@@ -193,14 +202,6 @@
 
 - Lockdown NPC sheets [\#3](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/3)
 - Add prettier.config.js [\#1](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/1)
-
-**Fixed&nbsp;Bugs**
-
-- Currency Conversion button vanishes when this module is enabled [\#11](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/11)
-
-**Other&nbsp;Changes**
-
-- Update compatibility for 0.6.6 [\#2](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/2)
 
 ## [v1.0.0](https://github.com/illandril/FoundryVTT-sheet5e-lockdown/tree/v1.0.0) (2020-08-23)
 
