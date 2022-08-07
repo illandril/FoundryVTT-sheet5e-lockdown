@@ -64,7 +64,7 @@ export default class LockableNPCSheet extends LockableSheet {
   }
 
   hideLegendaryAndLairRows(sheetElem, actor, hideIfUnused, isSheetEditable) {
-    const maxLegendaryActions = getProperty(actor, 'data.data.resources.legact.max');
+    const maxLegendaryActions = getProperty(actor.system, 'resources.legact.max');
     const noLegendaryActions = maxLegendaryActions < 1;
     lockUnlock(
       this.getLegendaryActionsRow(sheetElem),
@@ -73,7 +73,7 @@ export default class LockableNPCSheet extends LockableSheet {
       isSheetEditable
     );
 
-    const maxLegendaryResistances = getProperty(actor, 'data.data.resources.legres.max');
+    const maxLegendaryResistances = getProperty(actor.system, 'resources.legres.max');
     const noLegendaryResistance = maxLegendaryResistances < 1;
     lockUnlock(
       this.getLegendaryResistanceRow(sheetElem),
@@ -82,7 +82,7 @@ export default class LockableNPCSheet extends LockableSheet {
       isSheetEditable
     );
 
-    const usesLairActions = getProperty(actor, 'data.data.resources.lair.value');
+    const usesLairActions = getProperty(actor.system, 'resources.lair.value');
     const noLairActions = !usesLairActions;
     lockUnlock(this.getLairActionsRow(sheetElem), hideIfUnused, noLairActions, isSheetEditable);
   }

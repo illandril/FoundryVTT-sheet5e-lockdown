@@ -3,7 +3,7 @@ export const NAME = "Illandril's Character Sheet Lockdown";
 export const CSS_PREFIX = `${KEY}--`;
 
 const getVersion = () => {
-  const version = game?.modules?.get(KEY)?.data?.version
+  const version = game?.modules?.get(KEY)?.version
   return version && ` (${version})` || '';
 };
 

@@ -27,18 +27,18 @@ export const LockMode = {
 };
 
 const BONUSES = [
-  { name: 'data.bonuses.mwak.attack', label: 'DND5E.BonusMWAttack' },
-  { name: 'data.bonuses.mwak.damage', label: 'DND5E.BonusMWDamage' },
-  { name: 'data.bonuses.rwak.attack', label: 'DND5E.BonusRWAttack' },
-  { name: 'data.bonuses.rwak.damage', label: 'DND5E.BonusRWDamage' },
-  { name: 'data.bonuses.msak.attack', label: 'DND5E.BonusMSAttack' },
-  { name: 'data.bonuses.msak.damage', label: 'DND5E.BonusMSDamage' },
-  { name: 'data.bonuses.rsak.attack', label: 'DND5E.BonusRSAttack' },
-  { name: 'data.bonuses.rsak.damage', label: 'DND5E.BonusRSDamage' },
-  { name: 'data.bonuses.abilities.check', label: 'DND5E.BonusAbilityCheck' },
-  { name: 'data.bonuses.abilities.save', label: 'DND5E.BonusAbilitySave' },
-  { name: 'data.bonuses.abilities.skill', label: 'DND5E.BonusAbilitySkill' },
-  { name: 'data.bonuses.spell.dc', label: 'DND5E.BonusSpellDC' },
+  { name: 'bonuses.mwak.attack', label: 'DND5E.BonusMWAttack' },
+  { name: 'bonuses.mwak.damage', label: 'DND5E.BonusMWDamage' },
+  { name: 'bonuses.rwak.attack', label: 'DND5E.BonusRWAttack' },
+  { name: 'bonuses.rwak.damage', label: 'DND5E.BonusRWDamage' },
+  { name: 'bonuses.msak.attack', label: 'DND5E.BonusMSAttack' },
+  { name: 'bonuses.msak.damage', label: 'DND5E.BonusMSDamage' },
+  { name: 'bonuses.rsak.attack', label: 'DND5E.BonusRSAttack' },
+  { name: 'bonuses.rsak.damage', label: 'DND5E.BonusRSDamage' },
+  { name: 'bonuses.abilities.check', label: 'DND5E.BonusAbilityCheck' },
+  { name: 'bonuses.abilities.save', label: 'DND5E.BonusAbilitySave' },
+  { name: 'bonuses.abilities.skill', label: 'DND5E.BonusAbilitySkill' },
+  { name: 'bonuses.spell.dc', label: 'DND5E.BonusSpellDC' },
 ];
 
 const SHOWN_SHEETS = new Set();
@@ -267,7 +267,7 @@ export default class LockableSheet {
   }
 
   isSpellbookEmpty(actor) {
-    if (actor.data.items.some((item) => item.type === 'spell')) {
+    if (actor.items.some((item) => item.type === 'spell')) {
       return false;
     }
     if (MagicItemsSupport.doesActorHaveSpells(actor)) {
@@ -277,7 +277,7 @@ export default class LockableSheet {
   }
 
   isEffectsEmpty(actor) {
-    return actor.data.effects.size == 0;
+    return actor.effects.size == 0;
   }
 
   getNameInput(sheetElem) {
@@ -468,7 +468,7 @@ export default class LockableSheet {
       traitsList = document.createDocumentFragment();
     }
 
-    const actorFlags = actor.data.flags;
+    const actorFlags = actor.flags;
     for (let [key, flag] of Object.entries(CONFIG.DND5E.characterFlags)) {
       const value = getProperty(actorFlags, `dnd5e.${key}`);
       if (value) {
@@ -477,7 +477,7 @@ export default class LockableSheet {
     }
 
     BONUSES.forEach((bonus) => {
-      const value = getProperty(actor.data, bonus.name);
+      const value = getProperty(actor.system, bonus.name);
       if (value) {
         this.addTag(traitsList, bonus.label, value);
       }

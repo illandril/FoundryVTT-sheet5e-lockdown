@@ -1,14 +1,15 @@
 {
-    "name": "illandril-sheet5e-lockdown",
+    "id": "illandril-sheet5e-lockdown",
     "title": "Illandril's Character Sheet Lockdown (5e)",
     "description": "Locks down character sheets (DnD5e only) to prevent players from making changes, and minimize the risk of accidental GM edits. Note: This is not a secure lockdown, and player could get around it if they really wanted.",
     "version": "2.4.6",
     "library": "false",
     "manifestPlusVersion": "1.2.0",
-    "minimumCoreVersion": "0.6.5",
-    "compatibleCoreVersion": "9",
+    "compatibility": {
+      "minimum": 10,
+      "verified": 10
+    },
     "type": "module",
-    "author": "Joe Spandrusyszyn (illandril)",
     "authors": [
         {
             "name": "Joe Spandrusyszyn (illandril)",
@@ -20,9 +21,17 @@
             "reddit": "u/illandril"
         }
     ],
-    "dependencies": [],
-    "system": "dnd5e",
-    "conflicts": [],
+    "relationships": {
+        "systems": [
+            {
+                "id": "dnd5e",
+                "type": "system",
+                "compatibility": {
+                    "verified": "1.6.3"
+                }
+            }
+        ]
+    },
     "esmodules": [
         "./scripts/index.js"
     ],

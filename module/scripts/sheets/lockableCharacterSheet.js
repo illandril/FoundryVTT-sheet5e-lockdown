@@ -74,7 +74,7 @@ export default class LockableCharacterSheet extends LockableSheet {
   }
 
   getResources(actor) {
-    return Object.keys(actor.data.data.resources);
+    return Object.keys(actor.system.resources);
   }
 
   getResourceNameAndMaxInputs(sheetElem, actor) {
@@ -105,8 +105,8 @@ export default class LockableCharacterSheet extends LockableSheet {
       if (!resourcesContainer) {
         resourcesContainer = resourceContainer.elements[0].parentNode;
       }
-      const name = getProperty(actor, 'data.data.resources.' + resource + '.label');
-      const max = getProperty(actor, 'data.data.resources.' + resource + '.max');
+      const name = getProperty(actor.system, 'resources.' + resource + '.label');
+      const max = getProperty(actor.system, 'resources.' + resource + '.max');
       const noResource = !name && max < 1;
       lockUnlock(resourceContainer, hideIfUnused, noResource, isSheetEditable);
     });
