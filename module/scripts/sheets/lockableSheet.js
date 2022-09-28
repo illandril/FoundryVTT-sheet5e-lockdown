@@ -89,7 +89,7 @@ export default class LockableSheet {
   }
 
   onRender(sheetElem, actor, isSheetEditable) {
-    console.log('render', actor.name);
+    log.info('render', actor.name);
     this.initialize(sheetElem, actor, isSheetEditable);
 
     const isLocked = !isSheetEditable || this.isLocked(sheetElem);
