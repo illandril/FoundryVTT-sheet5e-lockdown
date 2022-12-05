@@ -291,9 +291,9 @@ export default class LockableSheet {
     return {
       elements: sheetElem.querySelectorAll(
         [
-          'input[name="data.details.race"]',
-          'input[name="data.details.background"]',
-          'input[name="data.details.alignment"]',
+          'input[name="system.details.race"]',
+          'input[name="system.details.background"]',
+          'input[name="system.details.alignment"]',
           'select.actor-size',
         ].join(',')
       ),
@@ -303,7 +303,7 @@ export default class LockableSheet {
 
   getAlignmentForHide(sheetElem) {
     return {
-      elements: sheetElem.querySelectorAll('input[name="data.details.alignment"]'),
+      elements: sheetElem.querySelectorAll('input[name="system.details.alignment"]'),
       lockMode: LockMode.HIDE_PARENTS,
       always: true,
     };
@@ -317,10 +317,23 @@ export default class LockableSheet {
   }
 
   getProficiencyToggles(sheetElem) {
-    return {
-      elements: sheetElem.querySelectorAll('.proficiency-toggle'),
-      lockMode: LockMode.CSS_POINTER_EVENTS,
-    };
+    return [
+      {
+        // Proficiency toggles
+        elements: sheetElem.querySelectorAll('.proficiency-toggle'),
+        lockMode: LockMode.CSS_POINTER_EVENTS,
+      },
+      {
+        elements: sheetElem.querySelectorAll([
+          // Saving throw proficiency configure button
+          '.config-button[data-action="ability"]',
+
+          // Skill proficiency configure button
+          '.config-button[data-action="skill"]',
+        ].join(',')),
+        lockMode: LockMode.HIDE,
+      }
+    ];
   }
 
   getTraits(sheetElem) {
@@ -345,7 +358,7 @@ export default class LockableSheet {
 
   getSensesInput(sheetElem) {
     return {
-      elements: sheetElem.querySelectorAll('input[name="data.traits.senses"]'),
+      elements: sheetElem.querySelectorAll('input[name="system.traits.senses"]'),
       lockMode: LockMode.FORM_DISABLED,
     };
   }
@@ -388,7 +401,7 @@ export default class LockableSheet {
 
   getAvailableSpellSlots(sheetElem) {
     return {
-      elements: sheetElem.querySelectorAll('input[name^="data.spells."][name$=".value"]'),
+      elements: sheetElem.querySelectorAll('input[name^="system.spells."][name$=".value"]'),
       lockMode: LockMode.FORM_DISABLED,
     };
   }
@@ -435,12 +448,12 @@ export default class LockableSheet {
       {
         elements: sheetElem.querySelectorAll(
           [
-            'input[name="data.attributes.hp.max"]',
-            'input[name="data.attributes.ac.value"]',
-            'input[name="data.attributes.speed.value"]',
-            'input[name="data.attributes.speed.special"]',
-            'input[name="data.attributes.init.value"]',
-            'select[name="data.attributes.spellcasting"]',
+            'input[name="system.attributes.hp.max"]',
+            'input[name="system.attributes.ac.value"]',
+            'input[name="system.attributes.speed.value"]',
+            'input[name="system.attributes.speed.special"]',
+            'input[name="system.attributes.init.value"]',
+            'select[name="system.attributes.spellcasting"]',
           ].join(',')
         ),
         lockMode: LockMode.FORM_DISABLED,

@@ -37,9 +37,9 @@ export default class LockableNPCSheet extends LockableSheet {
       {
         elements: sheetElem.querySelectorAll(
           [
-            'input[name="data.details.type"]',
-            'input[name="data.details.source"]',
-            'input[name="data.details.cr"]',
+            'input[name="system.details.type"]',
+            'input[name="system.details.source"]',
+            'input[name="system.details.cr"]',
           ].join(',')
         ),
         lockMode: LockMode.FORM_DISABLED,
@@ -52,10 +52,10 @@ export default class LockableNPCSheet extends LockableSheet {
       {
         elements: sheetElem.querySelectorAll(
           [
-            'input[name="data.resources.legact.max"]',
-            'input[name="data.resources.legres.max"]',
-            'input[name="data.resources.lair.value"]',
-            'input[name="data.resources.lair.initiative"]',
+            'input[name="system.resources.legact.max"]',
+            'input[name="system.resources.legres.max"]',
+            'input[name="system.resources.lair.value"]',
+            'input[name="system.resources.lair.initiative"]',
           ].join(',')
         ),
         lockMode: LockMode.FORM_DISABLED,
@@ -88,7 +88,7 @@ export default class LockableNPCSheet extends LockableSheet {
   }
 
   getLegendaryActionsRow(sheetElem) {
-    const input = sheetElem.querySelector('input[name="data.resources.legact.max"]');
+    const input = sheetElem.querySelector('input[name="system.resources.legact.max"]');
     let row = input;
     while (row && !row.classList.contains('flexrow')) {
       row = row.parentNode;
@@ -100,7 +100,7 @@ export default class LockableNPCSheet extends LockableSheet {
   }
 
   getLegendaryResistanceRow(sheetElem) {
-    const input = sheetElem.querySelector('input[name="data.resources.legres.max"]');
+    const input = sheetElem.querySelector('input[name="system.resources.legres.max"]');
     let row = input;
     while (row && !row.classList.contains('flexrow')) {
       row = row.parentNode;
@@ -112,7 +112,7 @@ export default class LockableNPCSheet extends LockableSheet {
   }
 
   getLairActionsRow(sheetElem) {
-    const input = sheetElem.querySelector('input[name="data.resources.lair.value"]');
+    const input = sheetElem.querySelector('input[name="system.resources.lair.value"]');
     let row = input;
     while (row && !row.classList.contains('flexrow')) {
       row = row.parentNode;
@@ -130,8 +130,8 @@ export default class LockableNPCSheet extends LockableSheet {
       {
         elements: sheetElem.querySelectorAll(
           [
-            'input[name="data.attributes.hp.formula"]',
-            'input[name="data.details.spellLevel"]',
+            'input[name="system.attributes.hp.formula"]',
+            'input[name="system.details.spellLevel"]',
           ].join(',')
         ),
         lockMode: LockMode.FORM_DISABLED,

@@ -37,7 +37,7 @@ export const getRemoveItemButtons = (superButtons, sheetElem) => {
 
 export const getAvailableItemFeatureUses = (sheetElem) => {
   return {
-    elements: sheetElem.querySelectorAll('.item-detail input[data-path="data.uses.value"],.item-detail input[data-path="data.uses.max"]'),
+    elements: sheetElem.querySelectorAll('.item-detail input[data-path="system.uses.value"],.item-detail input[data-path="system.uses.max"]'),
     lockMode: LockMode.FORM_DISABLED,
   };
 };

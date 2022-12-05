@@ -76,7 +76,7 @@ class LockableTidy5eNPC extends LockableNPCSheet {
   }
 
   getLegendaryActionsRow(sheetElem) {
-    const input = sheetElem.querySelector('input[name="data.resources.legact.max"]');
+    const input = sheetElem.querySelector('input[name="system.resources.legact.max"]');
     let row = input;
     while (row && !row.classList.contains('counter')) {
       row = row.parentNode;
@@ -88,7 +88,7 @@ class LockableTidy5eNPC extends LockableNPCSheet {
   }
 
   getLegendaryResistanceRow(sheetElem) {
-    const input = sheetElem.querySelector('input[name="data.resources.legres.max"]');
+    const input = sheetElem.querySelector('input[name="system.resources.legres.max"]');
     let row = input;
     while (row && !row.classList.contains('counter')) {
       row = row.parentNode;
@@ -100,7 +100,7 @@ class LockableTidy5eNPC extends LockableNPCSheet {
   }
 
   getLairActionsRow(sheetElem) {
-    const input = sheetElem.querySelector('input[name="data.resources.lair.value"]');
+    const input = sheetElem.querySelector('input[name="system.resources.lair.value"]');
     let row = input;
     while (row && !row.classList.contains('counter')) {
       row = row.parentNode;

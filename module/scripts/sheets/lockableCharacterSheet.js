@@ -53,7 +53,10 @@ export default class LockableCharacterSheet extends LockableSheet {
 
   getXPInputs(sheetElem) {
     return {
-      elements: sheetElem.querySelectorAll('input[name="data.details.xp.value"]'),
+      elements: sheetElem.querySelectorAll([
+        'input[name="system.details.xp.value"]',
+        'select.level-selector'
+      ].join(',')),
       lockMode: LockMode.FORM_DISABLED,
     };
   }
@@ -67,7 +70,7 @@ export default class LockableCharacterSheet extends LockableSheet {
 
   getBackgroundForHide(sheetElem) {
     return {
-      elements: sheetElem.querySelectorAll('input[name="data.details.background"]'),
+      elements: sheetElem.querySelectorAll('input[name="system.details.background"]'),
       lockMode: LockMode.HIDE_PARENTS,
       always: true,
     };
@@ -81,9 +84,9 @@ export default class LockableCharacterSheet extends LockableSheet {
     const elementSelectors = [];
     this.getResources(actor).forEach((resource) => {
       elementSelectors.push(this.getResourceNameSelector(resource));
-      elementSelectors.push('input[name="data.resources.' + resource + '.max"]');
-      elementSelectors.push('input[name="data.resources.' + resource + '.sr"]');
-      elementSelectors.push('input[name="data.resources.' + resource + '.lr"]');
+      elementSelectors.push('input[name="system.resources.' + resource + '.max"]');
+      elementSelectors.push('input[name="system.resources.' + resource + '.sr"]');
+      elementSelectors.push('input[name="system.resources.' + resource + '.lr"]');
     });
     return {
       elements: sheetElem.querySelectorAll(elementSelectors.join(',')),
@@ -92,7 +95,7 @@ export default class LockableCharacterSheet extends LockableSheet {
   }
 
   getResourceNameSelector(resource) {
-    return 'input[name="data.resources.' + resource + '.label"]';
+    return 'input[name="system.resources.' + resource + '.label"]';
   }
 
   hideUnusedResources(sheetElem, actor, hideIfUnused, isSheetEditable) {
@@ -141,7 +144,7 @@ export default class LockableCharacterSheet extends LockableSheet {
   getCurrencyInputs(sheetElem) {
     return [
       {
-        elements: sheetElem.querySelectorAll('input[name^="data.currency."]'),
+        elements: sheetElem.querySelectorAll('input[name^="system.currency."]'),
         lockMode: LockMode.FORM_DISABLED,
       },
       {
