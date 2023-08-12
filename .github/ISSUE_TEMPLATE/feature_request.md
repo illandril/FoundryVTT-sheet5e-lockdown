@@ -17,7 +17,7 @@ A clear and concise description of what you want to happen.
 A clear and concise description of any alternative solutions or features you've considered.
 
 **What system(s) do you want this feature to work with?**
-DnD5e - Fifth Edition System
+Add the names of the system or systems you use here.
 
 **What other modules do you use that you want to ensure work well with this feature?**
 Add the names of other modules you use here.

@@ -1,30 +1,32 @@
-import Settings, { SETTINGS_UPDATED } from '../settings.js';
-import { log, KEY as MODULE_KEY, CSS_PREFIX } from '../module.js';
-import MagicItemsSupport from '../module-support/magicitems.js';
+/* eslint-disable max-lines-per-function */
+import { Setting } from '@illandril/foundryvtt-utils/dist/ModuleSettings.js';
+import module from '../module';
+import MagicItemsSupport from '../module-support/magicitems';
+import * as Settings from '../settings';
 
-export const REGISTERED = `${MODULE_KEY}.SheetsRegistered`;
+export const REGISTERED = `illandril-sheet5e-lockdown.SheetsRegistered`;
 
-const CSS_SHEET = `${CSS_PREFIX}sheet`;
-const CSS_EDIT = `${CSS_PREFIX}edit`;
-const CSS_TOGGLE_EDIT_ON = `${CSS_PREFIX}toggleEditOn`;
-const CSS_TOGGLE_EDIT_OFF = `${CSS_PREFIX}toggleEditOff`;
-const CSS_LOCK = `${CSS_PREFIX}lock`;
-const CSS_HIDE_IMPORT_BUTTONS = `${CSS_PREFIX}hideImportButtons`;
+const CSS_SHEET = module.cssPrefix.child('sheet');
+const CSS_EDIT = module.cssPrefix.child('edit');
+const CSS_TOGGLE_EDIT_ON = module.cssPrefix.child('toggleEditOn');
+const CSS_TOGGLE_EDIT_OFF = module.cssPrefix.child('toggleEditOff');
+const CSS_LOCK = module.cssPrefix.child('lock');
+const CSS_HIDE_IMPORT_BUTTONS = module.cssPrefix.child('hideImportButtons');
 
-const CSS_HIDE = `${CSS_PREFIX}hide`;
-const CSS_HIDE_RESERVE_SPACE = `${CSS_PREFIX}hideReserveSpace`;
-const CSS_FLEXFIX = `${CSS_PREFIX}flexfix`;
+const CSS_HIDE = module.cssPrefix.child('hide');
+const CSS_HIDE_RESERVE_SPACE = module.cssPrefix.child('hideReserveSpace');
 
-const CSS_NO_POINTER_EVENTS = `${CSS_PREFIX}noPointerEvents`;
+const CSS_NO_POINTER_EVENTS = module.cssPrefix.child('noPointerEvents');
 
-export const LockMode = {
-  CSS_POINTER_EVENTS: 0,
-  FORM_DISABLED: 1,
-  HIDE: 2,
-  HIDE_RESERVE_SPACE: 3,
-  HIDE_PARENTS: 4,
-  CONTENT_EDITABLE: 5,
-};
+export enum LockMode {
+  CSS_POINTER_EVENTS = 'CSS_POINTER_EVENTS',
+  FORM_DISABLED = 'FORM_DISABLED',
+  HIDE = 'HIDE',
+  HIDE_RESERVE_SPACE = 'HIDE_RESERVE_SPACE',
+  HIDE_PARENTS = 'HIDE_PARENTS',
+  CONTENT_EDITABLE = 'CONTENT_EDITABLE',
+  DISABLE_CONTEXT_MENU = 'DISABLE_CONTEXT_MENU',
+}
 
 const BONUSES = [
   { name: 'bonuses.mwak.attack', label: 'DND5E.BonusMWAttack' },
@@ -41,14 +43,16 @@ const BONUSES = [
   { name: 'bonuses.spell.dc', label: 'DND5E.BonusSpellDC' },
 ];
 
-const SHOWN_SHEETS = new Set();
-
-Hooks.on(SETTINGS_UPDATED, () => {
+const SHOWN_SHEETS = new Set<ActorSheet>();
+const refreshShownSheets = () => {
   SHOWN_SHEETS.forEach((sheet) => {
     if (sheet.rendered) {
       sheet.render();
     }
   });
+};
+Hooks.on(Settings.SETTINGS_UPDATED, () => {
+  refreshShownSheets();
 });
 
 setInterval(() => {
@@ -60,52 +64,57 @@ setInterval(() => {
   });
 }, 10000);
 
-const LOCKABLE_SHEET_NAMES = new Set();
-export const isLockableSheet = (sheetName) => LOCKABLE_SHEET_NAMES.has(sheetName);
+const LOCKABLE_SHEET_NAMES = new Set<string>();
+export const isLockableSheet = (sheetName: string) => LOCKABLE_SHEET_NAMES.has(sheetName);
 
 export default class LockableSheet {
-  constructor(sheetName, sheetDisabledSetting) {
-    this.sheetName = sheetName;
-    this.onRenderHook = (actorSheet) => {
+  constructor(public readonly sheetName: string) {
+    const onRenderHook = (actorSheet: ActorSheet<dnd5e.documents.Actor5e>) => {
       if (actorSheet.constructor.name !== sheetName) {
         // It's a custom sheet that extends some other sheet, and we're in the parent
         // class's hook - skip it to avoid inappropriate locking.
         return;
       }
-      if (sheetDisabledSetting && sheetDisabledSetting.get()) {
-        return;
-      }
       SHOWN_SHEETS.add(actorSheet);
+
       const sheetElem = actorSheet.element[0];
-      const actor = actorSheet.object;
       if (!sheetElem) {
         return;
       }
-      this.onRender(sheetElem, actor, actorSheet.isEditable);
+      this.onRender(sheetElem, actorSheet.actor, actorSheet.isEditable);
     };
+
     LOCKABLE_SHEET_NAMES.add(sheetName);
-    log.info(`Sheet Registered: ${sheetName}`);
-    Hooks.on('render' + sheetName, this.onRenderHook);
+    module.logger.info(`Sheet Registered: ${sheetName}`);
+    Hooks.on(`render${sheetName}` as keyof HookCallbacks, onRenderHook);
   }
 
-  onRender(sheetElem, actor, isSheetEditable) {
-    log.info('render', actor.name);
+  onRender(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, isSheetEditable: boolean) {
+    module.logger.info('render', actor.name);
     this.initialize(sheetElem, actor, isSheetEditable);
 
     const isLocked = !isSheetEditable || this.isLocked(sheetElem);
     this.makeLocked(sheetElem, actor, isLocked, isSheetEditable);
   }
 
-  initialize(sheetElem, actor, isSheetEditable) {
+  initialize(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, isSheetEditable: boolean) {
     this.showSpecialTraits(sheetElem, actor);
     if (sheetElem.classList.contains(CSS_SHEET)) {
       return;
     }
     sheetElem.classList.add(CSS_SHEET);
     sheetElem.classList.add(CSS_LOCK);
-    if (isSheetEditable && game.user.hasRole(Settings.ShowToggleEditRole.get())) {
-      const sheetHeader = sheetElem.querySelector('.window-header');
-      const sheetTitle = sheetHeader.querySelector('.window-title');
+    if (isSheetEditable && game.user?.hasRole(Settings.ShowToggleEditRole.get())) {
+      const sheetHeader = sheetElem.querySelector<HTMLElement>('.window-header');
+      if (!sheetHeader) {
+        module.logger.error('window-header not found in sheet');
+        return;
+      }
+      const sheetTitle = sheetHeader.querySelector<HTMLElement>('.window-title');
+      if (!sheetTitle) {
+        module.logger.error('window-title not found in window-header');
+        return;
+      }
 
       const editOnLink = document.createElement('a');
       editOnLink.classList.add(CSS_TOGGLE_EDIT_ON);
@@ -134,25 +143,20 @@ export default class LockableSheet {
         labelKeyType = 'Short';
       }
       if (labelKeyType !== null) {
-        const toggleOnString = game.i18n.localize(`${MODULE_KEY}.toggleEditOn${labelKeyType}`);
-        const toggleOffString = game.i18n.localize(`${MODULE_KEY}.toggleEditOff${labelKeyType}`);
+        const toggleOnString = module.localize(`toggleEditOn${labelKeyType}`);
+        const toggleOffString = module.localize(`toggleEditOff${labelKeyType}`);
         editOnLink.appendChild(document.createTextNode(toggleOnString));
         editOffLink.appendChild(document.createTextNode(toggleOffString));
       }
     }
-    this.customSheetInitialize(sheetElem, actor, isSheetEditable);
   }
 
-  customSheetInitialize(sheetElem, actor, isSheetEditable) {
-    // Nothing here, but some sheets do special stuff
-  }
-
-  isLocked(sheetElem) {
+  isLocked(sheetElem: HTMLElement) {
     return sheetElem.classList.contains(CSS_LOCK);
   }
 
-  makeLocked(sheetElem, actor, locked, isSheetEditable) {
-    log.debug(`Make Locked? ${locked} (${this.sheetName})`);
+  makeLocked(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, locked: boolean, isSheetEditable: boolean) {
+    module.logger.debug(`Make Locked? ${locked.toString()} (${this.sheetName})`);
     addRemoveClass(sheetElem, CSS_LOCK, locked);
     addRemoveClass(sheetElem, CSS_EDIT, !locked);
 
@@ -167,13 +171,13 @@ export default class LockableSheet {
       this.getBasicDetailInputs(sheetElem),
       locked,
       Settings.LockBasicDetails,
-      isSheetEditable
+      isSheetEditable,
     );
     lockUnlock(
       this.getAlignmentForHide(sheetElem),
       locked,
       Settings.ShowAlignmentRole,
-      isSheetEditable
+      isSheetEditable,
     );
 
     // Attributes
@@ -181,13 +185,13 @@ export default class LockableSheet {
       this.getAbilityScoreInputs(sheetElem),
       locked,
       Settings.LockAbilityScores,
-      isSheetEditable
+      isSheetEditable,
     );
     lockUnlock(
       this.getProficiencyToggles(sheetElem),
       locked,
       Settings.LockProficiencies,
-      isSheetEditable
+      isSheetEditable,
     );
     lockUnlock(this.getTraits(sheetElem), locked, Settings.LockTraits, isSheetEditable);
 
@@ -196,19 +200,25 @@ export default class LockableSheet {
       this.getAddItemButtons(sheetElem),
       locked,
       Settings.HideAddItemButtons,
-      isSheetEditable
+      isSheetEditable,
     );
     lockUnlock(
       this.getRemoveItemButtons(sheetElem),
       locked,
       Settings.HideRemoveItemButtons,
-      isSheetEditable
+      isSheetEditable,
     );
     lockUnlock(
       this.getEditItemButtons(sheetElem),
       locked,
       Settings.HideEditItemButtons,
-      isSheetEditable
+      isSheetEditable,
+    );
+    lockUnlock(
+      this.getItemContextMenus(sheetElem),
+      locked,
+      Settings.DisableItemContextMenu,
+      isSheetEditable,
     );
 
     // Features
@@ -216,7 +226,7 @@ export default class LockableSheet {
       this.getAvailableItemFeatureUses(sheetElem),
       locked,
       Settings.LockAvailableItemFeatureUses,
-      isSheetEditable
+      isSheetEditable,
     );
 
     // Spellbook
@@ -224,22 +234,22 @@ export default class LockableSheet {
       this.getAvailableSpellSlots(sheetElem),
       locked,
       Settings.LockAvailableSpellSlots,
-      isSheetEditable
+      isSheetEditable,
     );
     lockUnlock(
       this.getMaxSpellSlotOverride(sheetElem),
       locked,
       Settings.LockMaxSpellSlotOverride,
-      isSheetEditable
+      isSheetEditable,
     );
-    const hideEmptySpellbook =
-      locked && (Settings.HideAddItemButtons.get() || Settings.HideEmptySpellbook.get());
+    const hideEmptySpellbook
+      = locked && (Settings.HideAddItemButtons.get() || Settings.HideEmptySpellbook.get());
     const isSpellbookEmptyAndHidden = hideEmptySpellbook && this.isSpellbookEmpty(actor);
     lockUnlock(
       this.getSpellbookTab(sheetElem),
       hideEmptySpellbook,
       isSpellbookEmptyAndHidden,
-      isSheetEditable
+      isSheetEditable,
     );
 
     // Effects
@@ -250,7 +260,7 @@ export default class LockableSheet {
       this.getEffectsTab(sheetElem),
       locked,
       isEffectsEmptyAndHidden || Settings.ShowEffectsRole,
-      isSheetEditable
+      isSheetEditable,
     );
 
     // Biography
@@ -258,15 +268,15 @@ export default class LockableSheet {
       this.getBiographyForHide(sheetElem),
       locked,
       Settings.ShowBiographyRole,
-      isSheetEditable
+      isSheetEditable,
     );
 
     // Unsorted stuff
     lockUnlock(this.getUnsorteds(sheetElem), locked, Settings.LockUnsorteds, isSheetEditable);
-    log.debug('Make Locked Complete');
+    module.logger.debug('Make Locked Complete');
   }
 
-  isSpellbookEmpty(actor) {
+  isSpellbookEmpty(actor: dnd5e.documents.Actor5e) {
     if (actor.items.some((item) => item.type === 'spell')) {
       return false;
     }
@@ -276,55 +286,55 @@ export default class LockableSheet {
     return true;
   }
 
-  isEffectsEmpty(actor) {
-    return actor.effects.size == 0;
+  isEffectsEmpty(actor: dnd5e.documents.Actor5e) {
+    return actor.effects.size === 0;
   }
 
-  getNameInput(sheetElem) {
+  getNameInput(sheetElem: HTMLElement) {
     return {
-      elements: sheetElem.querySelectorAll('input[name="name"]'),
+      elements: sheetElem.querySelectorAll<HTMLElement>('input[name="name"]'),
       lockMode: LockMode.FORM_DISABLED,
     };
   }
 
-  getBasicDetailInputs(sheetElem) {
+  getBasicDetailInputs(sheetElem: HTMLElement): ElementCollection {
     return {
-      elements: sheetElem.querySelectorAll(
+      elements: sheetElem.querySelectorAll<HTMLElement>(
         [
           'input[name="system.details.race"]',
           'input[name="system.details.background"]',
           'input[name="system.details.alignment"]',
           'select.actor-size',
-        ].join(',')
+        ].join(','),
       ),
       lockMode: LockMode.FORM_DISABLED,
     };
   }
 
-  getAlignmentForHide(sheetElem) {
+  getAlignmentForHide(sheetElem: HTMLElement) {
     return {
-      elements: sheetElem.querySelectorAll('input[name="system.details.alignment"]'),
+      elements: sheetElem.querySelectorAll<HTMLElement>('input[name="system.details.alignment"]'),
       lockMode: LockMode.HIDE_PARENTS,
       always: true,
     };
   }
 
-  getAbilityScoreInputs(sheetElem) {
+  getAbilityScoreInputs(sheetElem: HTMLElement) {
     return {
-      elements: sheetElem.querySelectorAll('input.ability-score'),
+      elements: sheetElem.querySelectorAll<HTMLElement>('input.ability-score'),
       lockMode: LockMode.CSS_POINTER_EVENTS,
     };
   }
 
-  getProficiencyToggles(sheetElem) {
+  getProficiencyToggles(sheetElem: HTMLElement) {
     return [
       {
         // Proficiency toggles
-        elements: sheetElem.querySelectorAll('.proficiency-toggle'),
+        elements: sheetElem.querySelectorAll<HTMLElement>('.proficiency-toggle'),
         lockMode: LockMode.CSS_POINTER_EVENTS,
       },
       {
-        elements: sheetElem.querySelectorAll([
+        elements: sheetElem.querySelectorAll<HTMLElement>([
           // Saving throw proficiency configure button
           '.config-button[data-action="ability"]',
 
@@ -332,121 +342,137 @@ export default class LockableSheet {
           '.config-button[data-action="skill"]',
         ].join(',')),
         lockMode: LockMode.HIDE,
-      }
+      },
     ];
   }
 
-  getTraits(sheetElem) {
+  getTraits(sheetElem: HTMLElement) {
     return [
       this.getSensesInput(sheetElem),
       {
-        elements: sheetElem.querySelectorAll(
+        elements: sheetElem.querySelectorAll<HTMLElement>(
           [
             // Trait edit icons
             '.trait-selector',
             // Trait config icons
             '.traits .config-button',
-            // Empty trait rows
-            '.traits .form-group.inactive',
-          ].join(',')
+            // Empty trait rows (this only matches some... so use the more complicated selector below instead)
+            // '.traits .form-group.inactive',
+            // Empty Special Traits row
+            '.traits .form-group.empty-special-traits',
+          ].join(','),
         ),
         lockMode: LockMode.HIDE,
       },
-      Settings.ShowSpecialTraits.get() ? null : this.getConfigureSpecialTraitsRow(sheetElem),
+      {
+        // Empty trait rows
+        elements: [
+          ...sheetElem.querySelectorAll<HTMLElement>('.traits .form-group > .traits-list'),
+        ].filter((element) => !element.textContent?.trim()),
+        lockMode: LockMode.HIDE_PARENTS,
+      },
+      ...Settings.ShowSpecialTraits.get() ? [] : [this.getConfigureSpecialTraitsRow(sheetElem)],
     ];
   }
 
-  getSensesInput(sheetElem) {
+  getSensesInput(sheetElem: HTMLElement) {
     return {
-      elements: sheetElem.querySelectorAll('input[name="system.traits.senses"]'),
+      elements: sheetElem.querySelectorAll<HTMLElement>('input[name="system.traits.senses"]'),
       lockMode: LockMode.FORM_DISABLED,
     };
   }
 
-  getConfigureSpecialTraitsRow(sheetElem) {
+  getConfigureSpecialTraitsRow(sheetElem: HTMLElement) {
     return {
       // Special Traits
-      elements: sheetElem.querySelectorAll('.traits .configure-flags'),
+      elements: sheetElem.querySelectorAll<HTMLElement>('.traits .configure-flags'),
       lockMode: LockMode.HIDE_PARENTS,
     };
   }
 
-  getAddItemButtons(sheetElem) {
+  getAddItemButtons(sheetElem: HTMLElement) {
     return {
-      elements: sheetElem.querySelectorAll('.inventory-list .item-create'),
+      elements: sheetElem.querySelectorAll<HTMLElement>('.inventory-list .item-create'),
       lockMode: LockMode.HIDE,
     };
   }
 
-  getRemoveItemButtons(sheetElem) {
+  getRemoveItemButtons(sheetElem: HTMLElement) {
     return {
-      elements: sheetElem.querySelectorAll('.inventory-list .item-delete'),
+      elements: sheetElem.querySelectorAll<HTMLElement>('.inventory-list .item-delete'),
       lockMode: LockMode.HIDE,
     };
   }
 
-  getEditItemButtons(sheetElem) {
+  getEditItemButtons(sheetElem: HTMLElement) {
     return {
-      elements: sheetElem.querySelectorAll('.inventory-list .item-edit'),
+      elements: sheetElem.querySelectorAll<HTMLElement>('.inventory-list .item-edit'),
       lockMode: LockMode.HIDE,
     };
   }
 
-  getAvailableItemFeatureUses(sheetElem) {
+  getItemContextMenus(sheetElem: HTMLElement) {
     return {
-      elements: sheetElem.querySelectorAll('.item-detail.item-uses > input'),
+      elements: sheetElem.querySelectorAll<HTMLElement>('.inventory-list .item'),
+      lockMode: LockMode.DISABLE_CONTEXT_MENU,
+    };
+  }
+
+  getAvailableItemFeatureUses(sheetElem: HTMLElement) {
+    return {
+      elements: sheetElem.querySelectorAll<HTMLElement>('.item-detail.item-uses > input'),
       lockMode: LockMode.FORM_DISABLED,
     };
   }
 
-  getAvailableSpellSlots(sheetElem) {
+  getAvailableSpellSlots(sheetElem: HTMLElement) {
     return {
-      elements: sheetElem.querySelectorAll('input[name^="system.spells."][name$=".value"]'),
+      elements: sheetElem.querySelectorAll<HTMLElement>('input[name^="system.spells."][name$=".value"]'),
       lockMode: LockMode.FORM_DISABLED,
     };
   }
 
-  getMaxSpellSlotOverride(sheetElem) {
+  getMaxSpellSlotOverride(sheetElem: HTMLElement) {
     return {
-      elements: sheetElem.querySelectorAll('.slot-max-override'),
+      elements: sheetElem.querySelectorAll<HTMLElement>('.slot-max-override'),
       lockMode: LockMode.HIDE,
     };
   }
 
-  getEffectControls(sheetElem) {
+  getEffectControls(sheetElem: HTMLElement) {
     return {
-      elements: sheetElem.querySelectorAll('.effect-control'),
+      elements: sheetElem.querySelectorAll<HTMLElement>('.effect-control'),
       lockMode: LockMode.HIDE,
     };
   }
 
-  getEffectsTab(sheetElem) {
+  getEffectsTab(sheetElem: HTMLElement) {
     return {
-      elements: sheetElem.querySelectorAll('.tabs .item[data-tab="effects"]'),
+      elements: sheetElem.querySelectorAll<HTMLElement>('.tabs .item[data-tab="effects"]'),
       lockMode: LockMode.HIDE,
       always: true,
     };
   }
 
-  getSpellbookTab(sheetElem) {
+  getSpellbookTab(sheetElem: HTMLElement) {
     return {
-      elements: sheetElem.querySelectorAll('.tabs .item[data-tab="spellbook"]'),
+      elements: sheetElem.querySelectorAll<HTMLElement>('.tabs .item[data-tab="spellbook"]'),
       lockMode: LockMode.HIDE,
     };
   }
 
-  getBiographyForHide(sheetElem) {
+  getBiographyForHide(sheetElem: HTMLElement) {
     return {
-      elements: sheetElem.querySelectorAll('.tabs .item[data-tab="biography"]'),
+      elements: sheetElem.querySelectorAll<HTMLElement>('.tabs .item[data-tab="biography"]'),
       lockMode: LockMode.HIDE,
       always: true,
     };
   }
 
-  getUnsorteds(sheetElem) {
+  getUnsorteds(sheetElem: HTMLElement): ElementCollection {
     return [
       {
-        elements: sheetElem.querySelectorAll(
+        elements: sheetElem.querySelectorAll<HTMLElement>(
           [
             'input[name="system.attributes.hp.max"]',
             'input[name="system.attributes.ac.value"]',
@@ -454,18 +480,18 @@ export default class LockableSheet {
             'input[name="system.attributes.speed.special"]',
             'input[name="system.attributes.init.value"]',
             'select[name="system.attributes.spellcasting"]',
-          ].join(',')
+          ].join(','),
         ),
         lockMode: LockMode.FORM_DISABLED,
       },
       {
-        elements: sheetElem.querySelectorAll('.attribute .config-button'),
+        elements: sheetElem.querySelectorAll<HTMLElement>('.attribute .config-button'),
         lockMode: LockMode.HIDE,
       },
     ];
   }
 
-  showSpecialTraits(sheetElem, actor) {
+  showSpecialTraits(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e) {
     if (!Settings.ShowSpecialTraits.get()) {
       return;
     }
@@ -473,7 +499,7 @@ export default class LockableSheet {
     if (!specialTraitsRow) {
       return;
     }
-    let traitsList;
+    let traitsList: HTMLElement | DocumentFragment;
     if (this.showSpecialTraitsAsUL()) {
       traitsList = document.createElement('ul');
       traitsList.classList.add('traits-list');
@@ -481,28 +507,36 @@ export default class LockableSheet {
       traitsList = document.createDocumentFragment();
     }
 
-    const actorFlags = actor.flags;
-    for (let [key, flag] of Object.entries(CONFIG.DND5E.characterFlags)) {
-      const value = getProperty(actorFlags, `dnd5e.${key}`);
-      if (value) {
+    for (const [key, flag] of Object.entries(dnd5e.config.characterFlags)) {
+      const value = foundry.utils.getProperty(actor, `flags.dnd5e.${key}`);
+      if (value && (
+        value === true
+        || typeof value === 'number'
+        || typeof value === 'string'
+      )) {
         this.addTag(traitsList, flag.name, value);
       }
     }
 
     BONUSES.forEach((bonus) => {
-      const value = getProperty(actor.system, bonus.name);
-      if (value) {
+      const value = foundry.utils.getProperty(actor.system, bonus.name);
+      if (value && (
+        value === true
+        || typeof value === 'number'
+        || typeof value === 'string'
+      )) {
         this.addTag(traitsList, bonus.label, value);
       }
     });
     if (traitsList.childElementCount > 0) {
       specialTraitsRow.traitListContainer.appendChild(traitsList);
+      specialTraitsRow.row.classList.remove('empty-special-traits');
     } else {
-      specialTraitsRow.row.classList.add('inactive');
+      specialTraitsRow.row.classList.add('empty-special-traits');
     }
   }
 
-  addTag(traitsList, labelLocaleKey, value) {
+  addTag(traitsList: Node, labelLocaleKey: string, value: string | number | true) {
     if (!this.showSpecialTraitsAsUL()) {
       traitsList.appendChild(document.createTextNode(' '));
     }
@@ -521,12 +555,15 @@ export default class LockableSheet {
     return true;
   }
 
-  getSpecialTraitsRow(sheetElem) {
-    const flagsToggle = sheetElem.querySelector('.traits [data-action="flags"]');
+  getSpecialTraitsRow(sheetElem: HTMLElement) {
+    const flagsToggle = sheetElem.querySelector<HTMLElement>('.traits [data-action="flags"]');
     if (!flagsToggle) {
       return null;
     }
     const row = flagsToggle.parentElement;
+    if (!row) {
+      return null;
+    }
     return {
       row: row,
       traitListContainer: row,
@@ -534,34 +571,55 @@ export default class LockableSheet {
   }
 }
 
-const addRemoveClass = (element, cssClass, isAdd) => {
+const addRemoveClass = (element: HTMLElement, cssClass: string, isAdd: boolean) => {
   if (!element) {
     return;
   }
-  isAdd ? element.classList.add(cssClass) : element.classList.remove(cssClass);
+  if (isAdd) {
+    element.classList.add(cssClass);
+  } else {
+    element.classList.remove(cssClass);
+  }
 };
 
-export const lockUnlock = (elementGroups, sheetLocked, lockSetting, isSheetEditable) => {
-  if (typeof isSheetEditable !== 'boolean') {
-    log.error(`isSheetEditable was not a boolean - please submit a bug report in GitHub with a screenshot of the stack trace for this error`);
-    isSheetEditable = true;
+type ElementGroup = {
+  elements: HTMLElement[] | NodeListOf<HTMLElement>
+  lockMode: LockMode
+  always?: boolean
+};
+
+type ElementCollection = ElementGroup | (ElementGroup | ElementCollection)[];
+
+type LockSetting = boolean | Setting<boolean> | Setting<string>;
+const parseLockSetting = (lockSetting: LockSetting) => {
+  if (typeof lockSetting === 'boolean') {
+    return lockSetting;
   }
-  if (typeof lockSetting !== 'boolean') {
-    lockSetting = lockSetting.get();
-    if (typeof lockSetting === 'string') {
-      lockSetting = !game.user.hasRole(lockSetting);
-    }
+  const value = lockSetting.get();
+  if (typeof value === 'boolean') {
+    return value;
   }
+  return !game.user?.hasRole(value);
+};
+
+const disableContextMenu = (event: MouseEvent) => {
+  event.preventDefault();
+  event.stopPropagation();
+  return false;
+};
+
+export const lockUnlock = (elementGroups: null | ElementCollection, sheetLocked: boolean, lockSettingInput: LockSetting, isSheetEditable: boolean) => {
   if (!elementGroups) {
     return;
   }
+  const lockSetting = parseLockSetting(lockSettingInput);
   if (Array.isArray(elementGroups)) {
     elementGroups.forEach((elementGroup) => {
       lockUnlock(elementGroup, sheetLocked, lockSetting, isSheetEditable);
     });
   } else {
     const { elements, lockMode, always } = elementGroups;
-    const lock = (sheetLocked || always) && lockSetting;
+    const lock = (always ? true : sheetLocked) && lockSetting;
 
     if (isSheetEditable || lock) {
       switch (lockMode) {
@@ -572,7 +630,7 @@ export const lockUnlock = (elementGroups, sheetLocked, lockSetting, isSheetEdita
           break;
         case LockMode.FORM_DISABLED:
           elements.forEach((element) => {
-            element.disabled = lock;
+            (element as HTMLInputElement).disabled = lock;
           });
           break;
         case LockMode.HIDE:
@@ -587,30 +645,42 @@ export const lockUnlock = (elementGroups, sheetLocked, lockSetting, isSheetEdita
           break;
         case LockMode.HIDE_PARENTS:
           elements.forEach((element) => {
-            addRemoveClass(element.parentNode, CSS_HIDE, lock);
+            addRemoveClass(element.parentElement!, CSS_HIDE, lock);
           });
           break;
         case LockMode.CONTENT_EDITABLE:
           elements.forEach((element) => {
-            element.setAttribute('contenteditable', !lock);
+            element.setAttribute('contenteditable', (!lock).toString());
+          });
+          break;
+        case LockMode.DISABLE_CONTEXT_MENU:
+          elements.forEach((element) => {
+            if (lock) {
+              element.addEventListener('contextmenu', disableContextMenu, { capture: true });
+            } else {
+              element.removeEventListener('contextmenu', disableContextMenu, { capture: true });
+            }
+            element.setAttribute('contenteditable', (!lock).toString());
           });
           break;
         default:
-          log.error('Unexpected lockMode: ' + lockMode);
+          // Typescript says lockMode is never (which is true, as long as no types were incorrect
+          // and nobody added a new LockMode without updating this switch block)
+          module.logger.error(`Unexpected lockMode: ${lockMode as string}`);
       }
     }
   }
 };
 
-export const isHideReserveSpace = (element) => element.classList.contains(CSS_HIDE_RESERVE_SPACE);
+export const isHideReserveSpace = (element: HTMLElement) => element.classList.contains(CSS_HIDE_RESERVE_SPACE);
 
-const faIcon = (name) => {
+const faIcon = (name: string) => {
   const icon = document.createElement('i');
   icon.classList.add('fas');
   icon.classList.add('fa-' + name);
   return icon;
 };
 
-const stopPropagation = (event) => {
+const stopPropagation = (event: Event) => {
   event.stopPropagation();
 };

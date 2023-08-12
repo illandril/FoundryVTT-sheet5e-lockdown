@@ -29,7 +29,7 @@ If applicable, add screenshots to help explain your problem.
 **Foundry Versions**
  - Version of this module:
  - Foundry Version:
- - System Name and Version: DnD5e - Fifth Edition System, version #.#.#
+ - System Name and Version:
  - Browser Name and Version:
 
 **What other modules did you have active when experiencing this issue (include both names and versions)?**

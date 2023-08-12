@@ -1,0 +1,37 @@
+{
+  "compatibility": {
+    "minimum": 11,
+    "verified": 11
+  },
+  "esmodules": [
+    "module.js"
+  ],
+  "styles": [
+    "styles.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "license": "LICENSE",
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "verified": "2.3.0"
+        }
+      }
+    ]
+  },
+  "media": [
+    {
+      "type": "cover",
+      "url": "https://github.com/illandril/FoundryVTT-sheet5e-lockdown/raw/main/screenshots/examples-preview.png"
+    }
+  ]
+}

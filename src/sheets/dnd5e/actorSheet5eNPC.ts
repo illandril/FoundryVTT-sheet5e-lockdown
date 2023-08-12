@@ -1,5 +1,4 @@
-import LockableNPCSheet from '../lockableNPCSheet.js';
-import { LockMode } from '../lockableSheet.js';
+import LockableNPCSheet from '../lockableNPCSheet';
 
 class LockableActorSheet5eNPC extends LockableNPCSheet {
   constructor() {

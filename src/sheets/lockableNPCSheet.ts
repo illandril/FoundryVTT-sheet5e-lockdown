@@ -1,14 +1,12 @@
-import Settings from '../settings.js';
-import { log } from '../module.js';
-
+import * as Settings from '../settings';
 import LockableSheet, { LockMode, lockUnlock } from './lockableSheet.js';
 
 export default class LockableNPCSheet extends LockableSheet {
-  constructor(sheetName, sheetDisabledSetting) {
-    super(sheetName, sheetDisabledSetting);
+  constructor(sheetName: string) {
+    super(sheetName);
   }
 
-  makeLocked(sheetElem, actor, locked, isSheetEditable) {
+  makeLocked(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, locked: boolean, isSheetEditable: boolean) {
     super.makeLocked(sheetElem, actor, locked, isSheetEditable);
 
     // Basic Details section
@@ -20,78 +18,81 @@ export default class LockableNPCSheet extends LockableSheet {
       this.getLegendaryAndLairActions(sheetElem),
       locked,
       Settings.LockLegendaryAndLair,
-      isSheetEditable
+      isSheetEditable,
     );
     this.hideLegendaryAndLairRows(
       sheetElem,
       actor,
       locked && Settings.LockLegendaryAndLair.get(),
-      isSheetEditable
+      isSheetEditable,
     );
   }
 
-  getBasicDetailInputs(sheetElem) {
+  getBasicDetailInputs(sheetElem: HTMLElement) {
     // Override of super
     return [
       super.getBasicDetailInputs(sheetElem),
       {
-        elements: sheetElem.querySelectorAll(
+        elements: sheetElem.querySelectorAll<HTMLElement>(
           [
             'input[name="system.details.type"]',
             'input[name="system.details.source"]',
             'input[name="system.details.cr"]',
-          ].join(',')
+          ].join(','),
         ),
         lockMode: LockMode.FORM_DISABLED,
       },
     ];
   }
 
-  getLegendaryAndLairActions(sheetElem) {
+  getLegendaryAndLairActions(sheetElem: HTMLElement) {
     return [
       {
-        elements: sheetElem.querySelectorAll(
+        elements: sheetElem.querySelectorAll<HTMLElement>(
           [
             'input[name="system.resources.legact.max"]',
             'input[name="system.resources.legres.max"]',
             'input[name="system.resources.lair.value"]',
             'input[name="system.resources.lair.initiative"]',
-          ].join(',')
+          ].join(','),
         ),
         lockMode: LockMode.FORM_DISABLED,
       },
     ];
   }
 
-  hideLegendaryAndLairRows(sheetElem, actor, hideIfUnused, isSheetEditable) {
-    const maxLegendaryActions = getProperty(actor.system, 'resources.legact.max');
-    const noLegendaryActions = maxLegendaryActions < 1;
+  hideLegendaryAndLairRows(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, hideIfUnused: boolean, isSheetEditable: boolean) {
+    const maxLegendaryActions = foundry.utils.getProperty(actor.system, 'resources.legact.max');
+    const noLegendaryActions = !(typeof maxLegendaryActions === 'number' && maxLegendaryActions > 0);
     lockUnlock(
       this.getLegendaryActionsRow(sheetElem),
       hideIfUnused,
       noLegendaryActions,
-      isSheetEditable
+      isSheetEditable,
     );
 
-    const maxLegendaryResistances = getProperty(actor.system, 'resources.legres.max');
-    const noLegendaryResistance = maxLegendaryResistances < 1;
+    const maxLegendaryResistances = foundry.utils.getProperty(actor.system, 'resources.legres.max');
+    const noLegendaryResistance = !(typeof maxLegendaryResistances === 'number' && maxLegendaryResistances > 0);
     lockUnlock(
       this.getLegendaryResistanceRow(sheetElem),
       hideIfUnused,
       noLegendaryResistance,
-      isSheetEditable
+      isSheetEditable,
     );
 
-    const usesLairActions = getProperty(actor.system, 'resources.lair.value');
+    const usesLairActions = foundry.utils.getProperty(actor.system, 'resources.lair.value');
     const noLairActions = !usesLairActions;
     lockUnlock(this.getLairActionsRow(sheetElem), hideIfUnused, noLairActions, isSheetEditable);
   }
 
-  getLegendaryActionsRow(sheetElem) {
-    const input = sheetElem.querySelector('input[name="system.resources.legact.max"]');
+  getLegendaryActionsRow(sheetElem: HTMLElement) {
+    const input = sheetElem.querySelector<HTMLElement>('input[name="system.resources.legact.max"]');
     let row = input;
     while (row && !row.classList.contains('flexrow')) {
-      row = row.parentNode;
+      row = row.parentElement;
+    }
+    if (!row) {
+      return null;
     }
     return {
       elements: [row],
@@ -99,11 +100,14 @@ export default class LockableNPCSheet extends LockableSheet {
     };
   }
 
-  getLegendaryResistanceRow(sheetElem) {
-    const input = sheetElem.querySelector('input[name="system.resources.legres.max"]');
+  getLegendaryResistanceRow(sheetElem: HTMLElement) {
+    const input = sheetElem.querySelector<HTMLElement>('input[name="system.resources.legres.max"]');
     let row = input;
     while (row && !row.classList.contains('flexrow')) {
-      row = row.parentNode;
+      row = row.parentElement;
+    }
+    if (!row) {
+      return null;
     }
     return {
       elements: [row],
@@ -111,11 +115,14 @@ export default class LockableNPCSheet extends LockableSheet {
     };
   }
 
-  getLairActionsRow(sheetElem) {
-    const input = sheetElem.querySelector('input[name="system.resources.lair.value"]');
+  getLairActionsRow(sheetElem: HTMLElement) {
+    const input = sheetElem.querySelector<HTMLElement>('input[name="system.resources.lair.value"]');
     let row = input;
     while (row && !row.classList.contains('flexrow')) {
-      row = row.parentNode;
+      row = row.parentElement;
+    }
+    if (!row) {
+      return null;
     }
     return {
       elements: [row],
@@ -123,21 +130,21 @@ export default class LockableNPCSheet extends LockableSheet {
     };
   }
 
-  getUnsorteds(sheetElem) {
+  getUnsorteds(sheetElem: HTMLElement) {
     // Override of super
     return [
       super.getUnsorteds(sheetElem),
       {
-        elements: sheetElem.querySelectorAll(
+        elements: sheetElem.querySelectorAll<HTMLElement>(
           [
             'input[name="system.attributes.hp.formula"]',
             'input[name="system.details.spellLevel"]',
-          ].join(',')
+          ].join(','),
         ),
         lockMode: LockMode.FORM_DISABLED,
       },
       {
-        elements: sheetElem.querySelectorAll('.attribute.health .attribute-name.rollable'),
+        elements: sheetElem.querySelectorAll<HTMLElement>('.attribute.health .attribute-name.rollable'),
         lockMode: LockMode.CSS_POINTER_EVENTS,
       },
     ];

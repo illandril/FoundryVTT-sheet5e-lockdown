@@ -1,5 +1,4 @@
-import LockableCharacterSheet from '../lockableCharacterSheet.js';
-import { LockMode } from '../lockableSheet.js';
+import LockableCharacterSheet from '../lockableCharacterSheet';
 
 class LockableActorSheet5eCharacter extends LockableCharacterSheet {
   constructor() {
