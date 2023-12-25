@@ -322,7 +322,7 @@ export default class LockableSheet {
   getAbilityScoreInputs(sheetElem: HTMLElement) {
     return {
       elements: sheetElem.querySelectorAll<HTMLElement>('input.ability-score'),
-      lockMode: LockMode.CSS_POINTER_EVENTS,
+      lockMode: LockMode.FORM_DISABLED,
     };
   }
 

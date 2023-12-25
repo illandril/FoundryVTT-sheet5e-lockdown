@@ -62,6 +62,9 @@ export const LockRests = module.settings.register('lockRests', Boolean, true, { 
 export const LockAbilityScores = module.settings.register('lockAbilityScores', Boolean, true, { onChange });
 export const LockProficiencies = module.settings.register('lockProficiencies', Boolean, true, { onChange });
 export const LockResources = module.settings.register('lockResources', Boolean, true, { hasHint: true, onChange });
+export const LockDeathSaves = module.settings.register('lockDeathSaves', Boolean, false, { onChange });
+export const LockExhaustion = module.settings.register('lockExhaustion', Boolean, false, { onChange });
+export const LockInspiration = module.settings.register('lockInspiration', Boolean, false, { onChange });
 export const LockTraits = module.settings.register('lockTraits', Boolean, true, { hasHint: true, onChange });
 export const LockLegendaryAndLair = module.settings.register('lockLegendaryAndLair', Boolean, true, { hasHint: true, onChange });
 export const ShowSpecialTraits = module.settings.register('showSpecialTraits', Boolean, true, { hasHint: true, onChange });
@@ -77,6 +80,7 @@ export const DisableItemContextMenu = module.settings.register('disableItemConte
 export const LockCurrency = module.settings.register('lockCurrency', Boolean, true, { onChange });
 export const LockEquipItemButtons = module.settings.register('lockEquipItemButtons', Boolean, false, { hasHint: true, onChange });
 export const LockAttunementOverride = module.settings.register('lockAttunementOverride', Boolean, true, { onChange });
+export const LockInventoryQuantity = module.settings.register('lockInventoryQuantity', Boolean, true, { onChange });
 
 // Features
 export const LockAvailableItemFeatureUses = module.settings.register('lockAvailableItemFeatureUses', Boolean, false, { onChange });

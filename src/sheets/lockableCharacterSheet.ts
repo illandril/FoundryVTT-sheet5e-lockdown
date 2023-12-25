@@ -9,7 +9,13 @@ export default class LockableCharacterSheet extends LockableSheet {
   makeLocked(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, locked: boolean, isSheetEditable: boolean) {
     super.makeLocked(sheetElem, actor, locked, isSheetEditable);
 
-    // Basic Details section
+    this.makeLockedBasicDetails(sheetElem, actor, locked, isSheetEditable);
+    this.makeLockedAttributes(sheetElem, actor, locked, isSheetEditable);
+    this.makeLockedInventory(sheetElem, actor, locked, isSheetEditable);
+    this.makeLockedSpellbook(sheetElem, actor, locked, isSheetEditable);
+  }
+
+  private makeLockedBasicDetails(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, locked: boolean, isSheetEditable: boolean) {
     lockUnlock(this.getXPInputs(sheetElem), locked, Settings.LockXP, isSheetEditable);
     lockUnlock(
       this.getBackgroundForHide(sheetElem),
@@ -18,8 +24,9 @@ export default class LockableCharacterSheet extends LockableSheet {
       isSheetEditable,
     );
     lockUnlock(this.getRestButtons(sheetElem), locked, Settings.LockRests, isSheetEditable);
+  }
 
-    // Attributes
+  private makeLockedAttributes(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, locked: boolean, isSheetEditable: boolean) {
     lockUnlock(
       this.getResourceNameAndMaxInputs(sheetElem, actor),
       locked,
@@ -32,8 +39,12 @@ export default class LockableCharacterSheet extends LockableSheet {
       locked && Settings.LockResources.get(),
       isSheetEditable,
     );
+    lockUnlock(this.getDeathSaveInputs(sheetElem), locked, Settings.LockDeathSaves, isSheetEditable);
+    lockUnlock(this.getExhaustionInputs(sheetElem), locked, Settings.LockExhaustion, isSheetEditable);
+    lockUnlock(this.getInspirationInputs(sheetElem), locked, Settings.LockInspiration, isSheetEditable);
+  }
 
-    // Inventory
+  private makeLockedInventory(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, locked: boolean, isSheetEditable: boolean) {
     lockUnlock(this.getCurrencyInputs(sheetElem), locked, Settings.LockCurrency, isSheetEditable);
     lockUnlock(
       this.getEquipItemButtons(sheetElem),
@@ -47,8 +58,10 @@ export default class LockableCharacterSheet extends LockableSheet {
       Settings.LockAttunementOverride,
       isSheetEditable,
     );
+    lockUnlock(this.getInventoryQuantityInputs(sheetElem), locked, Settings.LockInventoryQuantity, isSheetEditable);
+  }
 
-    // Spellbook
+  private makeLockedSpellbook(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, locked: boolean, isSheetEditable: boolean) {
     lockUnlock(
       this.getPrepareSpellButtons(sheetElem),
       locked,
@@ -158,6 +171,15 @@ export default class LockableCharacterSheet extends LockableSheet {
     ];
   }
 
+  getInventoryQuantityInputs(sheetElem: HTMLElement) {
+    return [
+      {
+        elements: sheetElem.querySelectorAll<HTMLElement>('.item-detail.item-quantity input'),
+        lockMode: LockMode.FORM_DISABLED,
+      },
+    ];
+  }
+
   getEquipItemButtons(sheetElem: HTMLElement) {
     return {
       elements: sheetElem.querySelectorAll<HTMLElement>('.tab.inventory .inventory-list .item-toggle'),
@@ -173,6 +195,33 @@ export default class LockableCharacterSheet extends LockableSheet {
       },
       {
         elements: sheetElem.querySelectorAll<HTMLElement>('input[name="system.attributes.attunement.max"]'),
+        lockMode: LockMode.FORM_DISABLED,
+      },
+    ];
+  }
+
+  getDeathSaveInputs(sheetElem: HTMLElement) {
+    return [
+      {
+        elements: sheetElem.querySelectorAll<HTMLElement>('input[name^="system.attributes.death."]'),
+        lockMode: LockMode.FORM_DISABLED,
+      },
+    ];
+  }
+
+  getExhaustionInputs(sheetElem: HTMLElement) {
+    return [
+      {
+        elements: sheetElem.querySelectorAll<HTMLElement>('input[name="system.attributes.exhaustion"]'),
+        lockMode: LockMode.FORM_DISABLED,
+      },
+    ];
+  }
+
+  getInspirationInputs(sheetElem: HTMLElement) {
+    return [
+      {
+        elements: sheetElem.querySelectorAll<HTMLElement>('input[name="system.attributes.inspiration"]'),
         lockMode: LockMode.FORM_DISABLED,
       },
     ];
