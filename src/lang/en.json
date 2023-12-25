@@ -50,6 +50,18 @@
         "label": "Lock Resources",
         "hint": "Locks the name, maximum value, and reset on short/long rest toggles for Resource 1, 2, and 3. This does not lock the current value for resources. If a resource is locked, has no name, and has a maximum of 0, it will be hidden."
       },
+      "showResource1Role": {
+        "label": "Show Resource 1 To",
+        "hint": "A character's Resource 1 will be hidden (even when the character sheet is unlocked) from players who do not have at least the selected role."
+      },
+      "showResource2Role": {
+        "label": "Show Resource 2 To",
+        "hint": "A character's Resource 2 will be hidden (even when the character sheet is unlocked) from players who do not have at least the selected role."
+      },
+      "showResource3Role": {
+        "label": "Show Resource 3 To",
+        "hint": "A character's Resource 3 will be hidden (even when the character sheet is unlocked) from players who do not have at least the selected role."
+      },
       "lockDeathSaves": {
         "label": "Lock Death Saves"
       },

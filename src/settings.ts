@@ -62,6 +62,22 @@ export const LockRests = module.settings.register('lockRests', Boolean, true, { 
 export const LockAbilityScores = module.settings.register('lockAbilityScores', Boolean, true, { onChange });
 export const LockProficiencies = module.settings.register('lockProficiencies', Boolean, true, { onChange });
 export const LockResources = module.settings.register('lockResources', Boolean, true, { hasHint: true, onChange });
+
+export const ShowResource1Role = module.settings.register('showResource1Role', String, 'PLAYER', {
+  hasHint: true,
+  choices: showRoleChoices,
+  onChange,
+});
+export const ShowResource2Role = module.settings.register('showResource2Role', String, 'PLAYER', {
+  hasHint: true,
+  choices: showRoleChoices,
+  onChange,
+});
+export const ShowResource3Role = module.settings.register('showResource3Role', String, 'PLAYER', {
+  hasHint: true,
+  choices: showRoleChoices,
+  onChange,
+});
 export const LockDeathSaves = module.settings.register('lockDeathSaves', Boolean, false, { onChange });
 export const LockExhaustion = module.settings.register('lockExhaustion', Boolean, false, { onChange });
 export const LockInspiration = module.settings.register('lockInspiration', Boolean, false, { onChange });

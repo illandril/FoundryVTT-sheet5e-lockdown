@@ -39,6 +39,11 @@ export default class LockableCharacterSheet extends LockableSheet {
       locked && Settings.LockResources.get(),
       isSheetEditable,
     );
+
+    lockUnlock(this.getResourceForHide(sheetElem, 'primary'), locked, Settings.ShowResource1Role, isSheetEditable);
+    lockUnlock(this.getResourceForHide(sheetElem, 'secondary'), locked, Settings.ShowResource2Role, isSheetEditable);
+    lockUnlock(this.getResourceForHide(sheetElem, 'tertiary'), locked, Settings.ShowResource3Role, isSheetEditable);
+
     lockUnlock(this.getDeathSaveInputs(sheetElem), locked, Settings.LockDeathSaves, isSheetEditable);
     lockUnlock(this.getExhaustionInputs(sheetElem), locked, Settings.LockExhaustion, isSheetEditable);
     lockUnlock(this.getInspirationInputs(sheetElem), locked, Settings.LockInspiration, isSheetEditable);
@@ -141,6 +146,18 @@ export default class LockableCharacterSheet extends LockableSheet {
       };
       lockUnlock(resourcesContainerAndLockMode, hideIfUnused, allHidden, isSheetEditable);
     }
+  }
+
+  getResourceForHide(sheetElem: HTMLElement, resource: string) {
+    const container = this.getResourceContainer(sheetElem, resource);
+    if (container) {
+      return {
+        ...container,
+        lockMode: LockMode.HIDE,
+        always: true,
+      };
+    }
+    return null;
   }
 
   getResourceContainer(sheetElem: HTMLElement, resource: string) {
