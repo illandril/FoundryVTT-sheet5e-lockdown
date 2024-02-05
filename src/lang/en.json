@@ -144,17 +144,14 @@
         "label": "Lock Other Inputs",
         "hint": "Locks Max Hit Points, Armor Class, Speed, Initiative Modifier, and Spellcasting Attribute. If you want to control any of these individually (or have any other issues with this module), please open an issue on this module's GitHub project page: https://github.com/illandril/FoundryVTT-sheet5e-lockdown"
       },
-      "disableTidy5eSheet": {
-        "label": "Disable Tidy5e Sheet Support",
-        "hint": "WARNING: Illandril's Character Sheet Lockdown is at risk of dropping support for Tidy5e Sheet at some point in the future, as Tidy5e Sheet has too many substantial differences from the default Character Sheets, including some that overlap with features provided by Illandril's Character Sheet Lockdown, which makes it extremely burdensome to continue supporting. If there are features that you use from Illandril's Character Sheet Lockdown with Tidy5e Sheets that are not already implemented directly in Tidy5e Sheet, Illandril recommends you open an issue on the Tidy5e Sheet GitHub page to request those features be added directly in Tidy5e Sheet so you no longer need to rely on both modules working together: https://github.com/sdenec/tidy5e-sheet/issues\nIllandril's Character Sheet Lockdown will continue to suppor the default sheets and custom sheets that do not add as many features as Tidy5e Sheet even if Tidy5e Sheet suppport is dropped.\nIf you encounter issues with this module and Tidy5e Sheet, but don't want to fully disable this module because you use a mix of both standard and Tidy5e sheets, you can disable only the Tidy5e Sheet support. If you do encounter problems with this module (in Tidy5e sheets or elsewhere), please open an issue on this module's GitHub project page: https://github.com/illandril/FoundryVTT-sheet5e-lockdown - if the fix is simple enough, I will still fix it and keep Tidy5e Sheet support. I will only drop Tidy5e Sheet support if and when a substantial enough issue comes along that would require too much effort to fix for me to consider it worthwhile."
+      "hideSheetConfigurationRole": {
+        "label": "Show Sheet Button To",
+        "hint": "The Sheet Configuration button in the header will be hidden (even when the character sheet is unlocked) from players who do not have at least the selected role."
       },
-      "disableOtherSheets": {
-        "label": "Disable Other Sheet Support",
-        "hint": "This module can attempt to lock down all other custom Character and NPC sheets, but they are not guaranteed to work (and may even make some sheets completely unusable). If you are using a sheet other than the base DnD5e sheets or Tidy5e, please open an issue on this module's GitHub project page to request official support: https://github.com/illandril/FoundryVTT-sheet5e-lockdown"
+      "notice": {
+        "label": "Notice (not a setting, read below)",
+        "hint": "Illandril's Character Sheet Lockdown has only partially been updated for D&D 5e 3.0.0 - it should work for the Legacy 5e Sheets, but it does not yet work for the new Default 5e Character Sheet. Because of how the new sheets are implemented, it may take a while before I add support, since adding support is non-trivial. If you like the new sheets and want to use them with this module, go to https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/90 and let me know what settings you use so I can prioritize what people actually want."
       }
-    },
-    "warning": {
-      "tidy5eSheetSupport": "Illandril's Character Sheet Lockdown may not work with Tidy5e Sheet in future releases. See the notes under the Disable Tidy5e Sheet Support setting for Illandril's Character Sheet Lockdown settings for more details."
     },
     "toggleEditOn": "Locked (Click to Unlock)",
     "toggleEditOnShort": "Locked",

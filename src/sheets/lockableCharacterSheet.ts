@@ -2,8 +2,8 @@ import * as Settings from '../settings';
 import LockableSheet, { LockMode, lockUnlock, isHideReserveSpace } from './lockableSheet';
 
 export default class LockableCharacterSheet extends LockableSheet {
-  constructor(sheetName: string) {
-    super(sheetName);
+  constructor(sheetName: string, isLegacySheet: boolean) {
+    super(sheetName, isLegacySheet);
   }
 
   makeLocked(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, locked: boolean, isSheetEditable: boolean) {
@@ -182,7 +182,13 @@ export default class LockableCharacterSheet extends LockableSheet {
         lockMode: LockMode.FORM_DISABLED,
       },
       {
+        // Pre-3.0.0 Convert Button
         elements: sheetElem.querySelectorAll<HTMLElement>('.currency-convert'),
+        lockMode: LockMode.HIDE,
+      },
+      {
+        // 3.0.0 Legacy Sheet Convert Button
+        elements: sheetElem.querySelectorAll<HTMLElement>('.item-action[data-action="currency"]'),
         lockMode: LockMode.HIDE,
       },
     ];
@@ -198,10 +204,18 @@ export default class LockableCharacterSheet extends LockableSheet {
   }
 
   getEquipItemButtons(sheetElem: HTMLElement) {
-    return {
-      elements: sheetElem.querySelectorAll<HTMLElement>('.tab.inventory .inventory-list .item-toggle'),
-      lockMode: LockMode.CSS_POINTER_EVENTS,
-    };
+    return [
+      {
+        // Pre-3.0.0
+        elements: sheetElem.querySelectorAll<HTMLElement>('.tab.inventory .inventory-list .item-toggle'),
+        lockMode: LockMode.CSS_POINTER_EVENTS,
+      },
+      {
+        // 3.0.0 Legacy Sheet
+        elements: sheetElem.querySelectorAll<HTMLElement>('.inventory-list .item-action[data-action="equip"]'),
+        lockMode: LockMode.CSS_POINTER_EVENTS,
+      },
+    ];
   }
 
   getAttunementOverride(sheetElem: HTMLElement) {
@@ -245,9 +259,17 @@ export default class LockableCharacterSheet extends LockableSheet {
   }
 
   getPrepareSpellButtons(sheetElem: HTMLElement) {
-    return {
-      elements: sheetElem.querySelectorAll<HTMLElement>('.tab.spellbook .inventory-list .item-toggle'),
-      lockMode: LockMode.CSS_POINTER_EVENTS,
-    };
+    return [
+      {
+        // Pre-3.0.0
+        elements: sheetElem.querySelectorAll<HTMLElement>('.tab.spellbook .inventory-list .item-toggle'),
+        lockMode: LockMode.CSS_POINTER_EVENTS,
+      },
+      {
+        // 3.0.0 Legacy Sheet
+        elements: sheetElem.querySelectorAll<HTMLElement>('.inventory-list .item-action[data-action="prepare"]'),
+        lockMode: LockMode.CSS_POINTER_EVENTS,
+      },
+    ];
   }
 }

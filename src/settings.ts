@@ -11,6 +11,7 @@ declare global {
 const onChange = () => {
   Hooks.callAll(SETTINGS_UPDATED);
 };
+export const Notice = module.settings.register('notice', Boolean, false, { hasHint: true });
 
 type RoleKey = keyof typeof foundry.CONST.USER_ROLES;
 const minimumRoleChoices = (Object.keys(foundry.CONST.USER_ROLES) as RoleKey[]).reduce((choices, roleKey) => {
@@ -22,10 +23,11 @@ const minimumRoleChoices = (Object.keys(foundry.CONST.USER_ROLES) as RoleKey[]).
 
 export const HIDE_FROM_EVERYONE_OPTION = 'HIDE_FROM_EVERYONE';
 
-const showRoleChoices = {
+type ShowRoleKey = RoleKey | 'HIDE_FROM_EVERYONE';
+const showRoleChoices: Record<ShowRoleKey, string> = {
   ...minimumRoleChoices,
   [HIDE_FROM_EVERYONE_OPTION]: `${module.id}.setting.hideFromEveryone`,
-};
+} as const;
 
 export const ShowToggleEditRole = module.settings.register<RoleKey>(
   'showToggleEditRole', String, 'GAMEMASTER', {
@@ -45,12 +47,12 @@ export const LockToggleStyle = module.settings.register('lockToggleStyle', Strin
 // Basic Details
 export const LockName = module.settings.register('lockName', Boolean, false, { onChange });
 export const LockBasicDetails = module.settings.register('lockBasicDetails', Boolean, true, { hasHint: true, onChange });
-export const ShowBackgroundRole = module.settings.register('showBackgroundRole', String, 'PLAYER', {
+export const ShowBackgroundRole = module.settings.register<ShowRoleKey>('showBackgroundRole', String, 'PLAYER', {
   hasHint: true,
   choices: showRoleChoices,
   onChange,
 });
-export const ShowAlignmentRole = module.settings.register('showAlignmentRole', String, 'PLAYER', {
+export const ShowAlignmentRole = module.settings.register<ShowRoleKey>('showAlignmentRole', String, 'PLAYER', {
   hasHint: true,
   choices: showRoleChoices,
   onChange,
@@ -63,17 +65,17 @@ export const LockAbilityScores = module.settings.register('lockAbilityScores', B
 export const LockProficiencies = module.settings.register('lockProficiencies', Boolean, true, { onChange });
 export const LockResources = module.settings.register('lockResources', Boolean, true, { hasHint: true, onChange });
 
-export const ShowResource1Role = module.settings.register('showResource1Role', String, 'PLAYER', {
+export const ShowResource1Role = module.settings.register<ShowRoleKey>('showResource1Role', String, 'PLAYER', {
   hasHint: true,
   choices: showRoleChoices,
   onChange,
 });
-export const ShowResource2Role = module.settings.register('showResource2Role', String, 'PLAYER', {
+export const ShowResource2Role = module.settings.register<ShowRoleKey>('showResource2Role', String, 'PLAYER', {
   hasHint: true,
   choices: showRoleChoices,
   onChange,
 });
-export const ShowResource3Role = module.settings.register('showResource3Role', String, 'PLAYER', {
+export const ShowResource3Role = module.settings.register<ShowRoleKey>('showResource3Role', String, 'PLAYER', {
   hasHint: true,
   choices: showRoleChoices,
   onChange,
@@ -108,18 +110,24 @@ export const LockMaxSpellSlotOverride = module.settings.register('lockMaxSpellSl
 
 // Effects
 export const LockEffects = module.settings.register('lockEffects', Boolean, false, { hasHint: true });
-export const ShowEffectsRole = module.settings.register('showEffectsRole', String, 'PLAYER', {
+export const ShowEffectsRole = module.settings.register<ShowRoleKey>('showEffectsRole', String, 'PLAYER', {
   hasHint: true,
   choices: showRoleChoices,
   onChange,
 });
 
 // Biography
-export const ShowBiographyRole = module.settings.register('showBiographyRole', String, 'PLAYER', {
+export const ShowBiographyRole = module.settings.register<ShowRoleKey>('showBiographyRole', String, 'PLAYER', {
   hasHint: true,
   choices: showRoleChoices,
   onChange,
 });
 
-// // Unsorted stuff that should be split up
+// Unsorted stuff that should be split up
 export const LockUnsorteds = module.settings.register('lockUnsorteds', Boolean, true, { hasHint: true, onChange });
+
+export const HideSheetConfigurationRole = module.settings.register<ShowRoleKey>('hideSheetConfigurationRole', String, 'ASSISTANT', {
+  hasHint: true,
+  choices: showRoleChoices,
+  onChange,
+});

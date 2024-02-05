@@ -2,8 +2,8 @@ import * as Settings from '../settings';
 import LockableSheet, { LockMode, lockUnlock } from './lockableSheet.js';
 
 export default class LockableNPCSheet extends LockableSheet {
-  constructor(sheetName: string) {
-    super(sheetName);
+  constructor(sheetName: string, isLegacySheet: boolean) {
+    super(sheetName, isLegacySheet);
   }
 
   makeLocked(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, locked: boolean, isSheetEditable: boolean) {

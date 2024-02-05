@@ -12,6 +12,7 @@ const CSS_TOGGLE_EDIT_ON = module.cssPrefix.child('toggleEditOn');
 const CSS_TOGGLE_EDIT_OFF = module.cssPrefix.child('toggleEditOff');
 const CSS_LOCK = module.cssPrefix.child('lock');
 const CSS_HIDE_IMPORT_BUTTONS = module.cssPrefix.child('hideImportButtons');
+const CSS_HIDE_SHEET_CONFIGURATION_BUTTON = module.cssPrefix.child('hideSheetConfiguration');
 
 const CSS_HIDE = module.cssPrefix.child('hide');
 const CSS_HIDE_RESERVE_SPACE = module.cssPrefix.child('hideReserveSpace');
@@ -68,7 +69,7 @@ const LOCKABLE_SHEET_NAMES = new Set<string>();
 export const isLockableSheet = (sheetName: string) => LOCKABLE_SHEET_NAMES.has(sheetName);
 
 export default class LockableSheet {
-  constructor(public readonly sheetName: string) {
+  constructor(public readonly sheetName: string, public readonly isLegacySheet: boolean) {
     const onRenderHook = (actorSheet: ActorSheet<dnd5e.documents.Actor5e>) => {
       if (actorSheet.constructor.name !== sheetName) {
         // It's a custom sheet that extends some other sheet, and we're in the parent
@@ -104,6 +105,8 @@ export default class LockableSheet {
     }
     sheetElem.classList.add(CSS_SHEET);
     sheetElem.classList.add(CSS_LOCK);
+    addRemoveClass(sheetElem, CSS_HIDE_SHEET_CONFIGURATION_BUTTON, !game.user?.hasRole(Settings.HideSheetConfigurationRole.get()));
+
     if (isSheetEditable && game.user?.hasRole(Settings.ShowToggleEditRole.get())) {
       const sheetHeader = sheetElem.querySelector<HTMLElement>('.window-header');
       if (!sheetHeader) {
@@ -391,24 +394,48 @@ export default class LockableSheet {
   }
 
   getAddItemButtons(sheetElem: HTMLElement) {
-    return {
-      elements: sheetElem.querySelectorAll<HTMLElement>('.inventory-list .item-create'),
-      lockMode: LockMode.HIDE,
-    };
+    return [
+      {
+        // Pre-3.0.0
+        elements: sheetElem.querySelectorAll<HTMLElement>('.inventory-list .item-create'),
+        lockMode: LockMode.HIDE,
+      },
+      {
+        // 3.0.0 Legacy Sheet
+        elements: sheetElem.querySelectorAll<HTMLElement>('.inventory-list .item-action[data-action="create"]'),
+        lockMode: LockMode.HIDE,
+      },
+    ];
   }
 
   getRemoveItemButtons(sheetElem: HTMLElement) {
-    return {
-      elements: sheetElem.querySelectorAll<HTMLElement>('.inventory-list .item-delete'),
-      lockMode: LockMode.HIDE,
-    };
+    return [
+      {
+        // Pre-3.0.0
+        elements: sheetElem.querySelectorAll<HTMLElement>('.inventory-list .item-delete'),
+        lockMode: LockMode.HIDE,
+      },
+      {
+        // 3.0.0 Legacy Sheet
+        elements: sheetElem.querySelectorAll<HTMLElement>('.inventory-list .item-action[data-action="delete"]'),
+        lockMode: LockMode.HIDE,
+      },
+    ];
   }
 
   getEditItemButtons(sheetElem: HTMLElement) {
-    return {
-      elements: sheetElem.querySelectorAll<HTMLElement>('.inventory-list .item-edit'),
-      lockMode: LockMode.HIDE,
-    };
+    return [
+      {
+        // Pre-3.0.0
+        elements: sheetElem.querySelectorAll<HTMLElement>('.inventory-list .item-edit'),
+        lockMode: LockMode.HIDE,
+      },
+      {
+        // 3.0.0 Legacy Sheet
+        elements: sheetElem.querySelectorAll<HTMLElement>('.inventory-list .item-action[data-action="edit"]'),
+        lockMode: LockMode.HIDE,
+      },
+    ];
   }
 
   getItemContextMenus(sheetElem: HTMLElement) {

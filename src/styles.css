@@ -29,3 +29,7 @@
 .illandril-sheet5e-lockdown--hideImportButtons #ddbImportButton {
   display: none;
 }
+
+.illandril-sheet5e-lockdown--hideSheetConfiguration .configure-sheet {
+  display: none;
+}
