@@ -2,10 +2,6 @@ import * as Settings from '../settings';
 import LockableSheet, { LockMode, lockUnlock, isHideReserveSpace } from './lockableSheet';
 
 export default class LockableCharacterSheet extends LockableSheet {
-  constructor(sheetName: string, isLegacySheet: boolean) {
-    super(sheetName, isLegacySheet);
-  }
-
   makeLocked(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, locked: boolean, isSheetEditable: boolean) {
     super.makeLocked(sheetElem, actor, locked, isSheetEditable);
 
@@ -15,30 +11,25 @@ export default class LockableCharacterSheet extends LockableSheet {
     this.makeLockedSpellbook(sheetElem, actor, locked, isSheetEditable);
   }
 
-  private makeLockedBasicDetails(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, locked: boolean, isSheetEditable: boolean) {
+  private makeLockedBasicDetails(
+    sheetElem: HTMLElement,
+    _actor: dnd5e.documents.Actor5e,
+    locked: boolean,
+    isSheetEditable: boolean,
+  ) {
     lockUnlock(this.getXPInputs(sheetElem), locked, Settings.LockXP, isSheetEditable);
-    lockUnlock(
-      this.getBackgroundForHide(sheetElem),
-      locked,
-      Settings.ShowBackgroundRole,
-      isSheetEditable,
-    );
+    lockUnlock(this.getBackgroundForHide(sheetElem), locked, Settings.ShowBackgroundRole, isSheetEditable);
     lockUnlock(this.getRestButtons(sheetElem), locked, Settings.LockRests, isSheetEditable);
   }
 
-  private makeLockedAttributes(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, locked: boolean, isSheetEditable: boolean) {
-    lockUnlock(
-      this.getResourceNameAndMaxInputs(sheetElem, actor),
-      locked,
-      Settings.LockResources,
-      isSheetEditable,
-    );
-    this.hideUnusedResources(
-      sheetElem,
-      actor,
-      locked && Settings.LockResources.get(),
-      isSheetEditable,
-    );
+  private makeLockedAttributes(
+    sheetElem: HTMLElement,
+    actor: dnd5e.documents.Actor5e,
+    locked: boolean,
+    isSheetEditable: boolean,
+  ) {
+    lockUnlock(this.getResourceNameAndMaxInputs(sheetElem, actor), locked, Settings.LockResources, isSheetEditable);
+    this.hideUnusedResources(sheetElem, actor, locked && Settings.LockResources.get(), isSheetEditable);
 
     lockUnlock(this.getResourceForHide(sheetElem, 'primary'), locked, Settings.ShowResource1Role, isSheetEditable);
     lockUnlock(this.getResourceForHide(sheetElem, 'secondary'), locked, Settings.ShowResource2Role, isSheetEditable);
@@ -49,38 +40,32 @@ export default class LockableCharacterSheet extends LockableSheet {
     lockUnlock(this.getInspirationInputs(sheetElem), locked, Settings.LockInspiration, isSheetEditable);
   }
 
-  private makeLockedInventory(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, locked: boolean, isSheetEditable: boolean) {
+  private makeLockedInventory(
+    sheetElem: HTMLElement,
+    _actor: dnd5e.documents.Actor5e,
+    locked: boolean,
+    isSheetEditable: boolean,
+  ) {
     lockUnlock(this.getCurrencyInputs(sheetElem), locked, Settings.LockCurrency, isSheetEditable);
-    lockUnlock(
-      this.getEquipItemButtons(sheetElem),
-      locked,
-      Settings.LockEquipItemButtons,
-      isSheetEditable,
-    );
-    lockUnlock(
-      this.getAttunementOverride(sheetElem),
-      locked,
-      Settings.LockAttunementOverride,
-      isSheetEditable,
-    );
+    lockUnlock(this.getEquipItemButtons(sheetElem), locked, Settings.LockEquipItemButtons, isSheetEditable);
+    lockUnlock(this.getAttunementOverride(sheetElem), locked, Settings.LockAttunementOverride, isSheetEditable);
     lockUnlock(this.getInventoryQuantityInputs(sheetElem), locked, Settings.LockInventoryQuantity, isSheetEditable);
   }
 
-  private makeLockedSpellbook(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, locked: boolean, isSheetEditable: boolean) {
-    lockUnlock(
-      this.getPrepareSpellButtons(sheetElem),
-      locked,
-      Settings.LockPrepareSpellButtons.get(),
-      isSheetEditable,
-    );
+  private makeLockedSpellbook(
+    sheetElem: HTMLElement,
+    _actor: dnd5e.documents.Actor5e,
+    locked: boolean,
+    isSheetEditable: boolean,
+  ) {
+    lockUnlock(this.getPrepareSpellButtons(sheetElem), locked, Settings.LockPrepareSpellButtons.get(), isSheetEditable);
   }
 
   getXPInputs(sheetElem: HTMLElement) {
     return {
-      elements: sheetElem.querySelectorAll<HTMLElement>([
-        'input[name="system.details.xp.value"]',
-        'select.level-selector',
-      ].join(',')),
+      elements: sheetElem.querySelectorAll<HTMLElement>(
+        ['input[name="system.details.xp.value"]', 'select.level-selector'].join(','),
+      ),
       lockMode: LockMode.FORM_DISABLED,
     };
   }
@@ -106,12 +91,12 @@ export default class LockableCharacterSheet extends LockableSheet {
 
   getResourceNameAndMaxInputs(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e) {
     const elementSelectors: string[] = [];
-    this.getResources(actor).forEach((resource) => {
+    for (const resource of this.getResources(actor)) {
       elementSelectors.push(this.getResourceNameSelector(resource));
       elementSelectors.push(`input[name="system.resources.${resource}.max"]`);
       elementSelectors.push(`input[name="system.resources.${resource}.sr"]`);
       elementSelectors.push(`input[name="system.resources.${resource}.lr"]`);
-    });
+    }
     return {
       elements: sheetElem.querySelectorAll<HTMLElement>(elementSelectors.join(',')),
       lockMode: LockMode.FORM_DISABLED,
@@ -122,7 +107,12 @@ export default class LockableCharacterSheet extends LockableSheet {
     return `input[name="system.resources.${resource}.label"]`;
   }
 
-  hideUnusedResources(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, hideIfUnused: boolean, isSheetEditable: boolean) {
+  hideUnusedResources(
+    sheetElem: HTMLElement,
+    actor: dnd5e.documents.Actor5e,
+    hideIfUnused: boolean,
+    isSheetEditable: boolean,
+  ) {
     let resourcesContainer: HTMLElement | null = null;
     for (const resource of this.getResources(actor)) {
       const resourceContainer = this.getResourceContainer(sheetElem, resource);
@@ -137,7 +127,7 @@ export default class LockableCharacterSheet extends LockableSheet {
       const noResource = !name && !(typeof max === 'number' && max > 0);
       lockUnlock(resourceContainer, hideIfUnused, noResource, isSheetEditable);
     }
-    if (resourcesContainer && resourcesContainer.classList.contains('attributes')) {
+    if (resourcesContainer?.classList.contains('attributes')) {
       const resourceContainers = resourcesContainer.children;
       const allHidden = Array.prototype.every.call(resourceContainers, isHideReserveSpace);
       const resourcesContainerAndLockMode = {

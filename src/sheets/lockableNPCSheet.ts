@@ -2,10 +2,6 @@ import * as Settings from '../settings';
 import LockableSheet, { LockMode, lockUnlock } from './lockableSheet.js';
 
 export default class LockableNPCSheet extends LockableSheet {
-  constructor(sheetName: string, isLegacySheet: boolean) {
-    super(sheetName, isLegacySheet);
-  }
-
   makeLocked(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, locked: boolean, isSheetEditable: boolean) {
     super.makeLocked(sheetElem, actor, locked, isSheetEditable);
 
@@ -14,18 +10,8 @@ export default class LockableNPCSheet extends LockableSheet {
     // TODO: Optionally hide Source
 
     // Attributes
-    lockUnlock(
-      this.getLegendaryAndLairActions(sheetElem),
-      locked,
-      Settings.LockLegendaryAndLair,
-      isSheetEditable,
-    );
-    this.hideLegendaryAndLairRows(
-      sheetElem,
-      actor,
-      locked && Settings.LockLegendaryAndLair.get(),
-      isSheetEditable,
-    );
+    lockUnlock(this.getLegendaryAndLairActions(sheetElem), locked, Settings.LockLegendaryAndLair, isSheetEditable);
+    this.hideLegendaryAndLairRows(sheetElem, actor, locked && Settings.LockLegendaryAndLair.get(), isSheetEditable);
   }
 
   getBasicDetailInputs(sheetElem: HTMLElement) {
@@ -61,24 +47,19 @@ export default class LockableNPCSheet extends LockableSheet {
     ];
   }
 
-  hideLegendaryAndLairRows(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, hideIfUnused: boolean, isSheetEditable: boolean) {
+  hideLegendaryAndLairRows(
+    sheetElem: HTMLElement,
+    actor: dnd5e.documents.Actor5e,
+    hideIfUnused: boolean,
+    isSheetEditable: boolean,
+  ) {
     const maxLegendaryActions = foundry.utils.getProperty(actor.system, 'resources.legact.max');
     const noLegendaryActions = !(typeof maxLegendaryActions === 'number' && maxLegendaryActions > 0);
-    lockUnlock(
-      this.getLegendaryActionsRow(sheetElem),
-      hideIfUnused,
-      noLegendaryActions,
-      isSheetEditable,
-    );
+    lockUnlock(this.getLegendaryActionsRow(sheetElem), hideIfUnused, noLegendaryActions, isSheetEditable);
 
     const maxLegendaryResistances = foundry.utils.getProperty(actor.system, 'resources.legres.max');
     const noLegendaryResistance = !(typeof maxLegendaryResistances === 'number' && maxLegendaryResistances > 0);
-    lockUnlock(
-      this.getLegendaryResistanceRow(sheetElem),
-      hideIfUnused,
-      noLegendaryResistance,
-      isSheetEditable,
-    );
+    lockUnlock(this.getLegendaryResistanceRow(sheetElem), hideIfUnused, noLegendaryResistance, isSheetEditable);
 
     const usesLairActions = foundry.utils.getProperty(actor.system, 'resources.lair.value');
     const noLairActions = !usesLairActions;
@@ -136,10 +117,7 @@ export default class LockableNPCSheet extends LockableSheet {
       super.getUnsorteds(sheetElem),
       {
         elements: sheetElem.querySelectorAll<HTMLElement>(
-          [
-            'input[name="system.attributes.hp.formula"]',
-            'input[name="system.details.spellLevel"]',
-          ].join(','),
+          ['input[name="system.attributes.hp.formula"]', 'input[name="system.details.spellLevel"]'].join(','),
         ),
         lockMode: LockMode.FORM_DISABLED,
       },

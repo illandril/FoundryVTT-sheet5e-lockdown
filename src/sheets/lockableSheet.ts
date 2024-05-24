@@ -1,10 +1,8 @@
-/* eslint-disable max-lines-per-function */
-import { Setting } from '@illandril/foundryvtt-utils/dist/ModuleSettings.js';
 import module from '../module';
 import MagicItemsSupport from '../module-support/magicitems';
 import * as Settings from '../settings';
 
-export const REGISTERED = `illandril-sheet5e-lockdown.SheetsRegistered`;
+export const REGISTERED = `${module.id}.SheetsRegistered` as const;
 
 const CSS_SHEET = module.cssPrefix.child('sheet');
 const CSS_EDIT = module.cssPrefix.child('edit');
@@ -20,12 +18,19 @@ const CSS_HIDE_RESERVE_SPACE = module.cssPrefix.child('hideReserveSpace');
 const CSS_NO_POINTER_EVENTS = module.cssPrefix.child('noPointerEvents');
 
 export enum LockMode {
+  // biome-ignore lint/style/useNamingConvention: Legacy
   CSS_POINTER_EVENTS = 'CSS_POINTER_EVENTS',
+  // biome-ignore lint/style/useNamingConvention: Legacy
   FORM_DISABLED = 'FORM_DISABLED',
+  // biome-ignore lint/style/useNamingConvention: Legacy
   HIDE = 'HIDE',
+  // biome-ignore lint/style/useNamingConvention: Legacy
   HIDE_RESERVE_SPACE = 'HIDE_RESERVE_SPACE',
+  // biome-ignore lint/style/useNamingConvention: Legacy
   HIDE_PARENTS = 'HIDE_PARENTS',
+  // biome-ignore lint/style/useNamingConvention: Legacy
   CONTENT_EDITABLE = 'CONTENT_EDITABLE',
+  // biome-ignore lint/style/useNamingConvention: Legacy
   DISABLE_CONTEXT_MENU = 'DISABLE_CONTEXT_MENU',
 }
 
@@ -46,11 +51,11 @@ const BONUSES = [
 
 const SHOWN_SHEETS = new Set<ActorSheet>();
 const refreshShownSheets = () => {
-  SHOWN_SHEETS.forEach((sheet) => {
+  for (const sheet of SHOWN_SHEETS) {
     if (sheet.rendered) {
       sheet.render();
     }
-  });
+  }
 };
 Hooks.on(Settings.SETTINGS_UPDATED, () => {
   refreshShownSheets();
@@ -58,18 +63,21 @@ Hooks.on(Settings.SETTINGS_UPDATED, () => {
 
 setInterval(() => {
   // Avoid excess memory overhead by clearing out the shown sheets list periodically
-  SHOWN_SHEETS.forEach((sheet) => {
+  for (const sheet of SHOWN_SHEETS) {
     if (!sheet.rendered) {
       SHOWN_SHEETS.delete(sheet);
     }
-  });
+  }
 }, 10000);
 
 const LOCKABLE_SHEET_NAMES = new Set<string>();
 export const isLockableSheet = (sheetName: string) => LOCKABLE_SHEET_NAMES.has(sheetName);
 
 export default class LockableSheet {
-  constructor(public readonly sheetName: string, public readonly isLegacySheet: boolean) {
+  constructor(
+    public readonly sheetName: string,
+    public readonly isLegacySheet: boolean,
+  ) {
     const onRenderHook = (actorSheet: ActorSheet<dnd5e.documents.Actor5e>) => {
       if (actorSheet.constructor.name !== sheetName) {
         // It's a custom sheet that extends some other sheet, and we're in the parent
@@ -105,7 +113,11 @@ export default class LockableSheet {
     }
     sheetElem.classList.add(CSS_SHEET);
     sheetElem.classList.add(CSS_LOCK);
-    addRemoveClass(sheetElem, CSS_HIDE_SHEET_CONFIGURATION_BUTTON, !game.user?.hasRole(Settings.HideSheetConfigurationRole.get()));
+    addRemoveClass(
+      sheetElem,
+      CSS_HIDE_SHEET_CONFIGURATION_BUTTON,
+      !game.user?.hasRole(Settings.HideSheetConfigurationRole.get()),
+    );
 
     if (isSheetEditable && game.user?.hasRole(Settings.ShowToggleEditRole.get())) {
       const sheetHeader = sheetElem.querySelector<HTMLElement>('.window-header');
@@ -137,7 +149,7 @@ export default class LockableSheet {
         editOffLink.appendChild(faIcon('unlock'));
       }
 
-      let labelKeyType;
+      let labelKeyType: '' | 'Short' | null;
       if (toggleStyle === 'full') {
         labelKeyType = '';
       } else if (toggleStyle === 'iconOnly') {
@@ -170,59 +182,19 @@ export default class LockableSheet {
 
     // Basic Details section
     lockUnlock(this.getNameInput(sheetElem), locked, Settings.LockName, isSheetEditable);
-    lockUnlock(
-      this.getBasicDetailInputs(sheetElem),
-      locked,
-      Settings.LockBasicDetails,
-      isSheetEditable,
-    );
-    lockUnlock(
-      this.getAlignmentForHide(sheetElem),
-      locked,
-      Settings.ShowAlignmentRole,
-      isSheetEditable,
-    );
+    lockUnlock(this.getBasicDetailInputs(sheetElem), locked, Settings.LockBasicDetails, isSheetEditable);
+    lockUnlock(this.getAlignmentForHide(sheetElem), locked, Settings.ShowAlignmentRole, isSheetEditable);
 
     // Attributes
-    lockUnlock(
-      this.getAbilityScoreInputs(sheetElem),
-      locked,
-      Settings.LockAbilityScores,
-      isSheetEditable,
-    );
-    lockUnlock(
-      this.getProficiencyToggles(sheetElem),
-      locked,
-      Settings.LockProficiencies,
-      isSheetEditable,
-    );
+    lockUnlock(this.getAbilityScoreInputs(sheetElem), locked, Settings.LockAbilityScores, isSheetEditable);
+    lockUnlock(this.getProficiencyToggles(sheetElem), locked, Settings.LockProficiencies, isSheetEditable);
     lockUnlock(this.getTraits(sheetElem), locked, Settings.LockTraits, isSheetEditable);
 
     // Inventory + Features + Spellbook
-    lockUnlock(
-      this.getAddItemButtons(sheetElem),
-      locked,
-      Settings.HideAddItemButtons,
-      isSheetEditable,
-    );
-    lockUnlock(
-      this.getRemoveItemButtons(sheetElem),
-      locked,
-      Settings.HideRemoveItemButtons,
-      isSheetEditable,
-    );
-    lockUnlock(
-      this.getEditItemButtons(sheetElem),
-      locked,
-      Settings.HideEditItemButtons,
-      isSheetEditable,
-    );
-    lockUnlock(
-      this.getItemContextMenus(sheetElem),
-      locked,
-      Settings.DisableItemContextMenu,
-      isSheetEditable,
-    );
+    lockUnlock(this.getAddItemButtons(sheetElem), locked, Settings.HideAddItemButtons, isSheetEditable);
+    lockUnlock(this.getRemoveItemButtons(sheetElem), locked, Settings.HideRemoveItemButtons, isSheetEditable);
+    lockUnlock(this.getEditItemButtons(sheetElem), locked, Settings.HideEditItemButtons, isSheetEditable);
+    lockUnlock(this.getItemContextMenus(sheetElem), locked, Settings.DisableItemContextMenu, isSheetEditable);
 
     // Features
     lockUnlock(
@@ -233,27 +205,11 @@ export default class LockableSheet {
     );
 
     // Spellbook
-    lockUnlock(
-      this.getAvailableSpellSlots(sheetElem),
-      locked,
-      Settings.LockAvailableSpellSlots,
-      isSheetEditable,
-    );
-    lockUnlock(
-      this.getMaxSpellSlotOverride(sheetElem),
-      locked,
-      Settings.LockMaxSpellSlotOverride,
-      isSheetEditable,
-    );
-    const hideEmptySpellbook
-      = locked && (Settings.HideAddItemButtons.get() || Settings.HideEmptySpellbook.get());
+    lockUnlock(this.getAvailableSpellSlots(sheetElem), locked, Settings.LockAvailableSpellSlots, isSheetEditable);
+    lockUnlock(this.getMaxSpellSlotOverride(sheetElem), locked, Settings.LockMaxSpellSlotOverride, isSheetEditable);
+    const hideEmptySpellbook = locked && (Settings.HideAddItemButtons.get() || Settings.HideEmptySpellbook.get());
     const isSpellbookEmptyAndHidden = hideEmptySpellbook && this.isSpellbookEmpty(actor);
-    lockUnlock(
-      this.getSpellbookTab(sheetElem),
-      hideEmptySpellbook,
-      isSpellbookEmptyAndHidden,
-      isSheetEditable,
-    );
+    lockUnlock(this.getSpellbookTab(sheetElem), hideEmptySpellbook, isSpellbookEmptyAndHidden, isSheetEditable);
 
     // Effects
     lockUnlock(this.getEffectControls(sheetElem), locked, Settings.LockEffects, isSheetEditable);
@@ -267,12 +223,7 @@ export default class LockableSheet {
     );
 
     // Biography
-    lockUnlock(
-      this.getBiographyForHide(sheetElem),
-      locked,
-      Settings.ShowBiographyRole,
-      isSheetEditable,
-    );
+    lockUnlock(this.getBiographyForHide(sheetElem), locked, Settings.ShowBiographyRole, isSheetEditable);
 
     // Unsorted stuff
     lockUnlock(this.getUnsorteds(sheetElem), locked, Settings.LockUnsorteds, isSheetEditable);
@@ -337,13 +288,15 @@ export default class LockableSheet {
         lockMode: LockMode.CSS_POINTER_EVENTS,
       },
       {
-        elements: sheetElem.querySelectorAll<HTMLElement>([
-          // Saving throw proficiency configure button
-          '.config-button[data-action="ability"]',
+        elements: sheetElem.querySelectorAll<HTMLElement>(
+          [
+            // Saving throw proficiency configure button
+            '.config-button[data-action="ability"]',
 
-          // Skill proficiency configure button
-          '.config-button[data-action="skill"]',
-        ].join(',')),
+            // Skill proficiency configure button
+            '.config-button[data-action="skill"]',
+          ].join(','),
+        ),
         lockMode: LockMode.HIDE,
       },
     ];
@@ -369,12 +322,12 @@ export default class LockableSheet {
       },
       {
         // Empty trait rows
-        elements: [
-          ...sheetElem.querySelectorAll<HTMLElement>('.traits .form-group > .traits-list'),
-        ].filter((element) => !element.textContent?.trim()),
+        elements: [...sheetElem.querySelectorAll<HTMLElement>('.traits .form-group > .traits-list')].filter(
+          (element) => !element.textContent?.trim(),
+        ),
         lockMode: LockMode.HIDE_PARENTS,
       },
-      ...Settings.ShowSpecialTraits.get() ? [] : [this.getConfigureSpecialTraitsRow(sheetElem)],
+      ...(Settings.ShowSpecialTraits.get() ? [] : [this.getConfigureSpecialTraitsRow(sheetElem)]),
     ];
   }
 
@@ -518,6 +471,7 @@ export default class LockableSheet {
     ];
   }
 
+  // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Legacy
   showSpecialTraits(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e) {
     if (!Settings.ShowSpecialTraits.get()) {
       return;
@@ -536,25 +490,17 @@ export default class LockableSheet {
 
     for (const [key, flag] of Object.entries(dnd5e.config.characterFlags)) {
       const value = foundry.utils.getProperty(actor, `flags.dnd5e.${key}`);
-      if (value && (
-        value === true
-        || typeof value === 'number'
-        || typeof value === 'string'
-      )) {
+      if (value && (value === true || typeof value === 'number' || typeof value === 'string')) {
         this.addTag(traitsList, flag.name, value);
       }
     }
 
-    BONUSES.forEach((bonus) => {
+    for (const bonus of BONUSES) {
       const value = foundry.utils.getProperty(actor.system, bonus.name);
-      if (value && (
-        value === true
-        || typeof value === 'number'
-        || typeof value === 'string'
-      )) {
+      if (value && (value === true || typeof value === 'number' || typeof value === 'string')) {
         this.addTag(traitsList, bonus.label, value);
       }
-    });
+    }
     if (traitsList.childElementCount > 0) {
       specialTraitsRow.traitListContainer.appendChild(traitsList);
       specialTraitsRow.row.classList.remove('empty-special-traits');
@@ -567,9 +513,7 @@ export default class LockableSheet {
     if (!this.showSpecialTraitsAsUL()) {
       traitsList.appendChild(document.createTextNode(' '));
     }
-    const tagElem = this.showSpecialTraitsAsUL()
-      ? document.createElement('li')
-      : document.createElement('span');
+    const tagElem = this.showSpecialTraitsAsUL() ? document.createElement('li') : document.createElement('span');
     tagElem.classList.add('tag');
     tagElem.appendChild(document.createTextNode(game.i18n.localize(labelLocaleKey)));
     if (typeof value !== 'boolean') {
@@ -610,14 +554,14 @@ const addRemoveClass = (element: HTMLElement, cssClass: string, isAdd: boolean) 
 };
 
 type ElementGroup = {
-  elements: HTMLElement[] | NodeListOf<HTMLElement>
-  lockMode: LockMode
-  always?: boolean
+  elements: HTMLElement[] | NodeListOf<HTMLElement>;
+  lockMode: LockMode;
+  always?: boolean;
 };
 
 type ElementCollection = ElementGroup | (ElementGroup | ElementCollection)[];
 
-type LockSetting = boolean | Setting<boolean> | Setting<string>;
+type LockSetting = boolean | typeof Settings.LockAbilityScores | typeof Settings.ShowAlignmentRole;
 const parseLockSetting = (lockSetting: LockSetting) => {
   if (typeof lockSetting === 'boolean') {
     return lockSetting;
@@ -635,15 +579,21 @@ const disableContextMenu = (event: MouseEvent) => {
   return false;
 };
 
-export const lockUnlock = (elementGroups: null | ElementCollection, sheetLocked: boolean, lockSettingInput: LockSetting, isSheetEditable: boolean) => {
+export const lockUnlock = (
+  elementGroups: null | ElementCollection,
+  sheetLocked: boolean,
+  lockSettingInput: LockSetting,
+  isSheetEditable: boolean,
+  // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Legacy
+) => {
   if (!elementGroups) {
     return;
   }
   const lockSetting = parseLockSetting(lockSettingInput);
   if (Array.isArray(elementGroups)) {
-    elementGroups.forEach((elementGroup) => {
+    for (const elementGroup of elementGroups) {
       lockUnlock(elementGroup, sheetLocked, lockSetting, isSheetEditable);
-    });
+    }
   } else {
     const { elements, lockMode, always } = elementGroups;
     const lock = (always ? true : sheetLocked) && lockSetting;
@@ -651,44 +601,49 @@ export const lockUnlock = (elementGroups: null | ElementCollection, sheetLocked:
     if (isSheetEditable || lock) {
       switch (lockMode) {
         case LockMode.CSS_POINTER_EVENTS:
-          elements.forEach((element) => {
+          for (const element of elements) {
             addRemoveClass(element, CSS_NO_POINTER_EVENTS, lock);
-          });
+          }
           break;
         case LockMode.FORM_DISABLED:
-          elements.forEach((element) => {
+          for (const element of elements) {
             (element as HTMLInputElement).disabled = lock;
-          });
+          }
           break;
         case LockMode.HIDE:
-          elements.forEach((element) => {
+          for (const element of elements) {
             addRemoveClass(element, CSS_HIDE, lock);
-          });
+          }
           break;
         case LockMode.HIDE_RESERVE_SPACE:
-          elements.forEach((element) => {
+          for (const element of elements) {
             addRemoveClass(element, CSS_HIDE_RESERVE_SPACE, lock);
-          });
+          }
           break;
         case LockMode.HIDE_PARENTS:
-          elements.forEach((element) => {
-            addRemoveClass(element.parentElement!, CSS_HIDE, lock);
-          });
+          for (const element of elements) {
+            const parent = element.parentElement;
+            if (!parent) {
+              module.logger.error('Could not find parent of element for LockMode.HIDE_PARENTS', element);
+              continue;
+            }
+            addRemoveClass(parent, CSS_HIDE, lock);
+          }
           break;
         case LockMode.CONTENT_EDITABLE:
-          elements.forEach((element) => {
+          for (const element of elements) {
             element.setAttribute('contenteditable', (!lock).toString());
-          });
+          }
           break;
         case LockMode.DISABLE_CONTEXT_MENU:
-          elements.forEach((element) => {
+          for (const element of elements) {
             if (lock) {
               element.addEventListener('contextmenu', disableContextMenu, { capture: true });
             } else {
               element.removeEventListener('contextmenu', disableContextMenu, { capture: true });
             }
             element.setAttribute('contenteditable', (!lock).toString());
-          });
+          }
           break;
         default:
           // Typescript says lockMode is never (which is true, as long as no types were incorrect
@@ -704,7 +659,7 @@ export const isHideReserveSpace = (element: HTMLElement) => element.classList.co
 const faIcon = (name: string) => {
   const icon = document.createElement('i');
   icon.classList.add('fas');
-  icon.classList.add('fa-' + name);
+  icon.classList.add(`fa-${name}`);
   return icon;
 };
 
