@@ -1,6 +1,6 @@
 {
   "name": "@illandril/foundryvtt-sheet5e-lockdown",
-  "version": "4.3.0",
+  "version": "4.3.1",
   "description": "Illandril's Character Sheet Lockdown (5e): Locks down character sheets (DnD5e only) to prevent players from making changes, and minimize the risk of accidental GM edits. Note: This is not a secure lockdown, and player could get around it if they really wanted.",
   "type": "module",
   "scripts": {
