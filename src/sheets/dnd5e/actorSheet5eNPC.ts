@@ -1,7 +1,7 @@
-import * as Settings from '../../settings';
-import { qs, qsa } from '../../utils/html';
+import * as Settings from '../../settings.js';
+import { qs, qsa } from '../../utils/html.js';
 import LegacySheetLocker from '../LegacySheetLocker.js';
-import lockUnlock, { LockMode } from '../lockUnlock';
+import lockUnlock, { LockMode } from '../lockUnlock.js';
 
 class ActorSheet5eNPCLocker extends LegacySheetLocker {
   constructor() {
