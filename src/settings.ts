@@ -87,11 +87,21 @@ export const LockDeathSaves = module.settings.register('lockDeathSaves', Boolean
 export const LockExhaustion = module.settings.register('lockExhaustion', Boolean, false, { onChange });
 export const LockInspiration = module.settings.register('lockInspiration', Boolean, false, { onChange });
 export const LockTraits = module.settings.register('lockTraits', Boolean, true, { hasHint: true, onChange });
-export const LockLegendaryAndLair = module.settings.register('lockLegendaryAndLair', Boolean, true, {
+export const ShowSpecialTraitsButtonRole = module.settings.register<ShowRoleKey>(
+  'showSpecialTraitsButtonRole',
+  String,
+  'PLAYER',
+  {
+    hasHint: true,
+    choices: showRoleChoices,
+    onChange,
+  },
+);
+export const ShowSpecialTraits = module.settings.register('showSpecialTraits', Boolean, true, {
   hasHint: true,
   onChange,
 });
-export const ShowSpecialTraits = module.settings.register('showSpecialTraits', Boolean, true, {
+export const LockLegendaryAndLair = module.settings.register('lockLegendaryAndLair', Boolean, true, {
   hasHint: true,
   onChange,
 });

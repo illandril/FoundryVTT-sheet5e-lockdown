@@ -1,7 +1,13 @@
-import * as Settings from '../settings';
-import LockableSheet, { LockMode, lockUnlock } from './lockableSheet.js';
+import * as Settings from '../../settings';
+import { qs, qsa } from '../../utils/html';
+import LegacySheetLocker from '../LegacySheetLocker.js';
+import lockUnlock, { LockMode } from '../lockUnlock';
 
-export default class LockableNPCSheet extends LockableSheet {
+class ActorSheet5eNPCLocker extends LegacySheetLocker {
+  constructor() {
+    super('ActorSheet5eNPC', true);
+  }
+
   makeLocked(sheetElem: HTMLElement, actor: dnd5e.documents.Actor5e, locked: boolean, isSheetEditable: boolean) {
     super.makeLocked(sheetElem, actor, locked, isSheetEditable);
 
@@ -19,14 +25,12 @@ export default class LockableNPCSheet extends LockableSheet {
     return [
       super.getBasicDetailInputs(sheetElem),
       {
-        elements: sheetElem.querySelectorAll<HTMLElement>(
-          [
-            'input[name="system.details.type"]',
-            'input[name="system.details.source"]',
-            'input[name="system.details.cr"]',
-          ].join(','),
-        ),
-        lockMode: LockMode.FORM_DISABLED,
+        elements: qsa(sheetElem, [
+          'input[name="system.details.type"]',
+          'input[name="system.details.source"]',
+          'input[name="system.details.cr"]',
+        ]),
+        lockMode: LockMode.FormDisabled,
       },
     ];
   }
@@ -34,15 +38,13 @@ export default class LockableNPCSheet extends LockableSheet {
   getLegendaryAndLairActions(sheetElem: HTMLElement) {
     return [
       {
-        elements: sheetElem.querySelectorAll<HTMLElement>(
-          [
-            'input[name="system.resources.legact.max"]',
-            'input[name="system.resources.legres.max"]',
-            'input[name="system.resources.lair.value"]',
-            'input[name="system.resources.lair.initiative"]',
-          ].join(','),
-        ),
-        lockMode: LockMode.FORM_DISABLED,
+        elements: qsa(sheetElem, [
+          'input[name="system.resources.legact.max"]',
+          'input[name="system.resources.legres.max"]',
+          'input[name="system.resources.lair.value"]',
+          'input[name="system.resources.lair.initiative"]',
+        ]),
+        lockMode: LockMode.FormDisabled,
       },
     ];
   }
@@ -67,7 +69,7 @@ export default class LockableNPCSheet extends LockableSheet {
   }
 
   getLegendaryActionsRow(sheetElem: HTMLElement) {
-    const input = sheetElem.querySelector<HTMLElement>('input[name="system.resources.legact.max"]');
+    const input = qs(sheetElem, 'input[name="system.resources.legact.max"]');
     let row = input;
     while (row && !row.classList.contains('flexrow')) {
       row = row.parentElement;
@@ -77,12 +79,12 @@ export default class LockableNPCSheet extends LockableSheet {
     }
     return {
       elements: [row],
-      lockMode: LockMode.HIDE,
+      lockMode: LockMode.Hide,
     };
   }
 
   getLegendaryResistanceRow(sheetElem: HTMLElement) {
-    const input = sheetElem.querySelector<HTMLElement>('input[name="system.resources.legres.max"]');
+    const input = qs(sheetElem, 'input[name="system.resources.legres.max"]');
     let row = input;
     while (row && !row.classList.contains('flexrow')) {
       row = row.parentElement;
@@ -92,12 +94,12 @@ export default class LockableNPCSheet extends LockableSheet {
     }
     return {
       elements: [row],
-      lockMode: LockMode.HIDE,
+      lockMode: LockMode.Hide,
     };
   }
 
   getLairActionsRow(sheetElem: HTMLElement) {
-    const input = sheetElem.querySelector<HTMLElement>('input[name="system.resources.lair.value"]');
+    const input = qs(sheetElem, 'input[name="system.resources.lair.value"]');
     let row = input;
     while (row && !row.classList.contains('flexrow')) {
       row = row.parentElement;
@@ -107,7 +109,7 @@ export default class LockableNPCSheet extends LockableSheet {
     }
     return {
       elements: [row],
-      lockMode: LockMode.HIDE,
+      lockMode: LockMode.Hide,
     };
   }
 
@@ -116,15 +118,17 @@ export default class LockableNPCSheet extends LockableSheet {
     return [
       super.getUnsorteds(sheetElem),
       {
-        elements: sheetElem.querySelectorAll<HTMLElement>(
-          ['input[name="system.attributes.hp.formula"]', 'input[name="system.details.spellLevel"]'].join(','),
-        ),
-        lockMode: LockMode.FORM_DISABLED,
+        elements: qsa(sheetElem, [
+          'input[name="system.attributes.hp.formula"]',
+          'input[name="system.details.spellLevel"]',
+        ]),
+        lockMode: LockMode.FormDisabled,
       },
       {
-        elements: sheetElem.querySelectorAll<HTMLElement>('.attribute.health .attribute-name.rollable'),
-        lockMode: LockMode.CSS_POINTER_EVENTS,
+        elements: qsa(sheetElem, '.attribute.health .attribute-name.rollable'),
+        lockMode: LockMode.PointerEvents,
       },
     ];
   }
 }
+new ActorSheet5eNPCLocker();

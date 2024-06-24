@@ -11,7 +11,7 @@
         "hint": "A Toggle Edit button will be shown to all users with at least the selected role, allowing them to modify all locked settings. Note: Changing this option will not impact already opened character sheets. Players will need to close and re-open their character sheet to see this change."
       },
       "lockToggleStyle": {
-        "label": "Lock Toggle Style",
+        "label": "Lock Toggle Style (Legacy)",
         "choice": {
           "full": "Icon, Label, and Help",
           "iconPlusLabel": "Icon and Label",
@@ -20,10 +20,10 @@
         }
       },
       "lockName": {
-        "label": "Lock Name"
+        "label": "Lock Name (Legacy)"
       },
       "lockBasicDetails": {
-        "label": "Lock Basic Details",
+        "label": "Lock Basic Details (Legacy)",
         "hint": "Basic Details include Race, Background, Alignment, and Size"
       },
       "showBackgroundRole": {
@@ -31,64 +31,68 @@
         "hint": "A character's background will be hidden (even when the character sheet is unlocked) from players who do not have at least the selected role."
       },
       "showAlignmentRole": {
-        "label": "Show Alignment To",
+        "label": "Show Alignment To (Legacy)",
         "hint": "A character's alignment will be hidden (even when the character sheet is unlocked) from players who do not have at least the selected role."
       },
       "lockXP": {
-        "label": "Lock Experience"
+        "label": "Lock Experience (Legacy)"
       },
       "lockRests": {
         "label": "Lock Short and Long Rests"
       },
       "lockAbilityScores": {
-        "label": "Lock Ability Scores"
+        "label": "Lock Ability Scores (Legacy)"
       },
       "lockProficiencies": {
-        "label": "Lock Proficiencies"
+        "label": "Lock Proficiencies (Legacy)"
       },
       "lockResources": {
-        "label": "Lock Resources",
+        "label": "Lock Resources (Legacy)",
         "hint": "Locks the name, maximum value, and reset on short/long rest toggles for Resource 1, 2, and 3. This does not lock the current value for resources. If a resource is locked, has no name, and has a maximum of 0, it will be hidden."
       },
       "showResource1Role": {
-        "label": "Show Resource 1 To",
+        "label": "Show Resource 1 To (Legacy)",
         "hint": "A character's Resource 1 will be hidden (even when the character sheet is unlocked) from players who do not have at least the selected role."
       },
       "showResource2Role": {
-        "label": "Show Resource 2 To",
+        "label": "Show Resource 2 To (Legacy)",
         "hint": "A character's Resource 2 will be hidden (even when the character sheet is unlocked) from players who do not have at least the selected role."
       },
       "showResource3Role": {
-        "label": "Show Resource 3 To",
+        "label": "Show Resource 3 To (Legacy)",
         "hint": "A character's Resource 3 will be hidden (even when the character sheet is unlocked) from players who do not have at least the selected role."
       },
       "lockDeathSaves": {
-        "label": "Lock Death Saves"
+        "label": "Lock Death Saves (Legacy, for now)"
       },
       "lockExhaustion": {
-        "label": "Lock Exhaustion"
+        "label": "Lock Exhaustion (Legacy, for now)"
       },
       "lockInspiration": {
         "label": "Lock Inspiration"
       },
       "lockTraits": {
-        "label": "Lock Traits",
+        "label": "Lock Traits (Legacy)",
         "hint": "Traits include Senses, Languages, Immunities/Resistances/Vulnerabilities, Weapon/Armor/Tool Proficiencies, and Special Traits. If a trait is locked and has no value, it will be hidden."
       },
-      "lockLegendaryAndLair": {
-        "label": "Lock Legendary and Lair Actions",
-        "hint": "Locks the maximum value for legendary actions and resistances, and the flag and initiative value for Uses Lair Action. The available value for Legendary Actions and Resistance is not locked. The Legendary and Lair rows are hidden when locked if the creature has no Legendary or Lair Actions."
+      "showSpecialTraitsButtonRole": {
+        "label": "Show Special Traits Button To (Default)",
+        "hint": "Show the Special Traits button (the star button to the left of the character level). Applies to the Default 5e Character Sheet only. See 'Lock Traits (Legacy)' for the related setting for Legacy 5e Character Sheets and NPC Sheets."
       },
       "showSpecialTraits": {
-        "label": "Show Special Traits",
-        "hint": "Show the list of Special Traits (Diamond Soul, Elven Accuracy, Attack Bonuses, etc) on the character sheet."
+        "label": "Show Special Traits Values (Legacy, for now)",
+        "hint": "Show the list of Special Traits (Diamond Soul, Elven Accuracy, Attack Bonuses, etc) on the character sheet (as opposed to only being accessible through the Special Traits configuration modal)."
+      },
+      "lockLegendaryAndLair": {
+        "label": "Lock Legendary and Lair Actions (NPC)",
+        "hint": "Locks the maximum value for legendary actions and resistances, and the flag and initiative value for Uses Lair Action. The available value for Legendary Actions and Resistance is not locked. The Legendary and Lair rows are hidden when locked if the creature has no Legendary or Lair Actions."
       },
       "hideAddItemButtons": {
-        "label": "Hide Add Item Buttons",
+        "label": "Hide Add Item Buttons (Legacy, for now)",
         "hint": "If checked, the Add buttons are hidden on the Inventory, Features, and Spellbook tabs. Note: Items can still be added through Drag and Drop even when locked, and this does not impact the Duplicate option in the right-click menu."
       },
       "hideRemoveItemButtons": {
-        "label": "Hide Delete Item Buttons",
+        "label": "Hide Delete Item Buttons (Legacy, for now)",
         "hint": "If checked, the Delete buttons are hidden on the Inventory, Features, and Spellbook tabs. Note: This does not impact the Delete option in the right-click menu."
       },
       "hideEmptySpellbook": {
@@ -96,37 +100,37 @@
         "hint": "If checked, the Spellbook tab will be hidden when the character sheet is locked and the character has no spells, regardless of the Hide Add and Delete Item Buttons setting. If unchecked, the Spellbook tab for characters with no spells will be hidden or shown based on the Hide Add and Delete Item Buttons setting when the character sheet is locked."
       },
       "hideEditItemButtons": {
-        "label": "Hide Edit Item Buttons",
+        "label": "Hide Edit Item Buttons (Legacy, for now)",
         "hint": "This setting impacts Inventory, Features, and Spellbook tabs. Note: This does not impact the Edit option in the right-click menu."
       },
       "disableItemContextMenu": {
-        "label": "Disable Item Context Menu",
+        "label": "Disable Item Context Menu (Legacy, for now)",
         "hint": "This setting impacts Inventory, Features, and Spellbook tabs."
       },
       "lockCurrency": {
-        "label": "Lock Currency"
+        "label": "Lock Currency (Legacy, for now)"
       },
       "lockEquipItemButtons": {
-        "label": "Lock Equip Item Toggles",
+        "label": "Lock Equip Item Toggles (Legacy, for now)",
         "hint": "Note: This does not impact the Equip option in the right-click menu or in the Edit Item modal."
       },
       "lockAttunementOverride": {
-        "label": "Lock Override Attunement Button"
+        "label": "Lock Override Attunement Button (Legacy)"
       },
       "lockInventoryQuantity": {
-        "label": "Lock Inventory Quantity"
+        "label": "Lock Inventory Quantity (Legacy, for now)"
       },
       "lockAvailableItemFeatureUses": {
-        "label": "Lock Available Item and Feature Uses"
+        "label": "Lock Available Item and Feature Uses (Legacy, for now)"
       },
       "lockPrepareSpellButtons": {
-        "label": "Lock Prepare Spell Toggles"
+        "label": "Lock Prepare Spell Toggles (Legacy, for now)"
       },
       "lockAvailableSpellSlots": {
-        "label": "Lock Available Spell Slots"
+        "label": "Lock Available Spell Slots (Legacy, for now)"
       },
       "lockMaxSpellSlotOverride": {
-        "label": "Lock Max Spell Slots Overrides"
+        "label": "Lock Max Spell Slots Overrides (Legacy)"
       },
       "lockEffects": {
         "label": "Lock Effects",
@@ -141,7 +145,7 @@
         "hint": "The Biography tab will be hidden (even when the character sheet is unlocked) from players who do not have at least the selected role."
       },
       "lockUnsorteds": {
-        "label": "Lock Other Inputs",
+        "label": "Lock Other Inputs (Legacy, for now)",
         "hint": "Locks Max Hit Points, Armor Class, Speed, Initiative Modifier, and Spellcasting Attribute. If you want to control any of these individually (or have any other issues with this module), please open an issue on this module's GitHub project page: https://github.com/illandril/FoundryVTT-sheet5e-lockdown"
       },
       "hideSheetConfigurationRole": {
@@ -150,7 +154,7 @@
       },
       "notice": {
         "label": "Notice (not a setting, read below)",
-        "hint": "Illandril's Character Sheet Lockdown has only partially been updated for D&D 5e 3.0.0 - it should work for the Legacy 5e Sheets, but it does not yet work for the new Default 5e Character Sheet. Because of how the new sheets are implemented, it may take a while before I add support, since adding support is non-trivial. If you like the new sheets and want to use them with this module, go to https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/90 and let me know what settings you use so I can prioritize what people actually want."
+        "hint": "Illandril's Character Sheet Lockdown has only partially been updated for D&D 5e 3.0.0. All settings should work for the Legacy 5e Sheets, but only some settings work for the new Default 5e Character Sheet. If you like the new sheets, and want to use a setting that is not currently supported for them, go to https://github.com/illandril/FoundryVTT-sheet5e-lockdown/issues/90 and let me know what settings you want so I can prioritize what people actually want. The settings marked as 'Legacy, for now' are on my list of settings to eventually support, but may take a while before I do, especially if nobody explicitly asks for them. The ones marked 'Legacy' (w/o 'for now') are settings that I think are not needed in the new character sheets, so if you think otherwise and want those settings definitely let me know."
       }
     },
     "toggleEditOn": "Locked (Click to Unlock)",
